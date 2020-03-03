@@ -2,6 +2,8 @@ package model;
 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Proyecto {
     private String titulo;
@@ -10,6 +12,10 @@ public class Proyecto {
     private LocalDate fechaCreacion;
     private Integer numVotos;
     private Integer importe;
+
+    List list = new ArrayList();
+
+    list.addAll(Actor a);
 
     public Proyecto (String titulo, String descripcion, LocalDate fechaUltimoVoto, LocalDate fechaCreacion, Integer numVotos, Integer importe){
         this.titulo = titulo;
@@ -69,9 +75,9 @@ public class Proyecto {
     }
 
 
-    public Boolean votar(Usuario u){
-
-    }
+    /*public Boolean votar(Usuario u){
+        return Boolean
+    }*/
 }
 
 
