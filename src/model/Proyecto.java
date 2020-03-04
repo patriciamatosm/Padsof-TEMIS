@@ -15,7 +15,7 @@ public class Proyecto {
 
     List list = new ArrayList();
 
-    list.addAll(Actor a);
+    //list.addAll(Actor a);
 
     public Proyecto (String titulo, String descripcion, LocalDate fechaUltimoVoto, LocalDate fechaCreacion, Integer numVotos, Integer importe){
         this.titulo = titulo;

@@ -107,6 +107,23 @@ public class Temis {
         ois.close();
     }
 
+    /**
+     *  Funcion que permite al usuario registrarse
+     *  @param dni dni del usuario
+     *  @param nombre nombre del usuario
+     *  @param contrasena contrasena del usuario
+     *  @return True/False dependiendo del éxito
+     */
+    public boolean registrarse(String dni, String nombre, String contrasena){
+        Usuario usuario;
+
+        if(this.usuarios.containsKey(dni)){
+            return false;
+        }
+       // usuario = new Usuario(dni, nombre, contrasena);
+        return true;
+    }
+
 
 
 
