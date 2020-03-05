@@ -4,6 +4,7 @@ package model;
 import java.io.*;
 import java.util.*;
 
+
 /**
  *  Clase que define la aplicación Temis
  *
@@ -19,6 +20,7 @@ public class Temis {
     private String contrasenaAdmin = "adminadmin";
     private Usuario usuarioConectado = null;
     private boolean representanteLegal = false;
+    private boolean adminFlag = false;
     private Map<Integer, Usuario> usuarios = new HashMap<>();
     private Map<Integer, Colectivo> colectivos = new HashMap<>();
     private Map<Integer, Proyecto> proyectos = new HashMap<>();
@@ -117,11 +119,43 @@ public class Temis {
     public boolean registrarse(String dni, String nombre, String contrasena){
         Usuario usuario;
 
-        if(this.usuarios.containsKey(dni)){
+        if(this.usuarios.containsKey(dni)){ //comprobar nombre si existe
             return false;
         }
        // usuario = new Usuario(dni, nombre, contrasena);
         return true;
+    }
+
+    /**
+     *
+     * @param id
+     * @param contrasena
+     * @return
+     */
+    public boolean iniciaSesion(String id, String contrasena){
+
+        if(id.length() == 9){
+            if(Character.isLetter(id.charAt(8))) {
+                if (this.usuarios.containsKey(id)) {
+                    this.usuarioConectado = this.usuarios.get(id);
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            try {
+                Integer.parseInt(id);
+                return false;
+            } catch (NumberFormatException e){
+                for (Usuario user: this.usuarios.values()) {
+                    if (user.getNombre().equals(id)) {
+                        this.usuarioConectado = user;
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
     }
 
 
