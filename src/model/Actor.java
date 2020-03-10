@@ -13,10 +13,28 @@ import java.util.ArrayList;
  */
 public abstract class Actor {
     private String nombre;
-    private ArrayList<Proyecto> listaProyecto = new ArrayList<Proyecto>();
+    private ArrayList<Proyecto> listaProyecto = new ArrayList<>();
 
     public Actor(String nombre) {
         this.nombre = nombre;
+    }
+
+    /**
+     * Función que devuelve el nombre del actor
+     *
+     * @return String con el nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * Funcion que devuelve una lista de proyectos apoyados por el actor
+     *
+     * @return ArrayList<Proyecto> con los proyectos apoyados
+     */
+    public ArrayList<Proyecto> getListaProyecto() {
+        return listaProyecto;
     }
 
     /**
