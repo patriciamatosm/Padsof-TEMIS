@@ -13,6 +13,7 @@ import java.util.*;
  * Patricia Matos Meza
  * @version 3/03/2020
  */
+@SuppressWarnings("unused")
 public class Temis {
     private static Temis pTemis;
     private String usuarioAdmin = "admon";
@@ -20,7 +21,7 @@ public class Temis {
     private Usuario usuarioConectado = null;
     private boolean representanteLegal = false;
     private boolean adminFlag = false;
-    private Map<Integer, Usuario> usuarios = new HashMap<>();
+    private Map<String, Usuario> usuarios = new HashMap<>();
     private Map<String, Colectivo> colectivos = new HashMap<>();
     private Map<Actor, Proyecto> proyectos = new HashMap<>();
 
@@ -47,7 +48,7 @@ public class Temis {
      * Funcion que guarda en el archivo Temis.txt los usuarios, los colectivos y
      * los proyectos existente en la aplicación.
      *
-     * @throws IOException
+     * @throws IOException en caso de que ocurra algun error
      */
     public void escribirFichero() throws IOException {
         FileOutputStream fos = new FileOutputStream("Temis.txt");
@@ -72,7 +73,7 @@ public class Temis {
     /**
      * Funcion que lee del archivo Temis.txt todos los objetos existentes de la aplicación
      *
-     * @throws IOException
+     * @throws IOException en caso de que ocurra algun error
      */
     @SuppressWarnings("unchecked")
     public void leerFichero() throws IOException {
@@ -80,7 +81,7 @@ public class Temis {
         ObjectInputStream ois = new ObjectInputStream(fis);
 
         Object objLeido;
-        Map<Integer, Usuario> usuarioMap;
+        Map<String, Usuario> usuarioMap;
         Map<String, Colectivo> colectivoMap;
         Map<Actor, Proyecto> proyectoMap;
 
@@ -89,7 +90,7 @@ public class Temis {
             // Leer usuarios
 
             objLeido = ois.readObject();
-            usuarioMap = (Map<Integer, Usuario>) objLeido;
+            usuarioMap = (Map<String, Usuario>) objLeido;
             pTemis.usuarios = usuarioMap;
 
             // Leer colectivos
@@ -125,7 +126,8 @@ public class Temis {
         if (this.usuarios.containsKey(dni)) { //comprobar nombre si existe
             return false;
         }
-        // usuario = new Usuario(dni, nombre, contrasena);
+        usuario = new Usuario(dni, nombre, contrasena);
+        this.usuarios.put(dni, usuario);
         return true;
     }
 
@@ -137,7 +139,7 @@ public class Temis {
      * @return True/False dependiendo del éxito
      */
     public boolean iniciaSesion(String id, String contrasena) {
-        if (id == "" || contrasena == "") return false;
+        if (id.equals("") || contrasena.equals("")) return false;
         if (id.length() == 9) {
             if (Character.isLetter(id.charAt(8))) {
                 if (this.usuarios.containsKey(id)) {

@@ -11,9 +11,10 @@ import java.util.List;
  *         Patricia Matos Meza
  * @version 6/03/2020
  */
+@SuppressWarnings("unused")
 public class Usuario extends Actor {
-    private String dni = "";
-    private String contrasena = "";
+    private String dni;
+    private String contrasena;
     private List<Colectivo> suscritoNoticias;
     private boolean logueado = false;
     private EstadoUsuario estado;
@@ -73,7 +74,7 @@ public class Usuario extends Actor {
      * @param c Colectivo al que esta suscrito el usuario
      */
     public void addSuscritoNoticias(Colectivo c) {
-        if (this.suscritoNoticias.contains(c) == false) {
+        if (!this.suscritoNoticias.contains(c)) {
             this.suscritoNoticias.add(c);
         }
     }
