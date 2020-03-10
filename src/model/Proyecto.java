@@ -12,18 +12,21 @@ public class Proyecto {
     private LocalDate fechaCreacion;
     private Integer numVotos;
     private Integer importe;
+    private Actor creador;
 
     List list = new ArrayList();
 
     //list.addAll(Actor a);
 
-    public Proyecto (String titulo, String descripcion, LocalDate fechaUltimoVoto, LocalDate fechaCreacion, Integer numVotos, Integer importe){
+    public Proyecto(String titulo, String descripcion, LocalDate fechaUltimoVoto, LocalDate fechaCreacion,
+                    Integer numVotos, Integer importe, Actor creador) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fechaUltimoVoto = fechaUltimoVoto;
         this.fechaCreacion = fechaCreacion;
         this.numVotos = numVotos;
         this.importe = importe;
+        this.creador = creador;
     }
 
     public String getTitulo() {
@@ -74,6 +77,9 @@ public class Proyecto {
         this.importe = importe;
     }
 
+    public Actor getCreador() {
+        return creador;
+    }
 
     /*public Boolean votar(Usuario u){
         return Boolean

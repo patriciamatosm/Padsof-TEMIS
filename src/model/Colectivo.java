@@ -24,6 +24,8 @@ public class Colectivo extends Actor {
         this.representante = usuario;
     }
 
+
+
     /**
      * Función que devuelve la descripción de un colectivo
      *
@@ -117,7 +119,8 @@ public class Colectivo extends Actor {
      */
     public boolean subscribirseNoticias(Usuario usuario) {
         if (this.listaUsuario.contains(usuario)) {
-            return usuario.anadirColectivoSubscrito(this);
+            usuario.addSuscritoNoticias(this);
+            return true;
         } else {
             return false;
         }

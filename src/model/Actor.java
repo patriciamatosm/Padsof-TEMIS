@@ -6,9 +6,8 @@ import java.util.ArrayList;
  * Clase abstracta que engloba usuarios y colectivos
  *
  * @author Daniel Prieto Fernández
- *         Silvia Tomey Prieto
- *         Patricia Matos Meza
- *
+ * Silvia Tomey Prieto
+ * Patricia Matos Meza
  * @version 3/03/2020
  */
 public abstract class Actor {
@@ -45,4 +44,5 @@ public abstract class Actor {
     public void anadirProyecto(Proyecto proyecto) {
         this.listaProyecto.add(proyecto);
     }
+
 }
