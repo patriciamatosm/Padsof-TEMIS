@@ -45,6 +45,39 @@ public class Temis {
     }
 
     /**
+     * Funcion que devuelve el usuario conectado
+     * @return Usuario el usuario conectado
+     */
+    public Usuario getUsuarioConectado() {
+        return usuarioConectado;
+    }
+
+    /**
+     * Funcion que devuelve los usuarios de la aplicacion
+     * @return mapa con los usuarios de la aplicacion
+     */
+    public Map<String, Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    /**
+     * Funcion que devuelve los colectivos de la aplicacion
+     * @return mapa con los colectivos de la aplicacion
+     */
+    public Map<String, Colectivo> getColectivos() {
+        return colectivos;
+    }
+
+    /**
+     * Funcion que devuelve los proyectos de la aplicacion
+     * @return mapa con los proyectos de la aplicacion
+     */
+    public Map<Actor, Proyecto> getProyectos() {
+        return proyectos;
+    }
+
+
+    /**
      * Funcion que guarda en el archivo Temis.txt los usuarios, los colectivos y
      * los proyectos existente en la aplicación.
      *
@@ -126,7 +159,7 @@ public class Temis {
         if (this.usuarios.containsKey(dni)) { //comprobar nombre si existe
             return false;
         }
-        usuario = new Usuario(dni, nombre, contrasena);
+        usuario = new Usuario(nombre, dni, contrasena);
         this.usuarios.put(dni, usuario);
         return true;
     }
@@ -143,8 +176,12 @@ public class Temis {
         if (id.length() == 9) {
             if (Character.isLetter(id.charAt(8))) {
                 if (this.usuarios.containsKey(id)) {
-                    this.usuarioConectado = this.usuarios.get(id);
-                    return true;
+                    if(contrasena.equals(this.usuarios.get(id).getContrasena())){
+                        this.usuarioConectado = this.usuarios.get(id);
+                        this.usuarios.get(id).setLogueado(true);
+                        return true;
+                    }
+                    return false;
                 }
             }
             return false;
@@ -155,8 +192,12 @@ public class Temis {
             } catch (NumberFormatException e) {
                 for (Usuario user : this.usuarios.values()) {
                     if (id.equals(user.getNombre())) {
-                        this.usuarioConectado = user;
-                        return true;
+                        if(contrasena.equals(user.getContrasena())){
+                            this.usuarioConectado = user;
+                            this.usuarios.get(user.getDni()).setLogueado(true);
+                            return true;
+                        }
+                        return false;
                     }
                 }
                 return false;

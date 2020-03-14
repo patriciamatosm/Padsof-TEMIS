@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * @version 6/03/2020
  */
 @SuppressWarnings("unused")
-public class Usuario extends Actor {
+public class Usuario extends Actor implements Serializable {
     private String dni;
     private String contrasena;
     private List<Colectivo> suscritoNoticias;

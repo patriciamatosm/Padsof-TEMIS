@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -10,7 +11,7 @@ import java.util.ArrayList;
  * Patricia Matos Meza
  * @version 3/03/2020
  */
-public abstract class Actor {
+public abstract class Actor implements Serializable {
     private String nombre;
     private ArrayList<Proyecto> listaProyecto = new ArrayList<>();
 
