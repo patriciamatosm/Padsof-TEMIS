@@ -10,7 +10,7 @@ public class Proyecto {
     private String descripcion;
     private LocalDate fechaUltimoVoto;
     private LocalDate fechaCreacion;
-    private Integer numVotos;
+    private Integer numVotos = 0;
     private Integer importe;
     private Actor creador;
 
@@ -18,13 +18,11 @@ public class Proyecto {
 
     //list.addAll(Actor a);
 
-    public Proyecto(String titulo, String descripcion, LocalDate fechaUltimoVoto, LocalDate fechaCreacion,
-                    Integer numVotos, Integer importe, Actor creador) {
+    public Proyecto(String titulo, String descripcion, LocalDate fechaCreacion,
+                    Integer importe, Actor creador) {
         this.titulo = titulo;
         this.descripcion = descripcion;
-        this.fechaUltimoVoto = fechaUltimoVoto;
         this.fechaCreacion = fechaCreacion;
-        this.numVotos = numVotos;
         this.importe = importe;
         this.creador = creador;
     }

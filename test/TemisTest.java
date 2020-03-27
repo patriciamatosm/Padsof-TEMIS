@@ -4,6 +4,7 @@ import org.junit.Test;
 
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -104,7 +105,18 @@ public class TemisTest {
     }
 
     @Test
-    public void testanadirProyecto() {
+    public void testanadirProyecto() throws IOException {
+        Temis pTemis;
+        pTemis = Temis.getInstance();
+        pTemis.registrarse("00000000B", "Patricia", "12345");
+        pTemis.iniciaSesion("Patricia", "12345");
+
+       /* Proyecto p = new Proyecto("Test", "descripcion para el test", LocalDate.now(),
+                0, Integer importe, Actor creador);
+        assertTrue(pTemis.getUsuarios().containsKey("00000000B"));*/
+
+        pTemis.getUsuarios().remove("00000000B");
+        pTemis.escribirFichero();
     }
 
     @Test
