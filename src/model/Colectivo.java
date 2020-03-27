@@ -1,6 +1,6 @@
 package model;
 
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Clase que define a un colectivo
@@ -11,12 +11,14 @@ import java.util.ArrayList;
  *
  * @version 3/03/2020
  */
+@SuppressWarnings("unused")
 public class Colectivo extends Actor {
     private String descripcion;
     private Usuario representante;
     private ArrayList<Usuario> listaUsuario = new ArrayList<>();
     private Colectivo padre = null;
     private ArrayList<Colectivo> subcolectivos = new ArrayList<>();
+    private Map<Proyecto, Notificacion> notificacionesRecibidas = new HashMap<>();
 
     public Colectivo(String descripcion, String nombre, Usuario representante) {
         super(nombre);
@@ -24,7 +26,22 @@ public class Colectivo extends Actor {
         this.representante = representante;
     }
 
+    /**
+     * Funcion que devuelve las notificaciones recibidas
+     * @return notificaciones recibidas
+     */
+    public Map<Proyecto, Notificacion> getNotificacionesRecibidas() {
+        return notificacionesRecibidas;
+    }
 
+    /**
+     * Funcion que anade notificacion de un proyecto a un colectivo
+     * @param p proyecto
+     * @param n notificacion
+     */
+    public void addNotificacion(Proyecto p, Notificacion n){
+        this.notificacionesRecibidas.put(p, n);
+    }
 
     /**
      * Función que devuelve la descripción de un colectivo
