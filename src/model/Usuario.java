@@ -16,6 +16,7 @@ import java.util.List;
 public class Usuario extends Actor implements Serializable {
     private String dni;
     private String contrasena;
+    private List<Colectivo> colectivosPropios;
     private List<Colectivo> suscritoNoticias;
     private boolean logueado = false;
     private EstadoUsuario estado;
@@ -33,6 +34,7 @@ public class Usuario extends Actor implements Serializable {
         this.dni = dni;
         this.contrasena = contrasena;
         this.suscritoNoticias = new ArrayList<>();
+        this.colectivosPropios = new ArrayList<>();
         this.estado = EstadoUsuario.EN_ESPERA;
     }
 
@@ -43,6 +45,23 @@ public class Usuario extends Actor implements Serializable {
         ACTIVO, EN_ESPERA, BLOQUEADO
     }
 
+    /**
+     * Funcion que devuelve los colectivos que ha creado el usuario
+     * @return lista de colectivos
+     */
+    public List<Colectivo> getColectivosPropios() {
+        return colectivosPropios;
+    }
+
+    /**
+     * Añadir colectivo propio
+     * @param c colectivo a ser añadido
+     */
+    public void addColectivosPropios(Colectivo c) {
+        if (!this.colectivosPropios.contains(c)) {
+            this.colectivosPropios.add(c);
+        }
+    }
     /**
      * Funcion que devuelve el estado de los usuarios
      * @return estado estado del usuario

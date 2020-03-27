@@ -3,7 +3,7 @@ import org.junit.Test;
 import model.*;
 import static org.junit.Assert.*;
 
-
+@SuppressWarnings("unused")
 public class UsuarioTest {
 
     @Test
@@ -14,8 +14,6 @@ public class UsuarioTest {
         u.addSuscritoNoticias(c);
         assertTrue(u.getSuscritoNoticias().contains(c));
 
-        u = null;
-        c = null;
     }
 
     @Test
@@ -24,7 +22,6 @@ public class UsuarioTest {
         assertFalse(u.isLogueado());
         u.setLogueado(true);
         assertTrue(u.isLogueado());
-        u = null;
     }
 
     @Test
@@ -32,7 +29,6 @@ public class UsuarioTest {
         Usuario u = new Usuario("Patricia", "00000000B", "12345");
         u.bloquearUsuario();
         assertEquals(u.getEstado(), Usuario.EstadoUsuario.BLOQUEADO);
-        u = null;
     }
 
     @Test
@@ -42,7 +38,6 @@ public class UsuarioTest {
         assertEquals(u.getEstado(), Usuario.EstadoUsuario.BLOQUEADO);
         u.desbloquearUsuario();
         assertEquals(u.getEstado(), Usuario.EstadoUsuario.ACTIVO);
-        u = null;
     }
 
     @Test
@@ -50,6 +45,15 @@ public class UsuarioTest {
         Usuario u = new Usuario("Patricia", "00000000B", "12345");
         u.aceptarRegistro();
         assertEquals(u.getEstado(), Usuario.EstadoUsuario.ACTIVO);
-        u = null;
+    }
+
+    @Test
+    public void addColectivosPropios() {
+        Usuario u = new Usuario("Patricia", "00000000B", "12345");
+        Colectivo c = new Colectivo("Test descripcion", "Test", u);
+
+        u.addColectivosPropios(c);
+        assertTrue(u.getColectivosPropios().contains(c));
+
     }
 }
