@@ -127,12 +127,13 @@ public class TemisTest {
         pTemis = Temis.getInstance();
         pTemis.registrarse("00000000B", "Patricia", "12345");
 
-        /*Colectivo c = new Colectivo("")*/
+        Colectivo c = new Colectivo("Test descripcion", "Test",
+                pTemis.getUsuarios().get("00000000B"));
 
-      /*  pTemis.anadirProyecto(p);*/
-        assertTrue(pTemis.getProyectos().containsKey(pTemis.getUsuarios().get("00000000B")));
+        pTemis.anadirColectivo(c);
+        assertTrue(pTemis.getColectivos().containsKey("00000000B"));
 
-        pTemis.getProyectos().remove(pTemis.getUsuarios().get("00000000B"));
+        pTemis.getColectivos().remove("00000000B");
         pTemis.getUsuarios().remove("00000000B");
         pTemis.escribirFichero();
     }
