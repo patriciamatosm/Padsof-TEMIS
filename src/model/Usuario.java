@@ -44,6 +44,14 @@ public class Usuario extends Actor implements Serializable {
     }
 
     /**
+     * Funcion que devuelve el estado de los usuarios
+     * @return estado estado del usuario
+     */
+    public EstadoUsuario getEstado() {
+        return estado;
+    }
+
+    /**
      * Funcion que devuelve el dni del usuario
      *
      * @return dni del usuario
