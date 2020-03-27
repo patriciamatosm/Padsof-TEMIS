@@ -109,17 +109,31 @@ public class TemisTest {
         Temis pTemis;
         pTemis = Temis.getInstance();
         pTemis.registrarse("00000000B", "Patricia", "12345");
-        pTemis.iniciaSesion("Patricia", "12345");
 
-       /* Proyecto p = new Proyecto("Test", "descripcion para el test", LocalDate.now(),
-                0, Integer importe, Actor creador);
-        assertTrue(pTemis.getUsuarios().containsKey("00000000B"));*/
+        Proyecto p = new ProyectoSocial("Test", "descripcion test", LocalDate.now(),
+                10, pTemis.getUsuarios().get("00000000B"), "je", true);
 
+        pTemis.anadirProyecto(p);
+        assertTrue(pTemis.getProyectos().containsKey(pTemis.getUsuarios().get("00000000B")));
+
+        pTemis.getProyectos().remove(pTemis.getUsuarios().get("00000000B"));
         pTemis.getUsuarios().remove("00000000B");
         pTemis.escribirFichero();
     }
 
     @Test
-    public void testanadirColectivo() {
+    public void testanadirColectivo() throws IOException {
+        Temis pTemis;
+        pTemis = Temis.getInstance();
+        pTemis.registrarse("00000000B", "Patricia", "12345");
+
+        /*Colectivo c = new Colectivo("")*/
+
+      /*  pTemis.anadirProyecto(p);*/
+        assertTrue(pTemis.getProyectos().containsKey(pTemis.getUsuarios().get("00000000B")));
+
+        pTemis.getProyectos().remove(pTemis.getUsuarios().get("00000000B"));
+        pTemis.getUsuarios().remove("00000000B");
+        pTemis.escribirFichero();
     }
 }

@@ -18,10 +18,10 @@ public class Colectivo extends Actor {
     private Colectivo padre = null;
     private ArrayList<Colectivo> subcolectivos = new ArrayList<>();
 
-    public Colectivo(String descripcion, String nombre, Usuario usuario) {
+    public Colectivo(String descripcion, String nombre, Usuario representante) {
         super(nombre);
         this.descripcion = descripcion;
-        this.representante = usuario;
+        this.representante = representante;
     }
 
 
