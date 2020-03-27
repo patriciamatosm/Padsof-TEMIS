@@ -8,6 +8,7 @@ package model;
  *         Patricia Matos Meza
  * @version 27/03/2020
  */
+@SuppressWarnings("unused")
 public class Notificacion {
     private Proyecto emisor;
     private Colectivo receptor;
@@ -53,7 +54,15 @@ public class Notificacion {
      * Funcion que envia una notificiacion
      */
     public void enviarNotificacion() {
-        this.receptor.getNotificacionesRecibidas().put(this.emisor, this);
+        this.receptor.getNotificacionesRecibidas().add(this);
     }
 
+    @Override
+    public String toString() {
+        return "Notificacion{" +
+                "emisor=" + emisor +
+                ", receptor=" + receptor +
+                ", mensaje='" + mensaje + '\'' +
+                '}';
+    }
 }

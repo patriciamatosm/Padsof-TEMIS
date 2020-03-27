@@ -18,7 +18,7 @@ public class Colectivo extends Actor {
     private ArrayList<Usuario> listaUsuario = new ArrayList<>();
     private Colectivo padre = null;
     private ArrayList<Colectivo> subcolectivos = new ArrayList<>();
-    private Map<Proyecto, Notificacion> notificacionesRecibidas = new HashMap<>();
+    private List<Notificacion> notificacionesRecibidas = new ArrayList<>();
 
     public Colectivo(String descripcion, String nombre, Usuario representante) {
         super(nombre);
@@ -30,17 +30,16 @@ public class Colectivo extends Actor {
      * Funcion que devuelve las notificaciones recibidas
      * @return notificaciones recibidas
      */
-    public Map<Proyecto, Notificacion> getNotificacionesRecibidas() {
+    public List<Notificacion>  getNotificacionesRecibidas() {
         return notificacionesRecibidas;
     }
 
     /**
      * Funcion que anade notificacion de un proyecto a un colectivo
-     * @param p proyecto
      * @param n notificacion
      */
-    public void addNotificacion(Proyecto p, Notificacion n){
-        this.notificacionesRecibidas.put(p, n);
+    public void addNotificacion(Notificacion n){
+        this.notificacionesRecibidas.add(n);
     }
 
     /**
