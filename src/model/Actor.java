@@ -21,7 +21,6 @@ public abstract class Actor implements Serializable {
 
     /**
      * Función que devuelve el nombre del actor
-     *
      * @return String con el nombre
      */
     public String getNombre() {
@@ -30,7 +29,6 @@ public abstract class Actor implements Serializable {
 
     /**
      * Funcion que devuelve una lista de proyectos apoyados por el actor
-     *
      * @return ArrayList<Proyecto> con los proyectos apoyados
      */
     public ArrayList<Proyecto> getListaProyecto() {
@@ -39,10 +37,9 @@ public abstract class Actor implements Serializable {
 
     /**
      * Esta función es para añadir un proyecto a la lista de proyectos
-     *
      * @param proyecto que se añadira a la lista de proyectos
      */
-    public void anadirProyecto(Proyecto proyecto) {
+    public void anadirProyecto(Proyecto proyecto) { //DISEÑO esta supongo que hay que meterla
         this.listaProyecto.add(proyecto);
     }
 
