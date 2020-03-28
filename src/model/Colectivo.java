@@ -1,6 +1,7 @@
 package model;
 
 import java.util.*;
+import java.io.Serializable;
 
 /**
  * Clase que define a un colectivo
@@ -12,7 +13,7 @@ import java.util.*;
  * @version 3/03/2020
  */
 @SuppressWarnings("unused")
-public class Colectivo extends Actor {
+public class Colectivo extends Actor implements Serializable {
     private String descripcion;
     private Usuario representante; //DISEÑO
     private ArrayList<Usuario> listaUsuario = new ArrayList<>();

@@ -53,9 +53,15 @@ public class ColectivoTest {
 
     @Test
     public void crearSubcolectivo() {
+        Usuario u1 = new Usuario("User 1", "00000001A", "00000");
+        Usuario u2 = new Usuario("User 2", "00000002A", "00000");
+
         c.crearSubcolectivo("Test1", "Description1");
         assertNotNull(c.getSubcolectivos());
         assertEquals(c, c.getSubcolectivos().get(0).getPadre());
+        c.unirse(u1);
+        assertFalse(c.getSubcolectivos().get(0).unirse(u1));
+        assertTrue(c.getSubcolectivos().get(0).unirse(u2));
         c.crearSubcolectivo("Test2", "Description2");
         assertNotNull(c.getSubcolectivos().get(1));
         assertEquals(c.getSubcolectivos().get(0).getPadre(), c.getSubcolectivos().get(1).getPadre());
@@ -68,9 +74,6 @@ public class ColectivoTest {
 
         Usuario u1 = new Usuario("User 1", "00000001A", "00000");
         Usuario u2 = new Usuario("User 2", "00000002A", "00000");
-        Usuario u3 = new Usuario("User 3", "00000003A", "00000");
-        Usuario u4 = new Usuario("User 4", "00000004A", "00000");
-        Usuario u5 = new Usuario("User 5", "00000005A", "00000");
 
         assertEquals(0.0, c1.calcularAfinidad(c2), 0);
 
