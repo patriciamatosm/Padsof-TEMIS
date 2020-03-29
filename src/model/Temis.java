@@ -24,6 +24,7 @@ public class Temis {
     private Map<String, Usuario> usuarios = new HashMap<>();
     private Map<String, Colectivo> colectivos = new HashMap<>();
     private Map<Actor, Proyecto> proyectos = new HashMap<>();
+    private List<String> distritos = new ArrayList<>();
 
 
     /**
@@ -42,6 +43,14 @@ public class Temis {
             pTemis = new Temis();
         }
         return pTemis;
+    }
+
+    /**
+     * Funcion que devuelve los distritos
+     * @return distritos
+     */
+    public List<String> getDistritos() {
+        return distritos;
     }
 
     /**
@@ -118,7 +127,7 @@ public class Temis {
         Map<String, Colectivo> colectivoMap;
         Map<Actor, Proyecto> proyectoMap;
 
-
+        /* Leer componentes */
         try {
             // Leer usuarios
 
@@ -143,6 +152,19 @@ public class Temis {
             e.printStackTrace();
         }
         ois.close();
+
+        /* Leer distritos */
+        try {
+            Scanner input = new Scanner(new File("distritos.txt"));
+            while (input.hasNextLine()) {
+                String line = input.nextLine();
+                this.distritos.add(line);
+            }
+            input.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
