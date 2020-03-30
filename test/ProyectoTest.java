@@ -14,8 +14,7 @@ public class ProyectoTest {
 	@Test
 	public void votarTest() {
 		Usuario u = new Usuario("Patricia", "00000000B", "12345");
-		Proyecto p = new Proyecto("titulo", "descripcion", "2019-01-01", 30, 
-				                    200, u, Estado.EN_ESPERA);
+		ProyectoInfraestructura p = new ProyectoInfraestructura("titulo", "descripcion", 200, u, "abc", "def", "ghi");
 		
 		p.votar(u);
 		assertTrue(u.getListaProyecto().contains(p));
@@ -28,8 +27,7 @@ public class ProyectoTest {
 		Usuario u1 = new Usuario("Patricia", "00000000B", "12345");
 		Usuario u2 = new Usuario("Daniel", "11111111A", "67890");
 		Usuario u3 = new Usuario("Silvia", "22222222C", "45678");
-		Proyecto p = new Proyecto("titulo", "descripcion", "2019-01-01", 30, 
-				                    200, u1, Estado.EN_ESPERA);
+		ProyectoSocial p = new ProyectoSocial("titulo", "descripcion", 200, u1, "jkl", true);
 	
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 		usuarios.add(u1);
@@ -49,8 +47,7 @@ public class ProyectoTest {
 	@Test
 	public void caducadoTest() {
 		Usuario u = new Usuario("Patricia", "00000000B", "12345");
-		Proyecto p = new Proyecto("titulo", "descripcion", "2019-01-01", 30, 
-				                    200, u, Estado.ACTIVO);
+		ProyectoInfraestructura p = new ProyectoInfraestructura("titulo", "descripcion", 200, u, "abc", "def", "ghi");
 		
 		p.caducado();
 		assertTrue(p.getEstado() == Estado.CADUCADO);
@@ -59,8 +56,7 @@ public class ProyectoTest {
 	@Test
 	public void aceptarProyectoTest() {
 		Usuario u = new Usuario("Patricia", "00000000B", "12345");
-		Proyecto p = new Proyecto("titulo", "descripcion", "2019-01-01", 30, 
-				                    200, u, Estado.EN_ESPERA);
+		ProyectoSocial p = new ProyectoSocial("titulo", "descripcion", 200, u, "jkl", true);
 		p.aceptarProyecto();
 		assertTrue(p.getEstado() == Estado.ACTIVO);
 	}
@@ -68,8 +64,7 @@ public class ProyectoTest {
 	@Test
 	public void aceptarFinanciacionTest() {
 		Usuario u = new Usuario("Patricia", "00000000B", "12345");
-		Proyecto p = new Proyecto("titulo", "descripcion", "2019-01-01", 30, 
-				                    200, u, Estado.ESPERA_FINANC);
+		ProyectoInfraestructura p = new ProyectoInfraestructura("titulo", "descripcion", 200, u, "abc", "def", "ghi");
 		p.aceptarFinanciacion();
 		assertTrue(p.getEstado() == Estado.FINANCIADO);
 	}
@@ -77,8 +72,7 @@ public class ProyectoTest {
 	@Test
 	public void esperarFinancTest() {
 		Usuario u = new Usuario("Patricia", "00000000B", "12345");
-		Proyecto p = new Proyecto("titulo", "descripcion", "2019-01-01", 30, 
-				                    200, u, Estado.ACTIVO);
+		ProyectoSocial p = new ProyectoSocial("titulo", "descripcion", 200, u, "jkl", true);
 	
 		assertFalse(p.esperarFinanc());
 		p.setNumVotos(60);
