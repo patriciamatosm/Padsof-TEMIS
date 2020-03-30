@@ -7,6 +7,7 @@ import es.uam.eps.sadp.grants.CCGG;
 import es.uam.eps.sadp.grants.GrantRequest;
 import es.uam.eps.sadp.grants.InvalidRequestException;
 import es.uam.eps.sadp.grants.GrantRequest.ProjectKind;
+import es.uam.eps.sadp.grants.InvalidIDException;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -48,13 +49,6 @@ public abstract class Proyecto implements GrantRequest, Serializable {
         this.importe = importe;
         this.creador = creador;
         this.estado = Estado.EN_ESPERA;
-        CCGG pasarela = CCGG.getGateway();
-        GrantRequest solicitud = (GrantRequest) this;
-        try {
-			String codigo = pasarela.submitRequest(solicitud);
-		} catch (IOException | InvalidRequestException e) {
-			e.printStackTrace();
-		}
     }
     /**
      * Enumeracion que indica el estado del proyecto
@@ -313,7 +307,40 @@ public abstract class Proyecto implements GrantRequest, Serializable {
                 " . Creado por: " + creador.getNombre();
     }
 
-
+    /**
+     * Funcion para solicitar financiacion
+     */
+    public void pedirFinanciacion() {
+    	CCGG pasarela = CCGG.getGateway();
+        GrantRequest solicitud = (GrantRequest) this;
+        try {
+			String codigo = pasarela.submitRequest(solicitud);
+		} catch (IOException | InvalidRequestException e) {
+			e.printStackTrace();
+		}
+        this.setEstado(Estado.ESPERA_FINANC);
+    }
+    
+   /**
+    * Funcion para comprobar si la financiacion ha sido concedida
+    * @param pasarela 
+    * @param codigo
+    * @return la cantidad concedida, 0 si no ha sido aprobada, o null si sigue pendiente
+    */
+    public Double financiacion(CCGG pasarela, String codigo) {
+    	Double result = null;
+    	pasarela.setDate(LocalDate.now().plusDays(11));
+		try {
+			result = pasarela.getAmountGranted(codigo);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InvalidIDException e) {
+			e.printStackTrace();
+		}
+		if(result >0) this.setEstado(Estado.FINANCIADO);
+    	return result; 
+    }
+    
 }
 
 
