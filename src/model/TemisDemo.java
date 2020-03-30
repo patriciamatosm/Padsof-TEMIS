@@ -56,6 +56,34 @@ public class TemisDemo {
         pTemis.anadirProyecto(p);
         System.out.println("Proyecto creado: " + pTemis.getProyectos().get("Proyecto1"));
 
+        if (!pTemis.registrarse("00000000C", "John", "12345")){
+            System.out.println("Error: No se ha podido registrar el usuario");
+            return;
+        }
+
+        pTemis.getUsuarios().get("00000000C").aceptarRegistro();
+
+        /* Apoyar proyectp */
+
+        pTemis.cierraSesion();
+
+        System.out.println("Apoyando proyecto como " + pTemis.getUsuarioConectado().getNombre() + "...");
+
+        if (!pTemis.iniciaSesion("00000000C","12345")){
+            System.out.println("Error: No se ha podido loggear el usuario con dni");
+            return;
+        }
+
+        pTemis.getProyectos().get("Proyecto1").votar(pTemis.getUsuarioConectado());
+
+
+        pTemis.cierraSesion();
+
+        if (!pTemis.iniciaSesion("Jane","12345")){
+            System.out.println("Error: No se ha podido loggear el usuario con nombre");
+            return;
+        }
+
 
 
 
@@ -95,13 +123,6 @@ public class TemisDemo {
          System.out.println("Colectivo creado: " + pTemis.getColectivos().get("Colectivo1"));
 
          /* Creamos un usuario para que se una al colectivo */
-
-        if (!pTemis.registrarse("00000000C", "John", "12345")){
-            System.out.println("Error: No se ha podido registrar el usuario");
-            return;
-        }
-
-        pTemis.getUsuarios().get("00000000C").aceptarRegistro();
 
         pTemis.cierraSesion();
 
