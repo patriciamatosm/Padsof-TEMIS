@@ -72,6 +72,9 @@ public class Colectivo extends Actor implements Serializable {
      * @param descripcion del proyecto
      */
     public void setDescripcion(String descripcion) {
+        if (descripcion.length() > 500){
+            return;
+        }
         this.descripcion = descripcion;
     }
 
