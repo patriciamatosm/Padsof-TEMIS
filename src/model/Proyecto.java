@@ -2,6 +2,13 @@ package model;
 
 
 import java.util.List;
+
+import es.uam.eps.sadp.grants.CCGG;
+import es.uam.eps.sadp.grants.GrantRequest;
+import es.uam.eps.sadp.grants.InvalidRequestException;
+import es.uam.eps.sadp.grants.GrantRequest.ProjectKind;
+
+import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -15,7 +22,7 @@ import java.time.LocalDate;
  */
 
 @SuppressWarnings("unused")
-public abstract class Proyecto implements Serializable {
+public abstract class Proyecto implements GrantRequest, Serializable {
     private String titulo;
     private String descripcion;
     private LocalDate fechaUltimoVoto;
@@ -25,7 +32,6 @@ public abstract class Proyecto implements Serializable {
     private Integer importe;
     private Actor creador;
     private Estado estado;
-
 
     /**
      * Constructor de la clase Proyecto
@@ -42,8 +48,15 @@ public abstract class Proyecto implements Serializable {
         this.importe = importe;
         this.creador = creador;
         this.estado = Estado.EN_ESPERA;
+        CCGG pasarela = CCGG.getGateway();
+        GrantRequest solicitud = (GrantRequest) this;
+        try {
+			String codigo = pasarela.submitRequest(solicitud);
+		} catch (IOException | InvalidRequestException e) {
+			e.printStackTrace();
+		}
     }
-
+    
     /**
      * Enumeracion que indica el estado del proyecto
      */
@@ -55,8 +68,8 @@ public abstract class Proyecto implements Serializable {
      * Funci�n para pedir el t�tulo del proyecto
      * @return titulo del proyecto
      */
-    public String getTitulo() {
-        return titulo;
+    public String getProjectTitle() {
+        return this.titulo;
     }
 
     /**
@@ -73,7 +86,7 @@ public abstract class Proyecto implements Serializable {
      * Funcion para pedir la descripcion del proyecto
      * @return descripcion del proyecto
      */
-    public String getDescripcion() {
+	public String getProjectDescription() {
         return descripcion;
     }
 
@@ -139,7 +152,7 @@ public abstract class Proyecto implements Serializable {
      * Funcion para pedir el importe destinado a un proyecto
      * @return importe destinado a un proyecto
      */
-    public Integer getImporte() {
+	public double getRequestedAmount() {
         return importe;
     }
 
@@ -198,6 +211,7 @@ public abstract class Proyecto implements Serializable {
      */
     public boolean votar(Usuario u){
     	if(this.estado == Estado.CADUCADO) return false;
+    	if(u.isLogueado() == false) return false;
     	
         if(u.getListaProyecto().contains(this)) {
             return false;
@@ -292,6 +306,8 @@ public abstract class Proyecto implements Serializable {
     public void notificaCambio(Notificacion n) {
     	n.enviarNotificacion();
     }
+    
+    
 }
 
 

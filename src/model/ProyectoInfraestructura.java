@@ -86,4 +86,21 @@ public class ProyectoInfraestructura extends Proyecto implements Serializable {
 		this.descripcionEspecifica = descripcionEspecifica;
 	}
 
+    /**
+     * Funcion para pedir el tipo de proyecto
+     * @return tipo de proyecto
+     */
+	public ProjectKind getProjectKind() {
+		return ProjectKind.Infrastructure;
+	}
+
+	/**
+	 * Funcion para obtener la informacion extra del proyecto
+	 * @return informacion extra del proyecto
+	 */
+	public String getExtraData() {
+		return "Distrito: " + distrito + ", url: " + urlCroquis +
+        		", Descripción: " + descripcionEspecifica;
+	}
+	
 }

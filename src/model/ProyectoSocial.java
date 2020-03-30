@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import model.Proyecto.Estado;
-
 /**
  * Clase que define un Proyecto Social
  *
@@ -67,5 +66,21 @@ public class ProyectoSocial extends Proyecto implements Serializable {
 	 */
 	public void setNacional(boolean nacional) {
 		this.nacional = nacional;
+	}
+	
+    /**
+     * Funcion para pedir el tipo de proyecto
+     * @return tipo de proyecto
+     */
+	public ProjectKind getProjectKind() {
+		return ProjectKind.Social;
+	}
+	
+	/**
+	 * Funcion para obtener la informacion extra del proyecto
+	 * @return informacion extra del proyecto
+	 */
+	public String getExtraData() {
+		return "Grupo étnico: " + grupoEtnico + ", nacional: " + nacional;
 	}
 }
