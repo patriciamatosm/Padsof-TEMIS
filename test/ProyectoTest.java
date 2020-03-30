@@ -47,10 +47,14 @@ public class ProyectoTest {
 	
 	@Test
 	public void caducadoTest() {
+		LocalDate fechaUlt = LocalDate.now();
+		
 		Usuario u = new Usuario("Patricia", "00000000B", "12345");
 		ProyectoInfraestructura p = new ProyectoInfraestructura("titulo", "descripcion",
 				200, u, "abc", "def", "ghi");
+		assertEquals(p.getEstado(), Estado.EN_ESPERA);
 		
+		p.setFechaUltimoVoto(fechaUlt.minusDays(40));
 		p.caducado();
 		assertEquals(p.getEstado(), Estado.CADUCADO);
 	}
