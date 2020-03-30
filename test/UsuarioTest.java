@@ -8,12 +8,16 @@ public class UsuarioTest {
 
     @Test
     public void addSuscritoNoticias() {
-        Usuario u = new Usuario("Patricia", "00000000B", "12345");
-        Colectivo c = new Colectivo("Test descripcion", "Test", u);
+        try {
+            Usuario u = new Usuario("Patricia", "00000000B", "12345");
+            Colectivo c = new Colectivo("Test descripcion", "Test", u);
 
-        u.addSuscritoNoticias(c);
-        assertTrue(u.getSuscritoNoticias().contains(c));
-
+            u.addSuscritoNoticias(c);
+            assertTrue(u.getSuscritoNoticias().contains(c));
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Test
@@ -49,11 +53,15 @@ public class UsuarioTest {
 
     @Test
     public void addColectivosPropios() {
-        Usuario u = new Usuario("Patricia", "00000000B", "12345");
-        Colectivo c = new Colectivo("Test descripcion", "Test", u);
+        try {
+            Usuario u = new Usuario("Patricia", "00000000B", "12345");
+            Colectivo c = new Colectivo("Test descripcion", "Test", u);
 
-        u.addColectivosPropios(c);
-        assertTrue(u.getColectivosPropios().contains(c));
-
+            u.addColectivosPropios(c);
+            assertTrue(u.getColectivosPropios().contains(c));
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

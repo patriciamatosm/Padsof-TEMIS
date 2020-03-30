@@ -21,8 +21,14 @@ public class Colectivo extends Actor implements Serializable {
     private ArrayList<Colectivo> subcolectivos = new ArrayList<>();
     private List<Notificacion> notificacionesRecibidas = new ArrayList<>();
 
-    public Colectivo(String descripcion, String nombre, Usuario representante) {
+    public Colectivo(String descripcion, String nombre, Usuario representante) throws Exception {
         super(nombre);
+        if (descripcion.length() < 5) {
+            throw new Exception("La descripcion tiene que ser al menos 5 caracteres");
+        }
+        if (descripcion.length() > 500) {
+            throw new Exception("La descripcion no puede pasar los 500 caracteres");
+        }
         this.descripcion = descripcion;
         this.representante = representante;
     }
@@ -161,11 +167,15 @@ public class Colectivo extends Actor implements Serializable {
      * @return true si se crea correctamente
      * false si da algun error
      */
-    public boolean crearSubcolectivo(String nombre, String descripcion) {
-        Colectivo colectivoHijo = new Colectivo(descripcion, nombre, this.representante);
-        colectivoHijo.padre = this;
-        this.subcolectivos.add(colectivoHijo);
-        return true;
+    public boolean crearSubcolectivo(String nombre, String descripcion) throws Exception {
+        try {
+            Colectivo colectivoHijo = new Colectivo(descripcion, nombre, this.representante);
+            colectivoHijo.padre = this;
+            this.subcolectivos.add(colectivoHijo);
+            return true;
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
     /**
