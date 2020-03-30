@@ -2,6 +2,7 @@ package model;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class TemisDemo {
     public static void main(String[] args) throws Exception {
@@ -75,7 +76,10 @@ public class TemisDemo {
             return;
         }
 
-        pTemis.getProyectos().get("Proyecto1").votar(pTemis.getUsuarioConectado());
+        if(!pTemis.getProyectos().get("Proyecto1").votar(pTemis.getUsuarioConectado())){
+            System.out.println("Error: No se ha podido votar");
+            return;
+        }
 
 
         System.out.println("Numero de votantes de Proyecto1: " + pTemis.getProyectos().get("Proyecto1").getNumVotos());
@@ -103,39 +107,20 @@ public class TemisDemo {
         /*Financiacion*/
 
         System.out.println("Pediremos financiacion sin tener el numero de votos...");
-        //pedir
+        pTemis.getProyectos().get("Proyecto1").pedirFinanciacion();
         System.out.println("Estado del proyecto: " + pTemis.getProyectos().get("Proyecto1").getEstado());
 
         System.out.println("Pediremos financiacion teniendo el numero de votos...");
         int votosAntes = pTemis.getProyectos().get("Proyecto1").getNumVotos();
+        pTemis.getProyectos().get("Proyecto1").setMinVotos(10);
         pTemis.getProyectos().get("Proyecto1").setNumVotos(pTemis.getProyectos().get("Proyecto1").getMinVotos());
-        // pedir
+        pTemis.getProyectos().get("Proyecto1").pedirFinanciacion();
         System.out.println("Estado del proyecto: " + pTemis.getProyectos().get("Proyecto1").getEstado());
         pTemis.getProyectos().get("Proyecto1").setNumVotos(votosAntes);
 
         System.out.println("Damos financiacion...");
-        //dar financiacion
+        System.out.println(pTemis.getProyectos().get("Proyecto1").financiacion().toString());
         System.out.println("Estado del proyecto: " + pTemis.getProyectos().get("Proyecto1").getEstado());
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -170,13 +155,66 @@ public class TemisDemo {
         System.out.println("Usuarios que pertenecen al colectivo: " +
                 pTemis.getColectivos().get("Colectivo1").getListaUsuario());
 
+        pTemis.cierraSesion();
+
+        /* creamos más usuarios para comprobar funcionalidad de votar */
+
+        if (!pTemis.registrarse("00000000D", "Eric", "12345")){
+            System.out.println("Error: No se ha podido registrar el usuario");
+            return;
+        }
+        pTemis.getUsuarios().get("00000000D").aceptarRegistro();
+        if (!pTemis.iniciaSesion("00000000D","12345")){
+            System.out.println("Error: No se ha podido loggear el usuario con dni");
+            return;
+        }
+
+        if (!pTemis.getColectivos().get("Colectivo1").unirse(pTemis.getUsuarioConectado())){
+            System.out.println("Error: No se ha podido unir al colectivo");
+            return;
+        }
+
+        pTemis.cierraSesion();
+
+        if (!pTemis.registrarse("00000000E", "Javier", "12345")){
+            System.out.println("Error: No se ha podido registrar el usuario");
+            return;
+        }
+        pTemis.getUsuarios().get("00000000E").aceptarRegistro();
+
+        if (!pTemis.iniciaSesion("00000000E","12345")){
+            System.out.println("Error: No se ha podido loggear el usuario con dni");
+            return;
+        }
+
+        if (!pTemis.getColectivos().get("Colectivo1").unirse(pTemis.getUsuarioConectado())){
+            System.out.println("Error: No se ha podido unir al colectivo");
+            return;
+        }
+
+        pTemis.cierraSesion();
+
+        if (!pTemis.iniciaSesion("00000000C","12345")){
+            System.out.println("Error: No se ha podido loggear el usuario con dni");
+            return;
+        }
+
         /* votamos como colectivo */
 
-        System.out.println("Votamos proyecto como colectivo...");
-        pTemis.getProyectos().get("Proyecto1").votarUsuarios(
+        System.out.println("Votamos proyecto como colectivo... Numero de votos actual: " +
+                pTemis.getProyectos().get("Proyecto1").getNumVotos());
+
+        System.out.println("Usuarios que pertenecen al colectivo: " +
                 pTemis.getColectivos().get("Colectivo1").getListaUsuario());
 
-        System.out.println("Numero de votantes de Proyecto1: " + pTemis.getProyectos().get("Proyecto1").getNumVotos());
+        if(!pTemis.getProyectos().get("Proyecto1").votarUsuarios(
+                pTemis.getColectivos().get("Colectivo1").getListaUsuario())){
+            System.out.println("Error: No se ha podido votar");
+            return;
+        }
+
+        System.out.println("Numero de votantes de Proyecto1 despues de votar: " +
+                pTemis.getProyectos().get("Proyecto1").getNumVotos());
 
 
         /* abandonamos colectivo*/
@@ -224,7 +262,7 @@ public class TemisDemo {
 
 
 
-
+        System.out.println("\n");
         /* Afinidad y popularidad */
 
 
@@ -234,6 +272,8 @@ public class TemisDemo {
         pTemis.cierraSesion();
         pTemis.getUsuarios().remove("00000000B");
         pTemis.getUsuarios().remove("00000000C");
+        pTemis.getUsuarios().remove("00000000D");
+        pTemis.getUsuarios().remove("00000000E");
         pTemis.getColectivos().remove("Colectivo1");
         pTemis.getColectivos().remove("Proyecto1");
         pTemis.escribirFichero();

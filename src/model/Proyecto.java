@@ -33,6 +33,7 @@ public abstract class Proyecto implements GrantRequest, Serializable {
     private Integer importe;
     private Actor creador;
     private Estado estado;
+    private String id;
 
     /**
      * Constructor de la clase Proyecto
@@ -204,7 +205,7 @@ public abstract class Proyecto implements GrantRequest, Serializable {
      */
     public boolean votar(Usuario u){
     	if(this.estado == Estado.CADUCADO) return false;
-    	if(u.isLogueado() == false) return false;
+    	if(!u.isLogueado()) return false;
     	
         if(u.getListaProyecto().contains(this)) {
             return false;
@@ -235,9 +236,8 @@ public abstract class Proyecto implements GrantRequest, Serializable {
     
     /**
      * Funcion para poner un proyecto como caducado cuando sobrepasa el tiempo limite establecido
-     * @return true si el proyecto ha pasado a estar caducado, false en el caso contrario
      */
-    public boolean caducado() {
+    public void caducado() {
     	
     	LocalDate fechaUltimo = this.getFechaUltimoVoto();
 		
@@ -247,9 +247,7 @@ public abstract class Proyecto implements GrantRequest, Serializable {
 
     	if(dias.isEqual(fechaUltimo) || dias.isAfter(fechaUltimo)) {
     		this.estado = Estado.CADUCADO;
-    		return true;
     	}
-    	return false;
     }
     
     /**
@@ -282,7 +280,7 @@ public abstract class Proyecto implements GrantRequest, Serializable {
      * Funcion para comprobar si un proyecto puede pasar a esperar financiacion
      * @return true si el proyecto cumple con los requisitos, false en el caso contrario
      */
-    public Boolean esperarFinanc() {
+    public boolean esperarFinanc() {
     	if(this.estado == Estado.CADUCADO) return false;
     	
     	if(this.getNumVotos() >= this.getMinVotos() && this.estado == Estado.ACTIVO) {
@@ -312,9 +310,9 @@ public abstract class Proyecto implements GrantRequest, Serializable {
      */
     public void pedirFinanciacion() {
     	CCGG pasarela = CCGG.getGateway();
-        GrantRequest solicitud = (GrantRequest) this;
+        GrantRequest solicitud = this;
         try {
-			String codigo = pasarela.submitRequest(solicitud);
+			this.id = pasarela.submitRequest(solicitud);
 		} catch (IOException | InvalidRequestException e) {
 			e.printStackTrace();
 		}
@@ -323,21 +321,19 @@ public abstract class Proyecto implements GrantRequest, Serializable {
     
    /**
     * Funcion para comprobar si la financiacion ha sido concedida
-    * @param pasarela 
-    * @param codigo
     * @return la cantidad concedida, 0 si no ha sido aprobada, o null si sigue pendiente
     */
-    public Double financiacion(CCGG pasarela, String codigo) {
+    public Double financiacion() {
+        CCGG pasarela = CCGG.getGateway();
     	Double result = null;
     	pasarela.setDate(LocalDate.now().plusDays(11));
 		try {
-			result = pasarela.getAmountGranted(codigo);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (InvalidIDException e) {
+			result = pasarela.getAmountGranted(this.id);
+            if(result > 0) this.setEstado(Estado.FINANCIADO);
+		} catch (IOException | InvalidIDException e) {
 			e.printStackTrace();
 		}
-		if(result >0) this.setEstado(Estado.FINANCIADO);
+
     	return result; 
     }
     

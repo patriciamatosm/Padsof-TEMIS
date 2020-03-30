@@ -36,6 +36,14 @@ public abstract class Actor implements Serializable {
     }
 
     /**
+     * Funcion que cambia el valor de la lista proyecto
+     * @param listaProyecto a cambiar
+     */
+    public void setListaProyecto(List<Proyecto> listaProyecto) {
+        this.listaProyecto = listaProyecto;
+    }
+
+    /**
      * Esta función es para añadir un proyecto a la lista de proyectos
      * @param proyecto que se añadira a la lista de proyectos
      */
