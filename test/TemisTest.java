@@ -110,7 +110,7 @@ public class TemisTest {
         pTemis = Temis.getInstance();
         pTemis.registrarse("00000000B", "Patricia", "12345");
 
-        Proyecto p = new ProyectoSocial("Test", "descripcion test", LocalDate.now(),
+        Proyecto p = new ProyectoSocial("Test", "descripcion test",
                 10, pTemis.getUsuarios().get("00000000B"), "je", true);
 
         pTemis.anadirProyecto(p);
@@ -127,8 +127,13 @@ public class TemisTest {
         pTemis = Temis.getInstance();
         pTemis.registrarse("00000000B", "Patricia", "12345");
 
-        Colectivo c = new Colectivo("Test descripcion", "Test",
-                pTemis.getUsuarios().get("00000000B"));
+        Colectivo c = null;
+        try {
+            c = new Colectivo("Test descripcion", "Test",
+                    pTemis.getUsuarios().get("00000000B"));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
         pTemis.anadirColectivo(c);
         assertTrue(pTemis.getColectivos().containsKey("00000000B"));

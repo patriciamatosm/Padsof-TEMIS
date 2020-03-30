@@ -1,11 +1,8 @@
 package model;
 
 
-import java.util.Date;
 import java.util.List;
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 /**
@@ -17,6 +14,7 @@ import java.time.LocalDate;
  * @version 6/03/2020
  */
 
+@SuppressWarnings("unused")
 public abstract class Proyecto implements Serializable {
     private String titulo;
     private String descripcion;
@@ -54,7 +52,7 @@ public abstract class Proyecto implements Serializable {
     }
     
     /**
-     * Función para pedir el título del proyecto
+     * Funciï¿½n para pedir el tï¿½tulo del proyecto
      * @return titulo del proyecto
      */
     public String getTitulo() {
@@ -99,7 +97,7 @@ public abstract class Proyecto implements Serializable {
 
     /**
      * Funcion para establecer la fecha del ultimo voto
-     * @param fechaUltimoVoto
+     * @param fechaUltimoVoto fecha ultimo voto
      */
     public void setFechaUltimoVoto(LocalDate fechaUltimoVoto) {
         this.fechaUltimoVoto = fechaUltimoVoto;
@@ -198,17 +196,16 @@ public abstract class Proyecto implements Serializable {
      * @param u usuario que vota
      * @return true si se ha sumado el voto al proyecto correctamente, false si ocurre lo contrario.
      */
-    public Boolean votar(Usuario u){
+    public boolean votar(Usuario u){
     	if(this.estado == Estado.CADUCADO) return false;
     	
         if(u.getListaProyecto().contains(this)) {
-        	return false;
-        }else {
-        	u.anadirProyecto(this);
-        	this.setFechaUltimoVoto(LocalDate.now());
-        	this.setNumVotos(this.getNumVotos()+1);
-        	return true;
+            return false;
         }
+        u.anadirProyecto(this);
+        this.setFechaUltimoVoto(LocalDate.now());
+        this.setNumVotos(this.getNumVotos()+1);
+        return true;
     }
     
     /**
@@ -216,7 +213,7 @@ public abstract class Proyecto implements Serializable {
      * @param usuarios que votan desde el colectivo
      * @return true si se ha sumado el voto al proyecto correctamente, false si ocurre lo contrario.
      */
-    public Boolean votarUsuarios(List<Usuario> usuarios) {
+    public boolean votarUsuarios(List<Usuario> usuarios) {
     	if(this.estado == Estado.CADUCADO) return false;
     	
     	for (Usuario u : usuarios) {
@@ -233,7 +230,7 @@ public abstract class Proyecto implements Serializable {
      * Funcion para poner un proyecto como caducado cuando sobrepasa el tiempo limite establecido
      * @return true si el proyecto ha pasado a estar caducado, false en el caso contrario
      */
-    public Boolean caducado() {
+    public boolean caducado() {
     	
     	LocalDate fechaUltimo = this.getFechaUltimoVoto();
 		
