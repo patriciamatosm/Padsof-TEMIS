@@ -5,9 +5,9 @@ import model.Proyecto.Estado;
 
 import static org.junit.Assert.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
 @SuppressWarnings("unused")
 public class ProyectoTest {
@@ -17,6 +17,7 @@ public class ProyectoTest {
 		Usuario u = new Usuario("Patricia", "00000000B", "12345");
 		ProyectoInfraestructura p = new ProyectoInfraestructura("titulo", "descripcion",
 				200, u, "abc", "def", "ghi");
+		u.setLogueado(true);
 		
 		p.votar(u);
 		assertTrue(u.getListaProyecto().contains(p));
@@ -32,7 +33,7 @@ public class ProyectoTest {
 		ProyectoSocial p = new ProyectoSocial("titulo", "descripcion", 200, u1,
 				"jkl", true);
 	
-		List<Usuario> usuarios = new ArrayList<>();
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 		usuarios.add(u1);
 		usuarios.add(u2);
 		usuarios.add(u3);
@@ -43,7 +44,7 @@ public class ProyectoTest {
 				flag = false;
 			}
 		}
-		assertTrue(flag);
+		assertEquals(true, flag);
 	} 
 	
 	@Test
@@ -74,6 +75,9 @@ public class ProyectoTest {
 		Usuario u = new Usuario("Patricia", "00000000B", "12345");
 		ProyectoInfraestructura p = new ProyectoInfraestructura("titulo", "descripcion",
 				200, u, "abc", "def", "ghi");
+		
+		assertEquals(p.getEstado(), Estado.EN_ESPERA);
+		p.setEstado(Estado.FINANCIADO);
 		p.aceptarFinanciacion();
 		assertEquals(p.getEstado(), Estado.FINANCIADO);
 	}
@@ -83,8 +87,11 @@ public class ProyectoTest {
 		Usuario u = new Usuario("Patricia", "00000000B", "12345");
 		ProyectoSocial p = new ProyectoSocial("titulo", "descripcion", 200, u,
 				"jkl", true);
-	
+		p.setEstado(Estado.CADUCADO);
 		assertFalse(p.esperarFinanc());
+		
+		p.setEstado(Estado.ACTIVO);
+		p.setMinVotos(30);
 		p.setNumVotos(60);
 		assertTrue(p.esperarFinanc());
 	}
