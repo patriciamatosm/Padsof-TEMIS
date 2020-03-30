@@ -14,8 +14,7 @@ public class NotificacionTest {
         try {
             Usuario u = new Usuario("Patricia", "00000000B", "12345");
             Colectivo c = new Colectivo("Test descripcion", "Test", u);
-            Proyecto p = new ProyectoSocial("Test", "descripcion test", "2015-01-01", 30,
-                    10, u, Estado.ACTIVO, "je", true);
+            Proyecto p = new ProyectoSocial("Test", "descripcion test", 10, u, "je", true);
             Notificacion n = new Notificacion(p, c, "Test");
             n.enviarNotificacion();
 
