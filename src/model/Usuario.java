@@ -147,4 +147,10 @@ public class Usuario extends Actor implements Serializable {
     }
 
 
+    @Override
+    public String toString() {
+        return "Nombre: " + super.getNombre() + ", Estado: " + this.getEstado().name();
+    }
+
+
 }

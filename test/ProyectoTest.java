@@ -5,6 +5,7 @@ import model.Proyecto.Estado;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class ProyectoTest {
 
 	@Test
 	public void votarUsuariosTest() {
-		boolean flag = false;
+		boolean flag = true;
 		
 		Usuario u1 = new Usuario("Patricia", "00000000B", "12345");
 		Usuario u2 = new Usuario("Daniel", "11111111A", "67890");
@@ -31,7 +32,7 @@ public class ProyectoTest {
 		ProyectoSocial p = new ProyectoSocial("titulo", "descripcion", 200, u1,
 				"jkl", true);
 	
-		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+		List<Usuario> usuarios = new ArrayList<>();
 		usuarios.add(u1);
 		usuarios.add(u2);
 		usuarios.add(u3);
@@ -39,10 +40,10 @@ public class ProyectoTest {
 		p.votarUsuarios(usuarios);
 		for(Usuario u: usuarios) {
 			if(!u.getListaProyecto().contains(p)) {
-				flag = true;
+				flag = false;
 			}
 		}
-		assertEquals(true, flag);
+		assertTrue(flag);
 	} 
 	
 	@Test

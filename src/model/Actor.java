@@ -1,7 +1,7 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Clase abstracta que engloba usuarios y colectivos
@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public abstract class Actor implements Serializable {
     private String nombre;
-    private ArrayList<Proyecto> listaProyecto = new ArrayList<>();
+    private List<Proyecto> listaProyecto = new ArrayList<>();
 
     public Actor(String nombre) {
         this.nombre = nombre;
@@ -31,7 +31,7 @@ public abstract class Actor implements Serializable {
      * Funcion que devuelve una lista de proyectos apoyados por el actor
      * @return ArrayList<Proyecto> con los proyectos apoyados
      */
-    public ArrayList<Proyecto> getListaProyecto() {
+    public List<Proyecto> getListaProyecto() {
         return listaProyecto;
     }
 

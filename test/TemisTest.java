@@ -136,9 +136,9 @@ public class TemisTest {
         }
 
         pTemis.anadirColectivo(c);
-        assertTrue(pTemis.getColectivos().containsKey("00000000B"));
+        assertTrue(pTemis.getColectivos().containsKey("Test"));
 
-        pTemis.getColectivos().remove("00000000B");
+        pTemis.getColectivos().remove("Test");
         pTemis.getUsuarios().remove("00000000B");
         pTemis.escribirFichero();
     }

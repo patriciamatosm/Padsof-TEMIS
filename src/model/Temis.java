@@ -250,7 +250,7 @@ public class Temis {
      * @param c Colectivo a añadir
      */
     public void anadirColectivo(Colectivo c){
-        this.colectivos.put(c.getRepresentante().getDni(),c);
+        this.colectivos.put(c.getNombre(),c);
     }
 
 

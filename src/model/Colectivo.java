@@ -107,6 +107,7 @@ public class Colectivo extends Actor implements Serializable {
      *         false si ya estaba en el colectivo
      */
     public boolean unirse(Usuario usuario) {
+        if(!usuario.isLogueado()) return false;
         if (inPadre(usuario)) {
             return false;
         } else {
@@ -172,6 +173,8 @@ public class Colectivo extends Actor implements Serializable {
             Colectivo colectivoHijo = new Colectivo(descripcion, nombre, this.representante);
             colectivoHijo.padre = this;
             this.subcolectivos.add(colectivoHijo);
+            Temis pTemis = Temis.getInstance();
+            pTemis.anadirColectivo(colectivoHijo);
             return true;
         } catch (Exception e) {
             throw new Exception(e.getMessage());
@@ -195,5 +198,12 @@ public class Colectivo extends Actor implements Serializable {
             return 0.0;
         }
         return cont / nUsuarios * 100;
+    }
+
+    @Override
+    public String toString() {
+        return "Colectivo " + super.getNombre() +
+                ": " + descripcion +
+                ". Creado por: " + representante.getNombre();
     }
 }

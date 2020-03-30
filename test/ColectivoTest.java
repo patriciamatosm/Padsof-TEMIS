@@ -1,5 +1,4 @@
-import model.Colectivo;
-import model.Usuario;
+import model.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -103,6 +102,12 @@ public class ColectivoTest {
             c.crearSubcolectivo("Test2", "Description2");
             assertNotNull(c.getSubcolectivos().get(1));
             assertEquals(c.getSubcolectivos().get(0).getPadre(), c.getSubcolectivos().get(1).getPadre());
+
+            Temis pTemis = Temis.getInstance();
+
+            pTemis.getColectivos().remove("Test1");
+            pTemis.escribirFichero();
+
         }
         catch (Exception e){
             System.out.println(e.getMessage());
