@@ -39,7 +39,7 @@ public abstract class Actor implements Serializable {
      * Esta función es para añadir un proyecto a la lista de proyectos
      * @param proyecto que se añadira a la lista de proyectos
      */
-    public void anadirProyecto(Proyecto proyecto) { //DISEÑO esta supongo que hay que meterla
+    public void anadirProyecto(Proyecto proyecto) {
         this.listaProyecto.add(proyecto);
     }
 

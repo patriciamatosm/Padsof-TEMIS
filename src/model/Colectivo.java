@@ -15,7 +15,7 @@ import java.io.Serializable;
 @SuppressWarnings("unused")
 public class Colectivo extends Actor implements Serializable {
     private String descripcion;
-    private Usuario representante; //DISEÑO
+    private Usuario representante;
     private ArrayList<Usuario> listaUsuario = new ArrayList<>();
     private Colectivo padre = null;
     private ArrayList<Colectivo> subcolectivos = new ArrayList<>();
@@ -122,7 +122,7 @@ public class Colectivo extends Actor implements Serializable {
      * @return true si esta en el colectivo o en alguno de los padres
      *         false si no se encuentra
      */
-    private boolean inPadre(Usuario usuario) {  //DISEÑO (no se si debe ser privado)
+    private boolean inPadre(Usuario usuario) {
         if (this.listaUsuario.contains(usuario) || usuario.equals(this.representante)) {
             return true;
         } else {
@@ -186,7 +186,7 @@ public class Colectivo extends Actor implements Serializable {
      * @param cole colectivo del que se quiere calcular la afinidad
      * @return Double con el % de afinidad
      */
-    public Double calcularAfinidad(Colectivo cole) {    //DISEÑO cambiar tipo
+    public Double calcularAfinidad(Colectivo cole) {
         double cont = 0, nUsuarios = 0;
         for (Usuario usuario: cole.listaUsuario) {
             nUsuarios++;
