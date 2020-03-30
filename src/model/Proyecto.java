@@ -66,7 +66,9 @@ public abstract class Proyecto implements Serializable {
      * @param titulo del proyecto
      */
     public void setTitulo(String titulo) {
-        this.titulo = titulo;
+        if(titulo.length() > 25) return;
+    	
+    	this.titulo = titulo;
     }
 
     /**
@@ -82,7 +84,9 @@ public abstract class Proyecto implements Serializable {
      * @param descripcion del proyecto
      */
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        if(descripcion.length() > 500) return;
+    	
+    	this.descripcion = descripcion;
     }
 
     /**
