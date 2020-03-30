@@ -238,7 +238,7 @@ public abstract class Proyecto implements Serializable {
 
     	LocalDate dias = (fechaActual.minusDays(30));
 
-    	if(dias == fechaUltimo) {
+    	if(dias.isEqual(fechaUltimo) || dias.isAfter(fechaUltimo)) {
     		this.estado = Estado.CADUCADO;
     		return true;
     	}
