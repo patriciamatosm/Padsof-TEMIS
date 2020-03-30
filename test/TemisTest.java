@@ -114,9 +114,9 @@ public class TemisTest {
                 10, pTemis.getUsuarios().get("00000000B"), "je", true);
 
         pTemis.anadirProyecto(p);
-        assertTrue(pTemis.getProyectos().containsKey(pTemis.getUsuarios().get("00000000B")));
+        assertTrue(pTemis.getProyectos().containsKey("Test"));
 
-        pTemis.getProyectos().remove(pTemis.getUsuarios().get("00000000B"));
+        pTemis.getProyectos().remove("Test");
         pTemis.getUsuarios().remove("00000000B");
         pTemis.escribirFichero();
     }

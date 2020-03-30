@@ -23,7 +23,7 @@ public class Temis {
     private boolean adminFlag = false;
     private Map<String, Usuario> usuarios = new HashMap<>();
     private Map<String, Colectivo> colectivos = new HashMap<>();
-    private Map<Actor, Proyecto> proyectos = new HashMap<>();
+    private Map<String, Proyecto> proyectos = new HashMap<>();
     private List<String> distritos = new ArrayList<>();
 
 
@@ -81,7 +81,7 @@ public class Temis {
      * Funcion que devuelve los proyectos de la aplicacion
      * @return mapa con los proyectos de la aplicacion
      */
-    public Map<Actor, Proyecto> getProyectos() {
+    public Map<String, Proyecto> getProyectos() {
         return proyectos;
     }
 
@@ -125,7 +125,7 @@ public class Temis {
         Object objLeido;
         Map<String, Usuario> usuarioMap;
         Map<String, Colectivo> colectivoMap;
-        Map<Actor, Proyecto> proyectoMap;
+        Map<String, Proyecto> proyectoMap;
 
         /* Leer componentes */
         try {
@@ -144,7 +144,7 @@ public class Temis {
             // Leer proyectos
 
             objLeido = ois.readObject();
-            proyectoMap = (Map<Actor, Proyecto>) objLeido;
+            proyectoMap = (Map<String, Proyecto>) objLeido;
             pTemis.proyectos = proyectoMap;
 
 
@@ -242,7 +242,7 @@ public class Temis {
      * @param p Proyecto a añadir
      */
     public void anadirProyecto(Proyecto p) {
-        this.proyectos.put(p.getCreador(), p);
+        this.proyectos.put(p.getProjectTitle(), p);
     }
 
     /**

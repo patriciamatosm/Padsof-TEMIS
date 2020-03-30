@@ -56,7 +56,6 @@ public abstract class Proyecto implements GrantRequest, Serializable {
 			e.printStackTrace();
 		}
     }
-    
     /**
      * Enumeracion que indica el estado del proyecto
      */
@@ -306,8 +305,15 @@ public abstract class Proyecto implements GrantRequest, Serializable {
     public void notificaCambio(Notificacion n) {
     	n.enviarNotificacion();
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Proyecto " + titulo +
+                ": " + descripcion +
+                " . Creado por: " + creador.getNombre();
+    }
+
+
 }
 
 

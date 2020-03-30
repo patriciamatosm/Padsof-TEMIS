@@ -40,12 +40,45 @@ public class TemisDemo {
         System.out.println("Usuario conectado: " + pTemis.getUsuarioConectado().toString());
         System.out.println("\n");
 
+
+
+
+
+
+
         /* Crear proyecto */
 
         System.out.println("Creando un proyecto social (funcionaria igual con el de infraestructura)...");
 
         Proyecto p = new ProyectoSocial("Proyecto1", "descripcion del proyecto1",
                 10, pTemis.getUsuarioConectado(), "prueba", true);
+
+        pTemis.anadirProyecto(p);
+        System.out.println("Proyecto creado: " + pTemis.getProyectos().get("Proyecto1"));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -130,6 +163,7 @@ public class TemisDemo {
         pTemis.getUsuarios().remove("00000000B");
         pTemis.getUsuarios().remove("00000000C");
         pTemis.getColectivos().remove("Colectivo1");
+        pTemis.getColectivos().remove("Proyecto1");
         pTemis.escribirFichero();
 
     }
