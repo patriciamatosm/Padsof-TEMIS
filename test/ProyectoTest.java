@@ -1,12 +1,13 @@
 
+import mvc.model.ProyectoInfraestructura;
+import mvc.model.ProyectoSocial;
+import mvc.model.Usuario;
 import org.junit.Test;
-import model.*;
-import model.Proyecto.Estado;
+import mvc.model.Proyecto.Estado;
 
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.time.LocalDate;
 
 @SuppressWarnings("unused")
@@ -44,7 +45,7 @@ public class ProyectoTest {
 				flag = false;
 			}
 		}
-		assertEquals(true, flag);
+		assertTrue(flag);
 	} 
 	
 	@Test

@@ -1,4 +1,6 @@
-import model.*;
+import mvc.model.Colectivo;
+import mvc.model.Temis;
+import mvc.model.Usuario;
 import org.junit.Before;
 import org.junit.Test;
 

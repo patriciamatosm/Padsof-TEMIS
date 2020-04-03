@@ -1,9 +1,5 @@
-import model.*;
-import model.Proyecto.Estado;
-
+import mvc.model.*;
 import org.junit.Test;
-
-import java.time.LocalDate;
 
 import static org.junit.Assert.*;
 

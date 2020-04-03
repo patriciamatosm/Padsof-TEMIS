@@ -1,6 +1,8 @@
 
+import mvc.model.Colectivo;
+import mvc.model.Usuario;
 import org.junit.Test;
-import model.*;
+
 import static org.junit.Assert.*;
 
 @SuppressWarnings("unused")
