@@ -23,9 +23,11 @@ public class PanelLogin extends JPanel implements ActionListener{
 
     //Fields
     private JTextField usuario = new JTextField(20);
+    private JTextField usuarioR = new JTextField(20);
     private JPasswordField contrasena = new JPasswordField(20);
     private JButton login = new JButton("Inicia sesión!");
     private JButton registro = new JButton("Regístrate");
+    private JButton registroR = new JButton("Regístrate");
 
     //Label
     private JLabel l1 = new JLabel("¡Bienvenido a Temis!" );
@@ -37,6 +39,7 @@ public class PanelLogin extends JPanel implements ActionListener{
     private JLabel l6 = new JLabel("Usuario o NIF");
     private JLabel l7 = new JLabel("Contraseña");
     private JLabel l8 = new JLabel("¿Aún no eres miembro?");
+    private JLabel l9 = new JLabel("Usuario");
 
     /**
      * Constructor de la clase
@@ -132,7 +135,20 @@ public class PanelLogin extends JPanel implements ActionListener{
         registro.setBorder(null);
         registro.setBounds(540, 635, 80, 20);
         registro.setBackground(new Color(124, 150, 197));
+        registro.setForeground(Color.blue);
         this.add(registro);
+
+        l9.setFont(l9.getFont().deriveFont(14f));
+        l9.setBounds(470, 360, 180, 10);
+        l9.setForeground(Color.black);
+        l9.setSize(l9.getPreferredSize());
+        this.add(l9);
+        l9.setVisible(false);
+
+        registroR.addActionListener(this);
+        registroR.setBounds(450, 630, 100, 40);
+        this.add(registroR);
+        registroR.setVisible(false);
 
     }
 
@@ -183,6 +199,21 @@ public class PanelLogin extends JPanel implements ActionListener{
 
 
         } else if(e.getSource() == registro){
+            l8.setVisible(false);
+            registro.setVisible(false);
+            login.setVisible(false);
+
+            contrasena.setBounds(410, 595, 180, 25);
+            l7.setBounds(460, 560, 80, 25);
+
+            usuario.setBounds(410, 500, 180, 25);
+            l6.setBounds(485, 460, 80, 25);
+            l6.setText("NIF");
+
+            usuarioR.setBounds(410, 400, 180, 25);
+            this.add(usuarioR);
+            l9.setVisible(true);
+            registroR.setVisible(true);
 
         }
 
