@@ -27,9 +27,20 @@ public class Controller {
      * Funcion que llama a la funcion de iniciar sesion
      * @param id usuario o dni del usuario
      * @param pwd contrasena
-     * @return
+     * @return true/false dependiendo del resultado
      */
     public boolean login(String id, String pwd) {
         return pTemis.iniciaSesion(id, pwd);
+    }
+
+    /**
+     * Funcion que llama a la funcion de registrarse
+     * @param usuario nombre del usuario
+     * @param nif dni del usuario
+     * @param pwd contrasena del usuario
+     * @return true/false dependiendo del resultado
+     */
+    public boolean register(String usuario, String nif, String pwd){
+        return pTemis.registrarse(usuario, nif, pwd);
     }
 }

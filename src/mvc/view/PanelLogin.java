@@ -181,12 +181,12 @@ public class PanelLogin extends JPanel implements ActionListener{
                 }
 
                 JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso!",
-                        "¡Bienvenido a Temis!" ,JOptionPane.OK_OPTION);
+                        "¡Bienvenido a Temis!" ,JOptionPane.PLAIN_MESSAGE);
 
             } else if (gui.getController().login(usuario.getText(), pwd)) {
 
                 JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso!",
-                        "¡Bienvenido a Temis!" ,JOptionPane.OK_OPTION);
+                        "¡Bienvenido a Temis!" ,JOptionPane.PLAIN_MESSAGE);
 
                 //gui.afterLogin(true);
 
@@ -214,6 +214,22 @@ public class PanelLogin extends JPanel implements ActionListener{
             this.add(usuarioR);
             l9.setVisible(true);
             registroR.setVisible(true);
+
+        } else if(e.getSource() == registroR){
+            String pwd = String.valueOf(this.contrasena.getPassword());
+
+            if(gui.getController().register(usuario.getText(), usuarioR.getText(), pwd)){
+
+                JOptionPane.showMessageDialog(this, "Registro exitoso! Por favor inicie sesión!",
+                        "¡Bienvenido a Temis!" ,JOptionPane.PLAIN_MESSAGE);
+
+                //Vuelta al login
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Ha habido un error, por favor intentelo de nuevo.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
 
         }
 
