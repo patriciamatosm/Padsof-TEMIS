@@ -1,5 +1,6 @@
 package mvc.controller;
 
+import mvc.model.*;
 import mvc.view.*;
 
 /**
@@ -12,6 +13,7 @@ import mvc.view.*;
  */
 public class Controller {
     private MiGUI gui;
+    private Temis pTemis = Temis.getInstance();
 
     /**
      * Constructor de la clase
@@ -19,5 +21,15 @@ public class Controller {
      */
     public Controller(MiGUI gui) {
         this.gui = gui;
+    }
+
+    /**
+     * Funcion que llama a la funcion de iniciar sesion
+     * @param id usuario o dni del usuario
+     * @param pwd contrasena
+     * @return
+     */
+    public boolean login(String id, String pwd) {
+        return pTemis.iniciaSesion(id, pwd);
     }
 }

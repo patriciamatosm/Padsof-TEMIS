@@ -46,6 +46,22 @@ public class Temis {
     }
 
     /**
+     * Funcion que devuelve el usuario del admin
+     * @return usuario del admin
+     */
+    public String getUsuarioAdmin() {
+        return usuarioAdmin;
+    }
+
+    /**
+     * Funcion que devuelve la contrasena del admin
+     * @return contrasena del admin
+     */
+    public String getContrasenaAdmin() {
+        return contrasenaAdmin;
+    }
+
+    /**
      * Funcion que devuelve los distritos
      * @return distritos
      */
@@ -195,6 +211,11 @@ public class Temis {
      */
     public boolean iniciaSesion(String id, String contrasena) {
         if (id.equals("") || contrasena.equals("")) return false;
+        if(id.equals(this.usuarioAdmin) && contrasena.equals(this.contrasenaAdmin)){
+            this.adminFlag = true;
+            return true;
+        }
+
         if (id.length() == 9) {
             if (Character.isLetter(id.charAt(8))) {
                 if (this.usuarios.containsKey(id)) {

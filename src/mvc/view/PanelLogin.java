@@ -7,6 +7,7 @@ import mvc.model.Temis;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 /**
  * Clase que define el Panel del login
@@ -24,6 +25,7 @@ public class PanelLogin extends JPanel implements ActionListener{
     private JTextField usuario = new JTextField(20);
     private JPasswordField contrasena = new JPasswordField(20);
     private JButton login = new JButton("Inicia sesión!");
+    private JButton registro = new JButton("Regístrate");
 
     //Label
     private JLabel l1 = new JLabel("¡Bienvenido a Temis!" );
@@ -34,6 +36,7 @@ public class PanelLogin extends JPanel implements ActionListener{
     private JLabel l5 = new JLabel("Por favor, inicia sesión o regístrate.");
     private JLabel l6 = new JLabel("Usuario o NIF");
     private JLabel l7 = new JLabel("Contraseña");
+    private JLabel l8 = new JLabel("¿Aún no eres miembro?");
 
     /**
      * Constructor de la clase
@@ -55,6 +58,17 @@ public class PanelLogin extends JPanel implements ActionListener{
         l1.setForeground(Color.black);
         this.add(l1);
 
+        /***********************
+         * LOGO
+         **********************/
+        JLabel icon1 = new JLabel(" ");
+        ImageIcon icono = new ImageIcon("image/logoTemis.png");
+        Image imagen = icono.getImage();
+        ImageIcon iconScaled = new ImageIcon (imagen.getScaledInstance(200,200,Image.SCALE_SMOOTH));
+        icon1.setIcon(iconScaled);
+        icon1.setBounds(400, 120, 200, 200);
+        this.add(icon1);
+
         /*Descripcion*/
         l2.setFont(l2.getFont().deriveFont(16f));
         l2.setBounds(230, 200, 10, 25);
@@ -71,44 +85,54 @@ public class PanelLogin extends JPanel implements ActionListener{
         l4.setForeground(Color.black);
         l4.setSize(l4.getPreferredSize());
 
-        this.add(l2);
+        /*this.add(l2);
         this.add(l3);
-        this.add(l4);
+        this.add(l4);*/
 
         /* Descripcion2 */
         l5.setFont(l5.getFont().deriveFont(16f));
-        l5.setBounds(360, 320, 10, 25);
+        l5.setBounds(370, 320, 10, 25);
         l5.setForeground(Color.black);
         l5.setSize(l5.getPreferredSize());
         this.add(l5);
 
         /* Campos */
         l6.setFont(l6.getFont().deriveFont(14f));
-        l6.setBounds(440, 400, 10, 25);
+        l6.setBounds(450, 400, 10, 25);
         l6.setForeground(Color.black);
         l6.setSize(l6.getPreferredSize());
         this.add(l6);
 
-        usuario.setBounds(400, 440, 180, 25);
+        usuario.setBounds(410, 440, 180, 25);
         this.add(usuario);
 
 
         l7.setFont(l7.getFont().deriveFont(14f));
-        l7.setBounds(445, 500, 10, 25);
+        l7.setBounds(455, 500, 10, 25);
         l7.setForeground(Color.black);
         l7.setSize(l7.getPreferredSize());
         this.add(l7);
 
-        contrasena.setBounds(400, 540, 180, 25);
+        contrasena.setBounds(410, 540, 180, 25);
         this.add(contrasena);
 
         login.addActionListener(this);
-        login.setBounds(440, 580, 100, 40);
+        login.setBounds(450, 580, 100, 40);
 
         this.add(login);
 
+        l8.setFont(l8.getFont().deriveFont(14f));
+        l8.setBounds(380, 635, 10, 25);
+        l8.setForeground(Color.black);
+        l8.setSize(l8.getPreferredSize());
+        this.add(l8);
 
-
+        registro.addActionListener(this);
+        registro.setOpaque(true);
+        registro.setBorder(null);
+        registro.setBounds(540, 635, 80, 20);
+        registro.setBackground(new Color(124, 150, 197));
+        this.add(registro);
 
     }
 
@@ -119,6 +143,55 @@ public class PanelLogin extends JPanel implements ActionListener{
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        Temis pTemis = Temis.getInstance();
+        try {
+            pTemis.leerFichero();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        if(e.getSource() == login){
+            String pwd = String.valueOf(this.contrasena.getPassword());
+
+            if(usuario.getText().equals(pTemis.getUsuarioAdmin())){
+                if(pwd.equals(pTemis.getContrasenaAdmin())) {
+                    gui.getController().login(usuario.getText(), pwd);
+                    //gui.afterLogin(false);
+                } else {
+                    JOptionPane.showMessageDialog(this,
+                            "Ha habido un error, por favor revise su usuario y su contraseña.",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+
+                JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso!",
+                        "¡Bienvenido a Temis!" ,JOptionPane.OK_OPTION);
+
+            } else if (gui.getController().login(usuario.getText(), pwd)) {
+
+                JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso!",
+                        "¡Bienvenido a Temis!" ,JOptionPane.OK_OPTION);
+
+                //gui.afterLogin(true);
+
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Ha habido un error, por favor revise su usuario y su contraseña.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+
+
+        } else if(e.getSource() == registro){
+
+        }
+
+        try {
+            pTemis.escribirFichero();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
 
     }
 }
