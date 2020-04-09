@@ -15,6 +15,7 @@ import java.awt.*;
 public class MiGUI extends JFrame{
     private Controller controller;
     private PanelLogin panelLogin;
+    private PanelPrincipal panelPrincipal;
     private Container container = this.getContentPane();
 
     /**
@@ -41,12 +42,15 @@ public class MiGUI extends JFrame{
 
         //crear paneles
         this.panelLogin = new PanelLogin(this);
+        this.panelPrincipal = new PanelPrincipal(this);
 
-        //añadirlos aqui
+        //añadir SOLO login
         container.add(panelLogin);
 
         //poner los demas en false
         panelLogin.setVisible(true);
+        panelPrincipal.setVisible(false);
+
 
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,5 +76,26 @@ public class MiGUI extends JFrame{
      */
     public void setController(Controller c) {
         this.controller = c;
+    }
+
+
+    /**
+     * Function que te permite volver al panel de login
+     * @param panel  panel
+     */
+    public void volverAlLogin(JPanel panel) {
+        panel.setVisible(false);
+
+        panelLogin.setVisible(true);
+        panelLogin.repaint();
+    }
+
+
+    public void irPaginaPrincipal(JPanel panel){
+        panel.setVisible(false);
+
+        panelPrincipal.asignarData();
+        container.add(panelPrincipal);
+        panelPrincipal.setVisible(true);
     }
 }

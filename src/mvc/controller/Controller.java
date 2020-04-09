@@ -43,4 +43,13 @@ public class Controller {
     public boolean register(String usuario, String nif, String pwd){
         return pTemis.registrarse(usuario, nif, pwd);
     }
+
+    public Usuario getLoggedUser(){
+        return pTemis.getUsuarioConectado();
+    }
+
+    public String getLoggedUserName(){ return pTemis.getUsuarioConectado().getNombre();}
+
+    public void logout(){ pTemis.cierraSesion();}
+
 }

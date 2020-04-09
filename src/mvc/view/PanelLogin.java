@@ -28,6 +28,7 @@ public class PanelLogin extends JPanel implements ActionListener{
     private JButton login = new JButton("Inicia sesión!");
     private JButton registro = new JButton("Regístrate");
     private JButton registroR = new JButton("Regístrate");
+    private JButton back = new JButton("< Volver");
 
     //Label
     private JLabel l1 = new JLabel("¡Bienvenido a Temis!" );
@@ -150,6 +151,25 @@ public class PanelLogin extends JPanel implements ActionListener{
         this.add(registroR);
         registroR.setVisible(false);
 
+
+        /*******************************************
+         * BUTTON VOLVER
+         *******************************************
+        back.setFont(back.getFont().deriveFont(16f));
+        back.setBounds(50, 20, 75, 25);
+        back.setForeground(Color.black);
+        back.setOpaque(false);
+        back.setContentAreaFilled(false);
+        back.setBorder(BorderFactory.createLineBorder(Color.black, 1, true));
+        back.addActionListener(this);
+        back.setVisible(false);
+        this.add(back);**/
+
+        //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setSize(new Dimension(981, 725));
+        this.setVisible(true);
+
+
     }
 
     /**
@@ -188,7 +208,7 @@ public class PanelLogin extends JPanel implements ActionListener{
                 JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso!",
                         "¡Bienvenido a Temis!" ,JOptionPane.PLAIN_MESSAGE);
 
-                //gui.afterLogin(true);
+                gui.irPaginaPrincipal(this);
 
             } else {
                 JOptionPane.showMessageDialog(this,
@@ -215,18 +235,22 @@ public class PanelLogin extends JPanel implements ActionListener{
             l9.setVisible(true);
             registroR.setVisible(true);
 
+            back.setVisible(true);
+
         } else if(e.getSource() == registroR){
             String pwd = String.valueOf(this.contrasena.getPassword());
 
             if(gui.getController().register(usuario.getText(), usuarioR.getText(), pwd)){
 
-                JOptionPane.showMessageDialog(this, "Registro exitoso! Por favor inicie sesión!",
+                JOptionPane.showMessageDialog(this, "Registro exitoso!",
                         "¡Bienvenido a Temis!" ,JOptionPane.PLAIN_MESSAGE);
 
-                //Vuelta al login
+                gui.getController().login(usuario.getText(), pwd);
+                gui.irPaginaPrincipal(this);
+
             } else {
                 JOptionPane.showMessageDialog(this,
-                        "Ha habido un error, por favor intentelo de nuevo.",
+                        "Ha habido un error con los datos suministrados, por favor intentelo de nuevo.",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
             }
