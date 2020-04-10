@@ -44,12 +44,23 @@ public class Controller {
         return pTemis.registrarse(usuario, nif, pwd);
     }
 
+    /**
+     * Funcion que llama a la funcion que nos devuelve el usuario conectado
+     * @return usuario conectado
+     */
     public Usuario getLoggedUser(){
         return pTemis.getUsuarioConectado();
     }
 
+    /**
+     * Funcion que llama a la funcion que nos devuelve el nombre del usuario conectado
+     * @return nombre del usuario conectado
+     */
     public String getLoggedUserName(){ return pTemis.getUsuarioConectado().getNombre();}
 
+    /**
+     * Funcion que llama a la funcion de cerrar sesión
+     */
     public void logout(){ pTemis.cierraSesion();}
 
 }

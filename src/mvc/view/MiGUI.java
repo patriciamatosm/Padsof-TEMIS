@@ -90,7 +90,10 @@ public class MiGUI extends JFrame{
         panelLogin.repaint();
     }
 
-
+    /**
+     * Funcion que permite volver a la pagina principal
+     * @param panel panel
+     */
     public void irPaginaPrincipal(JPanel panel){
         panel.setVisible(false);
 

@@ -177,6 +177,9 @@ public class PanelPrincipal extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * Funcion que puebla de datos el panel en cuestión
+     */
     public void asignarData(){
 
         if(gui.getController().getLoggedUser() != null){
