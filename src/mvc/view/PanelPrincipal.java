@@ -21,12 +21,15 @@ public class PanelPrincipal extends JPanel implements ActionListener {
 
     private MiGUI gui;
 
+    //Others
+    private boolean representanteFlag = false;
+
     //Fields
     private JButton usuario = new JButton("Usuario");
     private JButton representante = new JButton("Representante");
     private JButton cierraSesion = new JButton("Salir");
-    /*private JButton proyectos = new JButton("Proyectos");
-    private JButton colectivos = new JButton("Colectivos");*/
+    private JButton proyectos = new JButton("Proyectos");
+    private JButton colectivos = new JButton("Colectivos");
 
 
 
@@ -102,15 +105,17 @@ public class PanelPrincipal extends JPanel implements ActionListener {
         l3.setSize(l3.getPreferredSize());
         this.add(l3);
 
-        /*proyectos.setFont(proyectos.getFont().deriveFont(16f));
-        proyectos.setBounds(120, 140, 160, 25);
+        proyectos.setFont(proyectos.getFont().deriveFont(16f));
+        proyectos.setBounds(20, 160, 160, 25);
         proyectos.addActionListener(this);
+        proyectos.setVisible(false);
         this.add(proyectos);
 
         colectivos.setFont(colectivos.getFont().deriveFont(16f));
-        colectivos.setBounds(120, 185, 160, 25);
+        colectivos.setBounds(20, 205, 160, 25);
         colectivos.addActionListener(this);
-        this.add(colectivos);*/
+        colectivos.setVisible(false);
+        this.add(colectivos);
 
 
         //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -140,8 +145,26 @@ public class PanelPrincipal extends JPanel implements ActionListener {
             gui.getController().logout();
             gui.volverAlLogin(this);
         } else if(e.getSource() == usuario){
+            colectivos.setVisible(true);
+            proyectos.setVisible(true);
 
         } else if(e.getSource() == representante){
+            colectivos.setVisible(true);
+            proyectos.setVisible(true);
+            representanteFlag = true;
+        } else if(e.getSource() == proyectos){
+            if(representanteFlag){
+                //mostrar proyectos apoyados por los colectivos creados
+            } else {
+                // mostrar a los que pertenece el usuario
+            }
+
+        } else if(e.getSource() == colectivos){
+            if(representanteFlag){
+                //mostrar colectivos creados
+            } else {
+                // mostrar a los que pertenece el usuario
+            }
 
         }
 
