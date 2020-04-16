@@ -19,6 +19,8 @@ public class MiGUI extends JFrame{
     private PanelNotificacion panelNotificacion;
     private PanelProyectos panelProyectos;
     private PanelProyectosApoyo panelProyectosApoyo;
+    private PanelProyectoExp panelProyectoExp;
+    private PanelProponerProyecto panelProponerProyecto;
     private Container container = this.getContentPane();
 
     /**
@@ -49,6 +51,8 @@ public class MiGUI extends JFrame{
         this.panelNotificacion = new PanelNotificacion(this);
         this.panelProyectos = new PanelProyectos(this);
         this.panelProyectosApoyo = new PanelProyectosApoyo(this);
+        this.panelProyectoExp = new PanelProyectoExp(this);
+        this.panelProponerProyecto = new PanelProponerProyecto(this);
 
         //añadir SOLO login
         container.add(panelLogin);
@@ -59,6 +63,8 @@ public class MiGUI extends JFrame{
         panelNotificacion.setVisible(false);
         panelProyectos.setVisible(false);
         panelProyectosApoyo.setVisible(false);
+        panelProyectoExp.setVisible(false);
+        panelProponerProyecto.setVisible(false);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -139,6 +145,22 @@ public class MiGUI extends JFrame{
         panelProyectosApoyo.asignarData();
         container.add(panelProyectosApoyo);
         panelProyectosApoyo.setVisible(true);
+    }
+
+    public void irProyectoExp(JPanel panel){
+        panel.setVisible(false);
+
+        panelProyectosApoyo.asignarData();
+        container.add(panelProyectosApoyo);
+        panelProyectosApoyo.setVisible(true);
+    }
+
+    public void irProponerProyecto(JPanel panel){
+        panel.setVisible(false);
+
+        panelProponerProyecto.asignarData();
+        container.add(panelProponerProyecto);
+        panelProponerProyecto.setVisible(true);
     }
 
 }

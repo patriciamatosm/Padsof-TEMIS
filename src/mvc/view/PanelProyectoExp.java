@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class PanelProyectos extends JPanel implements ActionListener {
+public class PanelProyectoExp extends JPanel implements ActionListener {
 
     private MiGUI gui;
 
@@ -16,16 +16,16 @@ public class PanelProyectos extends JPanel implements ActionListener {
     private JButton pagPrinc = new JButton("Página principal");
     private JButton proyectos = new JButton("Proyectos");
     private JButton colectivos = new JButton("Colectivos");
-    private JButton proyectosApoyo = new JButton("Proyectos que apoyas");
-    private JButton proponerProyecto = new JButton("Proponer nuevo proyecto");
+    private JButton proyectosR = new JButton("Todos los proyectos");
+    private JButton votar = new JButton("votar");
     private JButton back = new JButton("Volver");
 
     /*labels*/
-    private JLabel l1 = new JLabel("Proyectos" );
+    private JLabel l1 = new JLabel("Proyecto1" );
     private JLabel l2 = new JLabel("Perfil de ");
     private JLabel l3 = new JLabel("No name");
 
-    public PanelProyectos(MiGUI gui) {
+    public PanelProyectoExp(MiGUI gui) {
         this.gui = gui;
         this.setLayout(new BorderLayout());
         this.setBackground(new Color(124, 150, 197));
@@ -35,8 +35,8 @@ public class PanelProyectos extends JPanel implements ActionListener {
         this.setBackground(new Color(124, 150, 197));
 
         /*Titulo*/
-        l1.setFont(l1.getFont().deriveFont(40f));
-        l1.setBounds(400, 100, 250, 55);
+        l1.setFont(l1.getFont().deriveFont(30f));
+        l1.setBounds(350, 100, 450, 45);
         l1.setForeground(Color.black);
         this.add(l1);
 
@@ -53,13 +53,13 @@ public class PanelProyectos extends JPanel implements ActionListener {
         colectivos.setBounds(30, 242, 100, 40);
         this.add(colectivos);
 
-        proyectosApoyo.addActionListener(this);
-        proyectosApoyo.setBounds(550, 600, 300, 40);
-        this.add(proyectosApoyo);
+        proyectosR.addActionListener(this);
+        proyectosR.setBounds(550, 600, 300, 40);
+        this.add(proyectosR);
 
-        proponerProyecto.addActionListener(this);
-        proponerProyecto.setBounds(150, 600, 300, 40);
-        this.add(proponerProyecto);
+        votar.addActionListener(this);
+        votar.setBounds(400, 300, 90, 40);
+        this.add(votar);
 
         /*Textos*/
         l2.setFont(l2.getFont().deriveFont(16f));
@@ -111,10 +111,8 @@ public class PanelProyectos extends JPanel implements ActionListener {
             gui.irColectivos(this);
         }*/ else if(e.getSource() == proyectos){
             gui.irProyectos(this);
-        } else if(e.getSource() == proyectosApoyo){
-            gui.irProyectosApoyo(this);
-        } else if(e.getSource() == proponerProyecto){
-            gui.irProponerProyecto(this);
+        } else if(e.getSource() == proyectosR){
+            gui.irProyectos(this);
         }
 
         try {
