@@ -35,7 +35,7 @@ public class PanelLogin extends JPanel implements ActionListener{
     private JLabel l2 = new JLabel("La aplicación oficial del ayuntamiento mediante la cual los ciudadanos");
     private JLabel l3 = new JLabel("pueden formar colectivos, proponer proyectos y votar dichas propuestas para " +
             "hacer");
-    private JLabel l4 = new JLabel("de este un barrio para todos.");
+    private JLabel l4 = new JLabel("de este un mejor barrio para todos.");
     private JLabel l5 = new JLabel("Por favor, inicia sesión o regístrate.");
     private JLabel l6 = new JLabel("Usuario o NIF");
     private JLabel l7 = new JLabel("Contraseña");
@@ -162,7 +162,7 @@ public class PanelLogin extends JPanel implements ActionListener{
         back.setContentAreaFilled(false);
         back.setBorder(BorderFactory.createLineBorder(Color.black, 1, true));
         back.addActionListener(this);
-        back.setVisible(false);
+        back.setVisible(true);
         this.add(back);**/
 
         //this.setDefaultCloseOperation(EXIT_ON_CLOSE);

@@ -125,8 +125,6 @@ public class PanelPrincipal extends JPanel implements ActionListener {
     }
 
 
-
-
     /**
      * Invoked when an action occurs.
      *
@@ -155,8 +153,10 @@ public class PanelPrincipal extends JPanel implements ActionListener {
         } else if(e.getSource() == proyectos){
             if(representanteFlag){
                 //mostrar proyectos apoyados por los colectivos creados
+                gui.irProyectos(this);
             } else {
                 // mostrar a los que pertenece el usuario
+                gui.irProyectos(this);
             }
 
         } else if(e.getSource() == colectivos){
