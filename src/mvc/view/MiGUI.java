@@ -18,6 +18,7 @@ public class MiGUI extends JFrame{
     private PanelPrincipal panelPrincipal;
     private PanelNotificacion panelNotificacion;
     private PanelProyectos panelProyectos;
+    private PanelProyectosApoyo panelProyectosApoyo;
     private Container container = this.getContentPane();
 
     /**
@@ -47,6 +48,7 @@ public class MiGUI extends JFrame{
         this.panelPrincipal = new PanelPrincipal(this);
         this.panelNotificacion = new PanelNotificacion(this);
         this.panelProyectos = new PanelProyectos(this);
+        this.panelProyectosApoyo = new PanelProyectosApoyo(this);
 
         //añadir SOLO login
         container.add(panelLogin);
@@ -56,7 +58,7 @@ public class MiGUI extends JFrame{
         panelPrincipal.setVisible(false);
         panelNotificacion.setVisible(false);
         panelProyectos.setVisible(false);
-
+        panelProyectosApoyo.setVisible(false);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -129,6 +131,14 @@ public class MiGUI extends JFrame{
         panelNotificacion.asignarData();
         container.add(panelNotificacion);
         panelNotificacion.setVisible(true);
+    }
+
+    public void irProyectosApoyo(JPanel panel){
+        panel.setVisible(false);
+
+        panelProyectosApoyo.asignarData();
+        container.add(panelProyectosApoyo);
+        panelProyectosApoyo.setVisible(true);
     }
 
 }
