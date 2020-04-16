@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class PanelProyectoExp extends JPanel implements ActionListener {
+public class PanelProyectoSocial extends JPanel implements ActionListener {
 
     private MiGUI gui;
 
@@ -21,11 +21,11 @@ public class PanelProyectoExp extends JPanel implements ActionListener {
     private JButton back = new JButton("Volver");
 
     /*labels*/
-    private JLabel l1 = new JLabel("Proyecto1" );
+    private JLabel l1 = new JLabel("Proyecto social" );
     private JLabel l2 = new JLabel("Perfil de ");
     private JLabel l3 = new JLabel("No name");
 
-    public PanelProyectoExp(MiGUI gui) {
+    public PanelProyectoSocial(MiGUI gui) {
         this.gui = gui;
         this.setLayout(new BorderLayout());
         this.setBackground(new Color(124, 150, 197));
