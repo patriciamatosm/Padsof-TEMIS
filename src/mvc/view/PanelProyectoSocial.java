@@ -34,6 +34,7 @@ public class PanelProyectoSocial extends JPanel implements ActionListener {
         this.setLayout(null);
         this.setBackground(new Color(124, 150, 197));
 
+
         /*Titulo*/
         l1.setFont(l1.getFont().deriveFont(30f));
         l1.setBounds(350, 100, 450, 45);
