@@ -166,6 +166,15 @@ public class Controller {
     }
 
     /**
+     * Funcion que devuelve dni
+     * @param u usuario
+     * @return dni
+     */
+    public String getDNI(Usuario u){
+        return u.getDni();
+    }
+
+    /**
      * Función que acepta registro
      * @param u usuario
      */
@@ -245,6 +254,19 @@ public class Controller {
                 a.denegarSolicitud();
             }
         }
+    }
+
+    /**
+     * Funcion que devuelve la lista de usuarios
+     * @return lista de usuarios
+     */
+    public List<Usuario> listaUsuarios(){
+        List<Usuario> us = new ArrayList<>();
+
+        for(Usuario u : pTemis.getUsuarios().values()){
+            us.add(u);
+        }
+        return us;
     }
 
 }
