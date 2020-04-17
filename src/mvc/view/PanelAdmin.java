@@ -32,8 +32,10 @@ public class PanelAdmin extends JPanel implements ActionListener {
     private JButton usuarios = new JButton("Lista de usuarios");
     private JButton eFinanciacion = new JButton("Espera de financiación");
     private JButton cierraSesion = new JButton("Salir");
+    private JButton volver = new JButton("< Volver");
 
     //Label
+    private JLabel icon1 = new JLabel("");
     private JLabel l1 = new JLabel("Perfil del administrador");
     private JLabel l2 = new JLabel("");
     private JLabel l3 = new JLabel("");
@@ -57,7 +59,6 @@ public class PanelAdmin extends JPanel implements ActionListener {
         /***********************
          * LOGO
          **********************/
-        JLabel icon1 = new JLabel(" ");
         ImageIcon icono = new ImageIcon("image/logoTemis.png");
         Image imagen = icono.getImage();
         ImageIcon iconScaled = new ImageIcon (imagen.getScaledInstance(100,100,Image.SCALE_SMOOTH));
@@ -102,6 +103,13 @@ public class PanelAdmin extends JPanel implements ActionListener {
         eFinanciacion.addActionListener(this);
         this.add(eFinanciacion);
 
+        l2.setVisible(false);
+        l3.setVisible(false);
+        this.add(l2);
+        this.add(l3);
+
+        volver.setVisible(false);
+        this.add(volver);
 
 
         //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -138,11 +146,38 @@ public class PanelAdmin extends JPanel implements ActionListener {
 
             this.assingRegistros();
 
-            l2.setText("Nombre: " + this.pendientes.get(0).getNombre());
-            l2.setBounds(120, 110, 100, 25);
-            l1.setForeground(Color.black);
-            l1.setSize(l1.getPreferredSize());
-            this.add(l1);
+            volver.setFont(volver.getFont().deriveFont(16f));
+            volver.setBounds(40, 200, 75, 25);
+            volver.setForeground(Color.black);
+            volver.setOpaque(false);
+            volver.setContentAreaFilled(false);
+            volver.setBorder(BorderFactory.createLineBorder(Color.black, 1, true));
+            volver.addActionListener(this);
+            volver.setVisible(true);
+            this.add(volver);
+
+            if (pendientes.isEmpty()){
+
+
+            } else {
+                System.out.println(this.pendientes);
+
+                l2.setText("Nombre:          " + gui.getController().getNombre(this.pendientes.get(0)));
+                l2.setFont(l2.getFont().deriveFont(20f));
+                l2.setBounds(400, 240, 100, 25);
+                l2.setForeground(Color.black);
+                l2.setSize(l2.getPreferredSize());
+                l2.setVisible(true);
+                this.add(l2);
+
+                l3.setText("Estado:          " + gui.getController().getEstado(this.pendientes.get(0)));
+                l3.setFont(l3.getFont().deriveFont(20f));
+                l3.setBounds(400, 290, 100, 25);
+                l3.setForeground(Color.black);
+                l3.setSize(l3.getPreferredSize());
+                l3.setVisible(true);
+                this.add(l3);
+            }
 
         } else if(e.getSource() == sProyecto){
             sRegistro.setVisible(false);
@@ -163,6 +198,24 @@ public class PanelAdmin extends JPanel implements ActionListener {
             eFinanciacion.setVisible(false);
             usuarios.setVisible(false);
 
+        } else if(e.getSource() == volver){
+            this.removeAll();
+            this.repaint();
+
+            sRegistro.setVisible(true);
+            sProyecto.setVisible(true);
+            eFinanciacion.setVisible(true);
+            usuarios.setVisible(true);
+            l1.setVisible(true);
+            cierraSesion.setVisible(true);
+            icon1.setVisible(true);
+            this.add(sRegistro);
+            this.add(sProyecto);
+            this.add(eFinanciacion);
+            this.add(usuarios);
+            this.add(l1);
+            this.add(cierraSesion);
+            this.add(icon1);
         }
 
 

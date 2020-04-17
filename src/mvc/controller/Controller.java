@@ -90,4 +90,22 @@ public class Controller {
 
         return usuarios;
     }
+
+    /**
+     * Funcion que devuelve el nombre de un usuario
+     * @param u Usuario
+     * @return nombre del usuario
+     */
+    public String getNombre(Usuario u){
+        return u.getNombre();
+    }
+
+    /**
+     * Funcion que devuelve el estado de un usuario
+     * @param u usuario
+     * @return estado del usuario
+     */
+    public Usuario.EstadoUsuario getEstado(Usuario u){
+        return u.getEstado();
+    }
 }

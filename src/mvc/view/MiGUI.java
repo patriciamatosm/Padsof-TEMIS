@@ -106,7 +106,9 @@ public class MiGUI extends JFrame{
      */
     public void volverAlLogin(JPanel panel) {
         panel.setVisible(false);
+        panel = null;
 
+        if(panelLogin == null) this.panelLogin = new PanelLogin(this);
         panelLogin.setVisible(true);
         panelLogin.repaint();
     }
@@ -118,6 +120,7 @@ public class MiGUI extends JFrame{
     public void irPaginaPrincipal(JPanel panel){
         panel.setVisible(false);
 
+        if(panelPrincipal == null) this.panelPrincipal = new PanelPrincipal(this);
         panelPrincipal.asignarData();
         container.add(panelPrincipal);
         panelPrincipal.setVisible(true);
@@ -129,7 +132,7 @@ public class MiGUI extends JFrame{
      */
     public void irAdmin(JPanel panel){
         panel.setVisible(false);
-
+        if(panelAdmin == null) this.panelAdmin = new PanelAdmin(this);
         container.add(panelAdmin);
         panelAdmin.setVisible(true);
 
@@ -146,6 +149,7 @@ public class MiGUI extends JFrame{
     public void irProyectos(JPanel panel){
         panel.setVisible(false);
 
+        if(panelProyectos == null) this.panelProyectos = new PanelProyectos(this);
         panelProyectos.asignarData();
         container.add(panelProyectos);
         panelProyectos.setVisible(true);
@@ -162,6 +166,7 @@ public class MiGUI extends JFrame{
     public void irProyectosApoyo(JPanel panel){
         panel.setVisible(false);
 
+        if(panelProyectosApoyo == null) this.panelProyectosApoyo = new PanelProyectosApoyo(this);
         panelProyectosApoyo.asignarData();
         container.add(panelProyectosApoyo);
         panelProyectosApoyo.setVisible(true);
@@ -170,6 +175,7 @@ public class MiGUI extends JFrame{
     public void irProponerProyecto(JPanel panel){
         panel.setVisible(false);
 
+        if(panelProponerProyecto == null) this.panelProponerProyecto = new PanelProponerProyecto(this);
         panelProponerProyecto.asignarData();
         container.add(panelProponerProyecto);
         panelProponerProyecto.setVisible(true);
@@ -178,6 +184,7 @@ public class MiGUI extends JFrame{
     public void irProyectoSocial(JPanel panel){
         panel.setVisible(false);
 
+        if(panelProyectoSocial == null) this.panelProyectoSocial = new PanelProyectoSocial(this);
         panelProyectoSocial.asignarData();
         container.add(panelProyectoSocial);
         panelProyectoSocial.setVisible(true);
@@ -186,6 +193,7 @@ public class MiGUI extends JFrame{
     public void irProyectoInfra(JPanel panel){
         panel.setVisible(false);
 
+        if(panelProyectoInfra == null) this.panelProyectoInfra = new PanelProyectoInfra(this);
         panelProyectoInfra.asignarData();
         container.add(panelProyectoInfra);
         panelProyectoInfra.setVisible(true);
