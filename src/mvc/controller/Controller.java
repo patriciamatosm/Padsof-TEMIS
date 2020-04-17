@@ -269,4 +269,15 @@ public class Controller {
         return us;
     }
 
+    /**
+     * Funcion que bloquea un usuario
+     * @param u usuario
+     */
+    public void bloquear(Usuario u){
+        for(Usuario a : pTemis.getUsuarios().values()){
+            if(a.getDni().equals(u.getDni()))
+                a.bloquearUsuario();
+        }
+    }
+
 }

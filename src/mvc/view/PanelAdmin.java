@@ -32,6 +32,8 @@ public class PanelAdmin extends JPanel implements ActionListener {
     private boolean proyecto = false;
     private boolean registro = false;
     private boolean finan = false;
+    private boolean ant = false;
+    private boolean sig = false;
     //Fields
     private JButton sRegistro = new JButton("Solicitudes de registro");
     private JButton sProyecto = new JButton("Solicitudes de proyecto");
@@ -383,8 +385,42 @@ public class PanelAdmin extends JPanel implements ActionListener {
                 }
             }
         } else if(e.getSource() == s){
-            this.assignUsuarios();
-            this.muestraUsuariosSig();
+            if(siguiente.isEmpty()){
+                JOptionPane.showMessageDialog(this, "No hay más usuarios que revisar! Buen trabajo!",
+                        "" ,JOptionPane.PLAIN_MESSAGE);
+            } else {
+                this.assignUsuarios();
+                this.muestraUsuariosSig();
+            }
+        } else if(e.getSource() == a){
+            if(anterior.isEmpty()){
+                JOptionPane.showMessageDialog(this, "No puedes ir más hacia atrás",
+                        "" ,JOptionPane.PLAIN_MESSAGE);
+            } else {
+                this.muestraUsuariosAnt();
+            }
+        } else if(e.getSource() == bloquear1){
+
+            if(sig){
+                gui.getController().bloquear(this.siguiente.get(0));
+            } else {
+                gui.getController().bloquear(this.anterior.get(0));
+            }
+
+        } else if(e.getSource() == bloquear2){
+            if(sig){
+                gui.getController().bloquear(this.siguiente.get(1));
+            } else {
+                gui.getController().bloquear(this.anterior.get(1));
+            }
+
+        } else if(e.getSource() == bloquear3){
+            if(sig){
+                gui.getController().bloquear(this.siguiente.get(2));
+            } else {
+                gui.getController().bloquear(this.anterior.get(2));
+            }
+
         }
 
         try {
@@ -580,6 +616,8 @@ public class PanelAdmin extends JPanel implements ActionListener {
      * Muestra usuarios en el sistema
      */
     private void muestraUsuariosSig(){
+        this.sig = true;
+        this.ant = false;
         l4.setText("Lista de usuarios");
         l4.setFont(l4.getFont().deriveFont(16f));
         l4.setBounds(440, 160, 400, 80);
@@ -591,120 +629,130 @@ public class PanelAdmin extends JPanel implements ActionListener {
         /*****
          * 1
          ****/
-        l2.setText("Nombre:        " + gui.getController().getNombre(this.siguiente.get(0)));
-        l2.setFont(l2.getFont().deriveFont(16f));
-        l2.setBounds(420, 280, 100, 25);
-        l2.setForeground(Color.black);
-        l2.setSize(l2.getPreferredSize());
-        l2.setVisible(true);
-        this.add(l2);
 
-        l3.setText("Dni:          " + gui.getController().getDNI(this.siguiente.get(0)));
-        l3.setFont(l3.getFont().deriveFont(16f));
-        l3.setBounds(420, 330, 100, 25);
-        l3.setForeground(Color.black);
-        l3.setSize(l3.getPreferredSize());
-        l3.setVisible(true);
-        this.add(l3);
+        if(this.siguiente.get(0) != null) {
+            l2.setText("Nombre:        " + gui.getController().getNombre(this.siguiente.get(0)));
+            l2.setFont(l2.getFont().deriveFont(16f));
+            l2.setBounds(420, 280, 100, 25);
+            l2.setForeground(Color.black);
+            l2.setSize(l2.getPreferredSize());
+            l2.setVisible(true);
+            this.add(l2);
 
-        l5.setText("Estado:          " +
-                gui.getController().getEstado(this.siguiente.get(0)));
-        l5.setFont(l5.getFont().deriveFont(16f));
-        l5.setBounds(420, 380, 100, 25);
-        l5.setForeground(Color.red);
-        l5.setSize(l5.getPreferredSize());
-        l5.setVisible(true);
-        this.add(l5);
+            l3.setText("Dni:          " + gui.getController().getDNI(this.siguiente.get(0)));
+            l3.setFont(l3.getFont().deriveFont(16f));
+            l3.setBounds(420, 330, 100, 25);
+            l3.setForeground(Color.black);
+            l3.setSize(l3.getPreferredSize());
+            l3.setVisible(true);
+            this.add(l3);
 
-        bloquear1.setFont(bloquear1.getFont().deriveFont(14f));
-        bloquear1.setBounds(560, 330, 100, 25);
-        bloquear1.addActionListener(this);
-        bloquear1.setVisible(true);
-        this.add(bloquear1);
+            l5.setText("Estado:          " +
+                    gui.getController().getEstado(this.siguiente.get(0)));
+            l5.setFont(l5.getFont().deriveFont(16f));
+            l5.setBounds(420, 380, 100, 25);
+            l5.setForeground(Color.red);
+            l5.setSize(l5.getPreferredSize());
+            l5.setVisible(true);
+            this.add(l5);
 
+            bloquear1.setFont(bloquear1.getFont().deriveFont(14f));
+            bloquear1.setBounds(560, 330, 100, 25);
+            bloquear1.addActionListener(this);
+            bloquear1.setVisible(true);
+            this.add(bloquear1);
+
+            this.anterior.add(this.siguiente.get(0));
+            this.siguiente.remove(0);
+        }
         /*****
          * 2
          ****/
 
-        l6.setText("Nombre:        " + gui.getController().getNombre(this.siguiente.get(1)));
-        l6.setFont(l6.getFont().deriveFont(16f));
-        l6.setBounds(420, 395, 100, 25);
-        l6.setForeground(Color.black);
-        l6.setSize(l6.getPreferredSize());
-        l6.setVisible(true);
-        this.add(l6);
+        if(this.siguiente.get(1) != null) {
+            l6.setText("Nombre:        " + gui.getController().getNombre(this.siguiente.get(1)));
+            l6.setFont(l6.getFont().deriveFont(16f));
+            l6.setBounds(420, 395, 100, 25);
+            l6.setForeground(Color.black);
+            l6.setSize(l6.getPreferredSize());
+            l6.setVisible(true);
+            this.add(l6);
 
-        l7.setText("Dni:          " + gui.getController().getDNI(this.siguiente.get(1)));
-        l7.setFont(l7.getFont().deriveFont(16f));
-        l7.setBounds(420, 445, 100, 25);
-        l7.setForeground(Color.black);
-        l7.setSize(l7.getPreferredSize());
-        l7.setVisible(true);
-        this.add(l7);
+            l7.setText("Dni:          " + gui.getController().getDNI(this.siguiente.get(1)));
+            l7.setFont(l7.getFont().deriveFont(16f));
+            l7.setBounds(420, 445, 100, 25);
+            l7.setForeground(Color.black);
+            l7.setSize(l7.getPreferredSize());
+            l7.setVisible(true);
+            this.add(l7);
 
-        l8.setText("Estado:          " +
-                gui.getController().getEstado(this.siguiente.get(1)));
-        l8.setFont(l8.getFont().deriveFont(16f));
-        l8.setBounds(420, 495, 100, 25);
-        l8.setForeground(Color.red);
-        l8.setSize(l8.getPreferredSize());
-        l8.setVisible(true);
-        this.add(l8);
+            l8.setText("Estado:          " +
+                    gui.getController().getEstado(this.siguiente.get(1)));
+            l8.setFont(l8.getFont().deriveFont(16f));
+            l8.setBounds(420, 495, 100, 25);
+            l8.setForeground(Color.red);
+            l8.setSize(l8.getPreferredSize());
+            l8.setVisible(true);
+            this.add(l8);
 
-        bloquear2.setFont(bloquear2.getFont().deriveFont(14f));
-        bloquear2.setBounds(560, 445, 100, 25);
-        bloquear2.addActionListener(this);
-        bloquear2.setVisible(true);
-        this.add(bloquear2);
+            bloquear2.setFont(bloquear2.getFont().deriveFont(14f));
+            bloquear2.setBounds(560, 445, 100, 25);
+            bloquear2.addActionListener(this);
+            bloquear2.setVisible(true);
+            this.add(bloquear2);
 
+            this.anterior.add(this.siguiente.get(1));
+            this.siguiente.remove(1);
+        }
 
         /*****
          * 3
          ****/
 
-        l9.setText("Nombre:        " + gui.getController().getNombre(this.siguiente.get(2)));
-        l9.setFont(l9.getFont().deriveFont(16f));
-        l9.setBounds(420, 510, 100, 25);
-        l9.setForeground(Color.black);
-        l9.setSize(l9.getPreferredSize());
-        l9.setVisible(true);
-        this.add(l9);
+        if(this.siguiente.get(2) != null) {
+            l9.setText("Nombre:        " + gui.getController().getNombre(this.siguiente.get(2)));
+            l9.setFont(l9.getFont().deriveFont(16f));
+            l9.setBounds(420, 510, 100, 25);
+            l9.setForeground(Color.black);
+            l9.setSize(l9.getPreferredSize());
+            l9.setVisible(true);
+            this.add(l9);
 
-        l10.setText("Dni:          " + gui.getController().getDNI(this.siguiente.get(2)));
-        l10.setFont(l10.getFont().deriveFont(16f));
-        l10.setBounds(420, 560, 100, 25);
-        l10.setForeground(Color.black);
-        l10.setSize(l10.getPreferredSize());
-        l10.setVisible(true);
-        this.add(l10);
+            l10.setText("Dni:          " + gui.getController().getDNI(this.siguiente.get(2)));
+            l10.setFont(l10.getFont().deriveFont(16f));
+            l10.setBounds(420, 560, 100, 25);
+            l10.setForeground(Color.black);
+            l10.setSize(l10.getPreferredSize());
+            l10.setVisible(true);
+            this.add(l10);
 
-        l11.setText("Estado:          " +
-                gui.getController().getEstado(this.siguiente.get(2)));
-        l11.setFont(l11.getFont().deriveFont(16f));
-        l11.setBounds(420, 610, 100, 25);
-        l11.setForeground(Color.red);
-        l11.setSize(l11.getPreferredSize());
-        l11.setVisible(true);
-        this.add(l11);
+            l11.setText("Estado:          " +
+                    gui.getController().getEstado(this.siguiente.get(2)));
+            l11.setFont(l11.getFont().deriveFont(16f));
+            l11.setBounds(420, 610, 100, 25);
+            l11.setForeground(Color.red);
+            l11.setSize(l11.getPreferredSize());
+            l11.setVisible(true);
+            this.add(l11);
 
-        bloquear3.setFont(bloquear3.getFont().deriveFont(14f));
-        bloquear3.setBounds(560, 560, 100, 25);
-        bloquear3.addActionListener(this);
-        bloquear3.setVisible(true);
-        this.add(bloquear3);
+            bloquear3.setFont(bloquear3.getFont().deriveFont(14f));
+            bloquear3.setBounds(560, 560, 100, 25);
+            bloquear3.addActionListener(this);
+            bloquear3.setVisible(true);
+            this.add(bloquear3);
 
-        this.anterior.add(this.siguiente.get(0));
-        this.anterior.add(this.siguiente.get(1));
-        this.anterior.add(this.siguiente.get(2));
-        this.siguiente.remove(0);
-        this.siguiente.remove(1);
-        this.siguiente.remove(2);
+            this.anterior.add(this.siguiente.get(2));
+            this.siguiente.remove(2);
+        }
+
     }
 
     /**
      * Muestra usuarios en el sistema
      */
     private void muestraUsuariosAnt(){
+        this.sig = false;
+        this.ant = true;
         l4.setText("Lista de usuarios");
         l4.setFont(l4.getFont().deriveFont(16f));
         l4.setBounds(440, 160, 400, 80);
@@ -716,114 +764,121 @@ public class PanelAdmin extends JPanel implements ActionListener {
         /*****
          * 1
          ****/
-        l2.setText("Nombre:        " + gui.getController().getNombre(this.anterior.get(0)));
-        l2.setFont(l2.getFont().deriveFont(16f));
-        l2.setBounds(420, 280, 100, 25);
-        l2.setForeground(Color.black);
-        l2.setSize(l2.getPreferredSize());
-        l2.setVisible(true);
-        this.add(l2);
+        if(this.anterior.get(0) != null) {
+            l2.setText("Nombre:        " + gui.getController().getNombre(this.anterior.get(0)));
+            l2.setFont(l2.getFont().deriveFont(16f));
+            l2.setBounds(420, 280, 100, 25);
+            l2.setForeground(Color.black);
+            l2.setSize(l2.getPreferredSize());
+            l2.setVisible(true);
+            this.add(l2);
 
-        l3.setText("Dni:          " + gui.getController().getDNI(this.anterior.get(0)));
-        l3.setFont(l3.getFont().deriveFont(16f));
-        l3.setBounds(420, 330, 100, 25);
-        l3.setForeground(Color.black);
-        l3.setSize(l3.getPreferredSize());
-        l3.setVisible(true);
-        this.add(l3);
+            l3.setText("Dni:          " + gui.getController().getDNI(this.anterior.get(0)));
+            l3.setFont(l3.getFont().deriveFont(16f));
+            l3.setBounds(420, 330, 100, 25);
+            l3.setForeground(Color.black);
+            l3.setSize(l3.getPreferredSize());
+            l3.setVisible(true);
+            this.add(l3);
 
-        l5.setText("Estado:          " +
-                gui.getController().getEstado(this.anterior.get(0)));
-        l5.setFont(l5.getFont().deriveFont(16f));
-        l5.setBounds(420, 380, 100, 25);
-        l5.setForeground(Color.red);
-        l5.setSize(l5.getPreferredSize());
-        l5.setVisible(true);
-        this.add(l5);
+            l5.setText("Estado:          " +
+                    gui.getController().getEstado(this.anterior.get(0)));
+            l5.setFont(l5.getFont().deriveFont(16f));
+            l5.setBounds(420, 380, 100, 25);
+            l5.setForeground(Color.red);
+            l5.setSize(l5.getPreferredSize());
+            l5.setVisible(true);
+            this.add(l5);
 
-        bloquear1.setFont(bloquear1.getFont().deriveFont(14f));
-        bloquear1.setBounds(560, 330, 100, 25);
-        bloquear1.addActionListener(this);
-        bloquear1.setVisible(true);
-        this.add(bloquear1);
+            bloquear1.setFont(bloquear1.getFont().deriveFont(14f));
+            bloquear1.setBounds(560, 330, 100, 25);
+            bloquear1.addActionListener(this);
+            bloquear1.setVisible(true);
+            this.add(bloquear1);
+
+            this.siguiente.add(this.anterior.get(0));
+            this.anterior.remove(0);
+        }
 
         /*****
          * 2
          ****/
 
-        l6.setText("Nombre:        " + gui.getController().getNombre(this.anterior.get(1)));
-        l6.setFont(l6.getFont().deriveFont(16f));
-        l6.setBounds(420, 395, 100, 25);
-        l6.setForeground(Color.black);
-        l6.setSize(l6.getPreferredSize());
-        l6.setVisible(true);
-        this.add(l6);
+        if(this.anterior.get(1) != null) {
+            l6.setText("Nombre:        " + gui.getController().getNombre(this.anterior.get(1)));
+            l6.setFont(l6.getFont().deriveFont(16f));
+            l6.setBounds(420, 395, 100, 25);
+            l6.setForeground(Color.black);
+            l6.setSize(l6.getPreferredSize());
+            l6.setVisible(true);
+            this.add(l6);
 
-        l7.setText("Dni:          " + gui.getController().getDNI(this.anterior.get(1)));
-        l7.setFont(l7.getFont().deriveFont(16f));
-        l7.setBounds(420, 445, 100, 25);
-        l7.setForeground(Color.black);
-        l7.setSize(l7.getPreferredSize());
-        l7.setVisible(true);
-        this.add(l7);
+            l7.setText("Dni:          " + gui.getController().getDNI(this.anterior.get(1)));
+            l7.setFont(l7.getFont().deriveFont(16f));
+            l7.setBounds(420, 445, 100, 25);
+            l7.setForeground(Color.black);
+            l7.setSize(l7.getPreferredSize());
+            l7.setVisible(true);
+            this.add(l7);
 
-        l8.setText("Estado:          " +
-                gui.getController().getEstado(this.anterior.get(1)));
-        l8.setFont(l8.getFont().deriveFont(16f));
-        l8.setBounds(420, 495, 100, 25);
-        l8.setForeground(Color.red);
-        l8.setSize(l8.getPreferredSize());
-        l8.setVisible(true);
-        this.add(l8);
+            l8.setText("Estado:          " +
+                    gui.getController().getEstado(this.anterior.get(1)));
+            l8.setFont(l8.getFont().deriveFont(16f));
+            l8.setBounds(420, 495, 100, 25);
+            l8.setForeground(Color.red);
+            l8.setSize(l8.getPreferredSize());
+            l8.setVisible(true);
+            this.add(l8);
 
-        bloquear2.setFont(bloquear2.getFont().deriveFont(14f));
-        bloquear2.setBounds(560, 445, 100, 25);
-        bloquear2.addActionListener(this);
-        bloquear2.setVisible(true);
-        this.add(bloquear2);
+            bloquear2.setFont(bloquear2.getFont().deriveFont(14f));
+            bloquear2.setBounds(560, 445, 100, 25);
+            bloquear2.addActionListener(this);
+            bloquear2.setVisible(true);
+            this.add(bloquear2);
 
+            this.siguiente.add(this.anterior.get(1));
+            this.anterior.remove(1);
+        }
 
         /*****
          * 3
          ****/
 
-        l9.setText("Nombre:        " + gui.getController().getNombre(this.siguiente.get(2)));
-        l9.setFont(l9.getFont().deriveFont(16f));
-        l9.setBounds(420, 510, 100, 25);
-        l9.setForeground(Color.black);
-        l9.setSize(l9.getPreferredSize());
-        l9.setVisible(true);
-        this.add(l9);
+        if(this.anterior.get(2) != null) {
+            l9.setText("Nombre:        " + gui.getController().getNombre(this.siguiente.get(2)));
+            l9.setFont(l9.getFont().deriveFont(16f));
+            l9.setBounds(420, 510, 100, 25);
+            l9.setForeground(Color.black);
+            l9.setSize(l9.getPreferredSize());
+            l9.setVisible(true);
+            this.add(l9);
 
-        l10.setText("Dni:          " + gui.getController().getDNI(this.siguiente.get(2)));
-        l10.setFont(l10.getFont().deriveFont(16f));
-        l10.setBounds(420, 560, 100, 25);
-        l10.setForeground(Color.black);
-        l10.setSize(l10.getPreferredSize());
-        l10.setVisible(true);
-        this.add(l10);
+            l10.setText("Dni:          " + gui.getController().getDNI(this.siguiente.get(2)));
+            l10.setFont(l10.getFont().deriveFont(16f));
+            l10.setBounds(420, 560, 100, 25);
+            l10.setForeground(Color.black);
+            l10.setSize(l10.getPreferredSize());
+            l10.setVisible(true);
+            this.add(l10);
 
-        l11.setText("Estado:          " +
-                gui.getController().getEstado(this.siguiente.get(2)));
-        l11.setFont(l11.getFont().deriveFont(16f));
-        l11.setBounds(420, 610, 100, 25);
-        l11.setForeground(Color.red);
-        l11.setSize(l11.getPreferredSize());
-        l11.setVisible(true);
-        this.add(l11);
+            l11.setText("Estado:          " +
+                    gui.getController().getEstado(this.siguiente.get(2)));
+            l11.setFont(l11.getFont().deriveFont(16f));
+            l11.setBounds(420, 610, 100, 25);
+            l11.setForeground(Color.red);
+            l11.setSize(l11.getPreferredSize());
+            l11.setVisible(true);
+            this.add(l11);
 
-        bloquear3.setFont(bloquear3.getFont().deriveFont(14f));
-        bloquear3.setBounds(560, 560, 100, 25);
-        bloquear3.addActionListener(this);
-        bloquear3.setVisible(true);
-        this.add(bloquear3);
+            bloquear3.setFont(bloquear3.getFont().deriveFont(14f));
+            bloquear3.setBounds(560, 560, 100, 25);
+            bloquear3.addActionListener(this);
+            bloquear3.setVisible(true);
+            this.add(bloquear3);
 
-        this.siguiente.add(this.anterior.get(0));
-        this.siguiente.add(this.anterior.get(1));
-        this.siguiente.add(this.anterior.get(2));
-        this.anterior.remove(0);
-        this.anterior.remove(1);
-        this.anterior.remove(2);
+            this.siguiente.add(this.anterior.get(2));
+            this.anterior.remove(2);
+        }
     }
 
     /*public void paintComponent(Graphics g) {
