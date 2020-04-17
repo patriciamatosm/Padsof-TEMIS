@@ -24,6 +24,7 @@ public class Temis {
     private Map<String, Usuario> usuarios = new HashMap<>();
     private Map<String, Colectivo> colectivos = new HashMap<>();
     private Map<String, Proyecto> proyectos = new HashMap<>();
+    List<Proyecto> solicitudes = new ArrayList<>();
     private List<String> distritos = new ArrayList<>();
 
 
@@ -51,6 +52,14 @@ public class Temis {
      */
     public String getUsuarioAdmin() {
         return usuarioAdmin;
+    }
+
+    /**
+     * Funcio que devuelve solicitudes
+     * @return solicitudes
+     */
+    public List<Proyecto> getSolicitudes() {
+        return solicitudes;
     }
 
     /**

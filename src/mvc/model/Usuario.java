@@ -146,6 +146,12 @@ public class Usuario extends Actor implements Serializable {
        if(this.estado == EstadoUsuario.EN_ESPERA) this.estado = EstadoUsuario.ACTIVO;
     }
 
+    /**
+     * Funcion que no activa un usuario
+     */
+    public void noAceptarRegistro(){
+        this.estado = EstadoUsuario.BLOQUEADO;
+    }
 
     @Override
     public String toString() {

@@ -255,6 +255,13 @@ public abstract class Proyecto implements GrantRequest, Serializable {
     public void aceptarProyecto() {
     	if(this.estado == Estado.EN_ESPERA) this.estado = Estado.ACTIVO;
     }
+
+    /**
+     * Funcion para no aceptar un proyecto que estaba en espera
+     */
+    public void noAceptarProyecto() {
+        this.estado = Estado.CADUCADO;
+    }
     
     /**
      * Funcion para aceptar financiacion para un proyecto que estaba en espera de financiarse
@@ -287,6 +294,22 @@ public abstract class Proyecto implements GrantRequest, Serializable {
     		return true;
     	}
     	return false;
+    }
+
+    /**
+     * FUncion que pide al admin pedir solicitud para financiacion
+     */
+    public void pedirAdminSolicitud(){
+        if(this.estado != Estado.CADUCADO){
+            Temis.getInstance().solicitudes.add(this);
+        }
+    }
+
+    /**
+     * Funcion que deniega solicitud de financiacion
+     */
+    public void denegarSolicitud(){
+        Temis.getInstance().solicitudes.remove(this);
     }
     
     /**
