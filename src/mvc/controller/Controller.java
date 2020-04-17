@@ -37,6 +37,16 @@ public class Controller {
     }
 
     /**
+     * Funcion que llama a la funcion de iniciar sesion del admin
+     * @param id usuario o dni del usuario
+     * @param pwd contrasena
+     * @return true/false dependiendo del resultado
+     */
+    public boolean loginAdmin(String id, String pwd) {
+        return pTemis.iniciaSesionAdmin(id, pwd);
+    }
+
+    /**
      * Funcion que llama a la funcion de registrarse
      * @param usuario nombre del usuario
      * @param nif dni del usuario

@@ -211,10 +211,6 @@ public class Temis {
      */
     public boolean iniciaSesion(String id, String contrasena) {
         if (id.equals("") || contrasena.equals("")) return false;
-        if(id.equals(this.usuarioAdmin) && contrasena.equals(this.contrasenaAdmin)){
-            this.adminFlag = true;
-            return true;
-        }
 
         if (id.length() == 9) {
             if (Character.isLetter(id.charAt(8))) {
@@ -246,6 +242,20 @@ public class Temis {
                 return false;
             }
         }
+    }
+
+    /**
+     * Funcion que se encarga del inicio de sesión del admin
+     * @param id del usuario
+     * @param contrasena del usuario
+     * @return True/False dependiendo del éxito
+     */
+    public boolean iniciaSesionAdmin(String id, String contrasena){
+        if(id.equals(usuarioAdmin) && contrasena.equals(contrasenaAdmin)){
+            this.adminFlag = true;
+            return true;
+        }
+        return false;
     }
 
     /**
