@@ -3,6 +3,9 @@ package mvc.controller;
 import mvc.model.*;
 import mvc.view.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Clase que define el controlador
  *
@@ -63,4 +66,18 @@ public class Controller {
      */
     public void logout(){ pTemis.cierraSesion();}
 
+    /**
+     * Funcion que devuelve lista con registros pendientes
+     * @return lista de usuarios
+     */
+    public List<Usuario> registrosPendientes(){
+        List<Usuario> usuarios = new ArrayList<>();
+
+        for(Usuario u : pTemis.getUsuarios().values()){
+            if(u.getEstado() == Usuario.EstadoUsuario.EN_ESPERA)
+                usuarios.add(u);
+        }
+
+        return usuarios;
+    }
 }

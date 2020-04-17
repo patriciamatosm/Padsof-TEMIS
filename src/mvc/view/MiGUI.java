@@ -16,7 +16,8 @@ public class MiGUI extends JFrame{
     private Controller controller;
     private PanelLogin panelLogin;
     private PanelPrincipal panelPrincipal;
-    private PanelNotificacion panelNotificacion;
+    private PanelAdmin panelAdmin;
+    //private PanelNotificacion panelNotificacion;
     private PanelProyectos panelProyectos;
     private PanelProyectosApoyo panelProyectosApoyo;
     private PanelProponerProyecto panelProponerProyecto;
@@ -49,7 +50,8 @@ public class MiGUI extends JFrame{
         //crear paneles
         this.panelLogin = new PanelLogin(this);
         this.panelPrincipal = new PanelPrincipal(this);
-        this.panelNotificacion = new PanelNotificacion(this);
+        this.panelAdmin = new PanelAdmin(this);
+       // this.panelNotificacion = new PanelNotificacion(this);
         this.panelProyectos = new PanelProyectos(this);
         this.panelProyectosApoyo = new PanelProyectosApoyo(this);
         this.panelProponerProyecto = new PanelProponerProyecto(this);
@@ -62,7 +64,10 @@ public class MiGUI extends JFrame{
         //poner los demas en false
         panelLogin.setVisible(true);
         panelPrincipal.setVisible(false);
-        panelNotificacion.setVisible(false);
+        panelAdmin.setVisible(false);
+
+
+        //panelNotificacion.setVisible(false);
         panelProyectos.setVisible(false);
         panelProyectosApoyo.setVisible(false);
         panelProponerProyecto.setVisible(false);
@@ -118,6 +123,18 @@ public class MiGUI extends JFrame{
         panelPrincipal.setVisible(true);
     }
 
+    /**
+     * Funcion que permite ir a la vista del admin
+     * @param panel panel
+     */
+    public void irAdmin(JPanel panel){
+        panel.setVisible(false);
+
+        container.add(panelAdmin);
+        panelAdmin.setVisible(true);
+
+    }
+
     /*public void irColectivos(JPanel panel){
         panel.setVisible(false);
 
@@ -134,13 +151,13 @@ public class MiGUI extends JFrame{
         panelProyectos.setVisible(true);
     }
 
-    public void irNotificacion(JPanel panel){
+    /*public void irNotificacion(JPanel panel){
         panel.setVisible(false);
 
         panelNotificacion.asignarData();
         container.add(panelNotificacion);
         panelNotificacion.setVisible(true);
-    }
+    }*/
 
     public void irProyectosApoyo(JPanel panel){
         panel.setVisible(false);

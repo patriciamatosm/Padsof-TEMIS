@@ -192,16 +192,17 @@ public class PanelLogin extends JPanel implements ActionListener{
             if(usuario.getText().equals(pTemis.getUsuarioAdmin())){
                 if(pwd.equals(pTemis.getContrasenaAdmin())) {
                     gui.getController().login(usuario.getText(), pwd);
-                    //gui.afterLogin(false);
+
+                    JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso!",
+                            "¡Bienvenido a Temis!" ,JOptionPane.PLAIN_MESSAGE);
+
+                    gui.irAdmin(this);
                 } else {
                     JOptionPane.showMessageDialog(this,
                             "Ha habido un error, por favor revise su usuario y su contraseña.",
                             "Error",
                             JOptionPane.ERROR_MESSAGE);
                 }
-
-                JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso!",
-                        "¡Bienvenido a Temis!" ,JOptionPane.PLAIN_MESSAGE);
 
             } else if (gui.getController().login(usuario.getText(), pwd)) {
 
