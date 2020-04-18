@@ -280,4 +280,48 @@ public class Controller {
         }
     }
 
+    /**
+     * Funcion que llama al constructor de Proyecto Social
+     * @return Proyecto social
+     */
+    public Proyecto nuevoProyectoSocial(String titulo, String descripcion, Integer importe,
+                                        Actor creador, String grupoEtnico, boolean nacional){
+
+        Proyecto p = new ProyectoSocial(titulo, descripcion, importe, creador, grupoEtnico, nacional);
+        return p;
+    }
+
+    /**
+     * Funcion que llama al constructor de Proyecto de Infraestructura
+     * @return Proyecto Infraestructura
+     */
+    public Proyecto nuevoProyectoInfra(String titulo, String descripcion, Integer importe,
+                                       Actor creador, String distrito, String urlCroquis, String descripcionEspecifica){
+
+        Proyecto p = new ProyectoInfraestructura(titulo, descripcion, importe,
+                creador, distrito, urlCroquis, descripcionEspecifica);
+        return p;
+    }
+
+    /**
+     * Funcion que llama a la funcion que añade un proyecto a la lista de proyectos
+     */
+    public void anadirProyecto(Proyecto p){
+        pTemis.anadirProyecto(p);
+    }
+
+    /**
+     * Funcion que devuelve lista con los proyectos
+     * @return lista de proyectos
+     */
+    public ArrayList<Proyecto> listaProyectos(){
+        ArrayList<Proyecto> proyectos = new ArrayList<>();
+
+        for(Proyecto p : pTemis.getProyectos().values() ){
+            /*if(p.getEstado() == Proyecto.Estado.ACTIVO || p.getEstado() == Proyecto.Estado.CADUCADO)*/
+            proyectos.add(p);
+        }
+        return proyectos;
+    }
+
 }

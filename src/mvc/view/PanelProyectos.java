@@ -1,5 +1,6 @@
 package mvc.view;
 
+import mvc.model.Proyecto;
 import mvc.model.Temis;
 
 import javax.swing.*;
@@ -7,6 +8,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PanelProyectos extends JPanel implements ActionListener {
 
@@ -18,6 +21,8 @@ public class PanelProyectos extends JPanel implements ActionListener {
     private JButton colectivos = new JButton("Colectivos");
     private JButton proyectosApoyo = new JButton("Proyectos que apoyas");
     private JButton proponerProyecto = new JButton("Proponer nuevo proyecto");
+    private DefaultListModel proy = new DefaultListModel();
+    private List<Proyecto> listaAux = new ArrayList<Proyecto>();
     private JButton back = new JButton("Volver");
 
     /*labels*/
@@ -74,6 +79,21 @@ public class PanelProyectos extends JPanel implements ActionListener {
 
         this.add(l2);
         this.add(l3);
+
+        /*Lista proyectos*/
+        /*if(!gui.getController().listaProyectos().isEmpty()) {
+            this.listaAux = gui.getController().listaProyectos();
+            for (int i = 0; i < listaAux.size(); i++) {
+                //Añadir cada elemento del ArrayList en el modelo de la lista
+                proy.add(i, listaAux.get(i));
+            }
+            JList lista = new JList(proy);
+            lista.setBounds(200, 200, 400, 400);
+            this.add(lista);
+        } else {
+            JOptionPane.showMessageDialog(this, "Actualmente, aún no existen proyectos.",
+                    "Lista vacía", JOptionPane.PLAIN_MESSAGE);
+        }*/
 
         back.setFont(back.getFont().deriveFont(16f));
         back.setBounds(750, 720, 75, 25);
