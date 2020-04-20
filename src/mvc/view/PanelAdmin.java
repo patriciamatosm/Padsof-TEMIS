@@ -34,6 +34,7 @@ public class PanelAdmin extends JPanel implements ActionListener {
     private boolean finan = false;
     private boolean ant = false;
     private boolean sig = false;
+    private Integer mostrados = 0;
     //Fields
     private JButton sRegistro = new JButton("Solicitudes de registro");
     private JButton sProyecto = new JButton("Solicitudes de proyecto");
@@ -400,24 +401,51 @@ public class PanelAdmin extends JPanel implements ActionListener {
             }
         } else if(e.getSource() == bloquear1){
 
-            if(sig){
-                gui.getController().bloquear(this.siguiente.get(0));
+            if(bloquear1.getText().equals("Bloquear")) {
+
+                if (sig) {
+                    gui.getController().bloquear(this.anterior.get(this.anterior.size() - this.mostrados));
+                } else {
+                    gui.getController().bloquear(this.siguiente.get(this.siguiente.size() - this.mostrados));
+                }
             } else {
-                gui.getController().bloquear(this.anterior.get(0));
+                if (sig) {
+                    gui.getController().desbloquear(this.anterior.get(this.anterior.size() - this.mostrados));
+                } else {
+                    gui.getController().desbloquear(this.siguiente.get(this.siguiente.size() - this.mostrados));
+                }
             }
 
         } else if(e.getSource() == bloquear2){
-            if(sig){
-                gui.getController().bloquear(this.siguiente.get(1));
+
+            if(bloquear2.getText().equals("Bloquear")) {
+                if (sig) {
+                    gui.getController().bloquear(this.anterior.get(this.anterior.size() - (this.mostrados - 1)));
+                } else {
+                    gui.getController().bloquear(this.siguiente.get(this.siguiente.size() - (this.mostrados - 1)));
+                }
             } else {
-                gui.getController().bloquear(this.anterior.get(1));
+                if (sig) {
+                    gui.getController().desbloquear(this.anterior.get(this.anterior.size() - (this.mostrados - 1)));
+                } else {
+                    gui.getController().desbloquear(this.siguiente.get(this.siguiente.size() - (this.mostrados - 1)));
+                }
             }
 
         } else if(e.getSource() == bloquear3){
-            if(sig){
-                gui.getController().bloquear(this.siguiente.get(2));
+
+            if(bloquear3.getText().equals("Bloquear")) {
+                if (sig) {
+                    gui.getController().bloquear(this.anterior.get(this.anterior.size() - (this.mostrados - 2)));
+                } else {
+                    gui.getController().bloquear(this.siguiente.get(this.siguiente.size() - (this.mostrados - 2)));
+                }
             } else {
-                gui.getController().bloquear(this.anterior.get(2));
+                if (sig) {
+                    gui.getController().desbloquear(this.anterior.get(this.anterior.size() - (this.mostrados - 2)));
+                } else {
+                    gui.getController().desbloquear(this.siguiente.get(this.siguiente.size() - (this.mostrados - 2)));
+                }
             }
 
         }
@@ -617,6 +645,7 @@ public class PanelAdmin extends JPanel implements ActionListener {
     private void muestraUsuariosSig(){
         this.sig = true;
         this.ant = false;
+        this.reseteaInterfaz();
         l4.setText("Lista de usuarios");
         l4.setFont(l4.getFont().deriveFont(16f));
         l4.setBounds(440, 160, 400, 80);
@@ -630,6 +659,8 @@ public class PanelAdmin extends JPanel implements ActionListener {
          ****/
         System.out.println("s" +this.siguiente);
         if(this.siguiente == null || this.siguiente.isEmpty() || this.siguiente.size() <= 0) return;
+        System.out.println("1 " +this.siguiente.get(0));
+
         l2.setText("Nombre:        " + gui.getController().getNombre(this.siguiente.get(0)));
         l2.setFont(l2.getFont().deriveFont(16f));
         l2.setBounds(420, 280, 100, 25);
@@ -655,6 +686,9 @@ public class PanelAdmin extends JPanel implements ActionListener {
         l5.setVisible(true);
         this.add(l5);
 
+        if(gui.getController().getEstado(this.siguiente.get(0)) == Usuario.EstadoUsuario.BLOQUEADO)
+            bloquear1.setText("Desbloquear");
+        else bloquear1.setText("Bloquear");
         bloquear1.setFont(bloquear1.getFont().deriveFont(14f));
         bloquear1.setBounds(640, 310, 100, 25);
         bloquear1.addActionListener(this);
@@ -663,12 +697,14 @@ public class PanelAdmin extends JPanel implements ActionListener {
 
         this.anterior.add(this.siguiente.get(0));
         this.siguiente.remove(0);
+        this.mostrados++;
 
         /*****
          * 2
          ****/
         System.out.println("s" +this.siguiente);
         if(this.siguiente == null ||this.siguiente.isEmpty() || this.siguiente.size() <= 0) return;
+        System.out.println("2 " +this.siguiente.get(0));
         l6.setText("Nombre:        " + gui.getController().getNombre(this.siguiente.get(0)));
         l6.setFont(l6.getFont().deriveFont(16f));
         l6.setBounds(420, 405, 100, 25);
@@ -694,6 +730,9 @@ public class PanelAdmin extends JPanel implements ActionListener {
         l8.setVisible(true);
         this.add(l8);
 
+        if(gui.getController().getEstado(this.siguiente.get(0)) == Usuario.EstadoUsuario.BLOQUEADO)
+            bloquear2.setText("Desbloquear");
+        else bloquear2.setText("Bloquear");
         bloquear2.setFont(bloquear2.getFont().deriveFont(14f));
         bloquear2.setBounds(640, 435, 100, 25);
         bloquear2.addActionListener(this);
@@ -702,12 +741,14 @@ public class PanelAdmin extends JPanel implements ActionListener {
 
         this.anterior.add(this.siguiente.get(0));
         this.siguiente.remove(0);
+        this.mostrados++;
 
         /*****
          * 3
          ****/
         System.out.println("s" +this.siguiente);
         if(this.siguiente == null || this.siguiente.isEmpty() || this.siguiente.size() <= 0) return;
+        System.out.println("3 " +this.siguiente.get(0));
         l9.setText("Nombre:        " + gui.getController().getNombre(this.siguiente.get(0)));
         l9.setFont(l9.getFont().deriveFont(16f));
         l9.setBounds(420, 530, 100, 25);
@@ -733,6 +774,9 @@ public class PanelAdmin extends JPanel implements ActionListener {
         l11.setVisible(true);
         this.add(l11);
 
+        if(gui.getController().getEstado(this.siguiente.get(0)) == Usuario.EstadoUsuario.BLOQUEADO)
+            bloquear3.setText("Desbloquear");
+        else bloquear3.setText("Bloquear");
         bloquear3.setFont(bloquear3.getFont().deriveFont(14f));
         bloquear3.setBounds(640, 560, 100, 25);
         bloquear3.addActionListener(this);
@@ -741,6 +785,7 @@ public class PanelAdmin extends JPanel implements ActionListener {
 
         this.anterior.add(this.siguiente.get(0));
         this.siguiente.remove(0);
+        this.mostrados++;
 
 
     }
@@ -751,6 +796,7 @@ public class PanelAdmin extends JPanel implements ActionListener {
     private void muestraUsuariosAnt(){
         this.sig = false;
         this.ant = true;
+        this.reseteaInterfaz();
         l4.setText("Lista de usuarios");
         l4.setFont(l4.getFont().deriveFont(16f));
         l4.setBounds(440, 160, 400, 80);
@@ -789,6 +835,9 @@ public class PanelAdmin extends JPanel implements ActionListener {
         l5.setVisible(true);
         this.add(l5);
 
+        if(gui.getController().getEstado(this.anterior.get(0)) == Usuario.EstadoUsuario.BLOQUEADO)
+            bloquear1.setText("Desbloquear");
+        else bloquear1.setText("Bloquear");
         bloquear1.setFont(bloquear1.getFont().deriveFont(14f));
         bloquear1.setBounds(640, 310, 100, 25);
         bloquear1.addActionListener(this);
@@ -797,6 +846,7 @@ public class PanelAdmin extends JPanel implements ActionListener {
 
         this.siguiente.add(this.anterior.get(0));
         this.anterior.remove(0);
+        this.mostrados++;
 
 
         /*****
@@ -829,6 +879,9 @@ public class PanelAdmin extends JPanel implements ActionListener {
         l8.setVisible(true);
         this.add(l8);
 
+        if(gui.getController().getEstado(this.anterior.get(0)) == Usuario.EstadoUsuario.BLOQUEADO)
+            bloquear2.setText("Desbloquear");
+        else bloquear2.setText("Bloquear");
         bloquear2.setFont(bloquear2.getFont().deriveFont(14f));
         bloquear2.setBounds(640, 435, 100, 25);
         bloquear2.addActionListener(this);
@@ -837,6 +890,7 @@ public class PanelAdmin extends JPanel implements ActionListener {
 
         this.siguiente.add(this.anterior.get(0));
         this.anterior.remove(0);
+        this.mostrados++;
 
         /*****
          * 3
@@ -868,6 +922,9 @@ public class PanelAdmin extends JPanel implements ActionListener {
         l11.setVisible(true);
         this.add(l11);
 
+        if(gui.getController().getEstado(this.anterior.get(0)) == Usuario.EstadoUsuario.BLOQUEADO)
+            bloquear3.setText("Desbloquear");
+        else bloquear3.setText("Bloquear");
         bloquear3.setFont(bloquear3.getFont().deriveFont(14f));
         bloquear3.setBounds(640, 560, 100, 25);
         bloquear3.addActionListener(this);
@@ -876,14 +933,27 @@ public class PanelAdmin extends JPanel implements ActionListener {
 
         this.siguiente.add(this.anterior.get(0));
         this.anterior.remove(0);
+        this.mostrados++;
 
     }
 
-    /*public void paintComponent(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
-        super.paintComponent(g);
-        g2.setColor(Color.black);
-        g2.drawRect(40, 40, 100, 100);
-    }*/
+    /** Funcion que resetea la interfaz **/
+    public void reseteaInterfaz(){
+        l2.setVisible(false);
+        l3.setVisible(false);
+        l5.setVisible(false);
+        l6.setVisible(false);
+        l7.setVisible(false);
+        l8.setVisible(false);
+        l9.setVisible(false);
+        l10.setVisible(false);
+        l11.setVisible(false);
+        bloquear1.setVisible(false);
+        bloquear2.setVisible(false);
+        bloquear3.setVisible(false);
+        this.mostrados = 0;
+
+    }
+
 
 }

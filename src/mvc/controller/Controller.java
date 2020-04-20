@@ -264,6 +264,7 @@ public class Controller {
         List<Usuario> us = new ArrayList<>();
 
         for(Usuario u : pTemis.getUsuarios().values()){
+            if(u.getEstado() == Usuario.EstadoUsuario.EN_ESPERA) continue;
             us.add(u);
         }
         return us;
@@ -277,6 +278,17 @@ public class Controller {
         for(Usuario a : pTemis.getUsuarios().values()){
             if(a.getDni().equals(u.getDni()))
                 a.bloquearUsuario();
+        }
+    }
+
+    /**
+     * Funcion que desbloquea un usuario
+     * @param u usuario
+     */
+    public void desbloquear(Usuario u){
+        for(Usuario a : pTemis.getUsuarios().values()){
+            if(a.getDni().equals(u.getDni()))
+                a.desbloquearUsuario();
         }
     }
 

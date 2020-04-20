@@ -13,6 +13,7 @@ public class App {
         MiGUI gui = new MiGUI("Bienvenido!");
         Controller controlador = new Controller(gui);
         gui.setController(controlador);
+        //Temis.getInstance().escribirFichero();
 
     }
 }
