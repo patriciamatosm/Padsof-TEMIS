@@ -31,6 +31,7 @@ public class Colectivo extends Actor implements Serializable {
         }
         this.descripcion = descripcion;
         this.representante = representante;
+        representante.addColectivosPropios(this);
     }
 
     /**
@@ -73,17 +74,17 @@ public class Colectivo extends Actor implements Serializable {
         return descripcion;
     }
 
-    /**
+ /*   /**
      * Función que modifica la descripción de un colectivo
      * @param descripcion del proyecto
      */
-    public void setDescripcion(String descripcion) {
+ /*   public void setDescripcion(String descripcion) {
         if (descripcion.length() > 500){
             return;
         }
         this.descripcion = descripcion;
     }
-
+*/
     /**
      * Función que devuelve el representante de un colectivo
      * @return Usuario que creo el colectivo
@@ -108,7 +109,7 @@ public class Colectivo extends Actor implements Serializable {
      */
     public boolean unirse(Usuario usuario) {
         if(!usuario.isLogueado()) return false;
-        if (inPadre(usuario)) {
+        if (inPadre(usuario) || this.representante.equals(usuario)) {
             return false;
         } else {
             this.listaUsuario.add(usuario);
@@ -122,8 +123,8 @@ public class Colectivo extends Actor implements Serializable {
      * @return true si esta en el colectivo o en alguno de los padres
      *         false si no se encuentra
      */
-    private boolean inPadre(Usuario usuario) {
-        if (this.listaUsuario.contains(usuario) || usuario.equals(this.representante)) {
+    public boolean inPadre(Usuario usuario) {
+        if (this.listaUsuario.contains(usuario) || this.representante.equals(usuario)) {
             return true;
         } else {
             if (this.getPadre() == null) return false;

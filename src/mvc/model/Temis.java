@@ -110,6 +110,19 @@ public class Temis {
         return proyectos;
     }
 
+    /**
+     * Funcion que devuelve el flag de representante
+     * @return true si es representante
+     */
+    public boolean isRepresentanteLegal() { return representanteLegal; }
+
+    /**
+     * Funcion que modifica el campo de representanteLegal
+     * @param representanteLegal boolean
+     */
+    public void setRepresentanteLegal(boolean representanteLegal) {
+        this.representanteLegal = representanteLegal;
+    }
 
     /**
      * Funcion que guarda en el archivo Temis.txt los usuarios, los colectivos y
@@ -290,8 +303,45 @@ public class Temis {
      * @param c Colectivo a añadir
      */
     public void anadirColectivo(Colectivo c){
-        this.colectivos.put(c.getNombre(),c);
+        this.colectivos.put(c.getNombre(), c);
     }
 
+    public Colectivo crearCol(String nombre, String desc) throws Exception {
+        for(Colectivo c : this.colectivos.values()) {
+            if(c.getNombre().equals(nombre)) {
+                throw new Exception("Ya existe un colectivo con ese nombre");
+            }
+        }
+        Colectivo c = null;
+        for(Usuario u : this.usuarios.values()) {
+            if(u.getDni().equals(this.getUsuarioConectado().getDni())) {
+                c = new Colectivo(desc, nombre, u);
+            }
+        }
+        return c;
+    }
 
+    public void unirse(Colectivo c) {
+        for(Colectivo col : this.colectivos.values()) {
+            if(col.getNombre().equals(c.getNombre())) {
+                for(Usuario u : this.usuarios.values()){
+                    if(u.getNombre().equals(this.getUsuarioConectado().getNombre())) {
+                        col.unirse(u);
+                    }
+                }
+            }
+        }
+    }
+
+    public void abandonar(Colectivo c) {
+        for(Colectivo col : this.colectivos.values()) {
+            if(col.getNombre().equals(c.getNombre())) {
+                for(Usuario u : this.usuarios.values()){
+                    if(u.getNombre().equals(this.getUsuarioConectado().getNombre())) {
+                        col.abandonar(u);
+                    }
+                }
+            }
+        }
+    }
 }

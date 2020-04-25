@@ -1,5 +1,6 @@
 package mvc.view;
 import mvc.controller.Controller;
+import mvc.model.Colectivo;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +24,11 @@ public class MiGUI extends JFrame{
     private PanelProponerProyecto panelProponerProyecto;
     private PanelProyectoSocial panelProyectoSocial;
     private PanelProyectoInfra panelProyectoInfra;
+    private PanelColectivo panelColectivo;
+    private PanelColectivoPropio panelColectivoPropio;
+    private PanelColectivosQueSigues panelColectivosQueSigues;
+    private PanelCrearColectivo panelCrearColectivo;
+    private PanelVerColectivo panelVerColectivo;
     private Container container = this.getContentPane();
 
     /**
@@ -57,6 +63,10 @@ public class MiGUI extends JFrame{
         this.panelProponerProyecto = new PanelProponerProyecto(this);
         this.panelProyectoSocial = new PanelProyectoSocial(this);
         this.panelProyectoInfra = new PanelProyectoInfra(this);
+        this.panelColectivo = new PanelColectivo(this);
+        this.panelColectivoPropio = new PanelColectivoPropio(this);
+        this.panelCrearColectivo = new PanelCrearColectivo(this);
+        this.panelVerColectivo = new PanelVerColectivo(this);
 
         //añadir SOLO login
         container.add(panelLogin);
@@ -199,4 +209,53 @@ public class MiGUI extends JFrame{
         panelProyectoInfra.setVisible(true);
     }
 
+    public void irColectivos(JPanel panel) {
+        panel.setVisible(false);
+
+        if(panelColectivo == null) this.panelColectivo = new PanelColectivo(this);
+        panelColectivo.asignarData();
+        container.add(panelColectivo);
+        panelColectivo.setVisible(true);
+    }
+
+    public void colectivoPropio(JPanel panel) {
+        panel.setVisible(false);
+
+        if(panelColectivoPropio == null) this.panelColectivoPropio = new PanelColectivoPropio(this);
+        panelColectivoPropio.asignarData();
+        container.add(panelColectivoPropio);
+        panelColectivoPropio.setVisible(true);
+    }
+
+    public void colectivosQueSigues(JPanel panel) {
+        panel.setVisible(false);
+
+        if(panelColectivosQueSigues == null) this.panelColectivosQueSigues = new PanelColectivosQueSigues(this);
+        panelColectivosQueSigues.asignarData();
+        container.add(panelColectivosQueSigues);
+        panelColectivosQueSigues.setVisible(true);
+    }
+
+    public void crearColectivos(JPanel panel) {
+        panel.setVisible(false);
+
+        if(panelCrearColectivo == null) this.panelCrearColectivo = new PanelCrearColectivo(this);
+        panelCrearColectivo.asignarData();
+        container.add(panelCrearColectivo);
+        panelCrearColectivo.setVisible(true);
+    }
+
+    public void verColectivo(JPanel panel) {
+        panel.setVisible(false);
+
+        if(panelVerColectivo == null) this.panelVerColectivo = new PanelVerColectivo(this);
+        panelVerColectivo.asignarData();
+        container.add(panelVerColectivo);
+        panelVerColectivo.setVisible(true);
+    }
+
+    public void asignarColectivo(Colectivo c) {
+        if(panelVerColectivo == null) this.panelVerColectivo = new PanelVerColectivo(this);
+        panelVerColectivo.setColectivo(c);
+    }
 }

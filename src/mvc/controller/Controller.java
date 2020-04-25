@@ -74,7 +74,7 @@ public class Controller {
     /**
      * Funcion que llama a la funcion de cerrar sesión
      */
-    public void logout(){ pTemis.cierraSesion();}
+    public void logout(){ pTemis.cierraSesion(); }
 
     /**
      * Funcion que devuelve lista con registros pendientes
@@ -336,4 +336,76 @@ public class Controller {
         return proyectos;
     }
 
+    public ArrayList<Colectivo> listaColectivosPropios() {
+        ArrayList<Colectivo> colectivos = new ArrayList<>();
+
+        for(Usuario user : pTemis.getUsuarios().values()){
+            if(pTemis.getUsuarioConectado().getDni().equals(user.getDni())){
+                colectivos.addAll(user.getColectivosPropios());
+            }
+        }
+        return colectivos;
+    }
+
+    public ArrayList<Colectivo> listaColectivosSeguidos() {
+        ArrayList<Colectivo> colectivos = new ArrayList<>();
+
+        for(Colectivo c : pTemis.getColectivos().values()) {
+            for(Usuario u : c.getListaUsuario()) {
+                if(u.getDni().equals(pTemis.getUsuarioConectado().getDni())) {
+                    colectivos.add(c);
+                }
+            }
+        }
+        return colectivos;
+    }
+
+    public ArrayList<Colectivo> listaColectivos() {
+        return new ArrayList<>(pTemis.getColectivos().values());
+    }
+
+    public void crearColectivo(String descripcion, String nombre) throws Exception {
+        Colectivo c = pTemis.crearCol(nombre, descripcion);
+        pTemis.anadirColectivo(c);
+    }
+
+    public String getNombreColectivo(Colectivo c) { return c.getNombre(); }
+
+    public String getRepColectivo(Colectivo c) {
+        return c.getRepresentante().getNombre();
+    }
+
+    public boolean isRepCol(Colectivo c) {
+        return c.getRepresentante().getDni().equals(pTemis.getUsuarioConectado().getDni());
+    }
+
+    public String getDescripcion(Colectivo c) { return c.getDescripcion(); }
+
+    public void unirseCol(Colectivo c) {
+        pTemis.unirse(c);
+    }
+
+    public void abandonarCol(Colectivo c) {
+        pTemis.abandonar(c);
+    }
+
+    public boolean enColectivo(Colectivo c) {
+        for(Usuario u : c.getListaUsuario()) {
+            if(u.getDni().equals(pTemis.getUsuarioConectado().getDni())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Colectivo getColectivo(Colectivo c) {
+        for(Colectivo col : pTemis.getColectivos().values()) {
+            if(col.getNombre().equals(c.getNombre())) {
+                return col;
+            }
+        }
+        return null;
+    }
+
+    public boolean getRepresentante() { return pTemis.isRepresentanteLegal(); }
 }

@@ -161,9 +161,9 @@ public class PanelPrincipal extends JPanel implements ActionListener {
 
         } else if(e.getSource() == colectivos){
             if(representanteFlag){
-                //mostrar colectivos creados
+                gui.irColectivos(this);
             } else {
-                // mostrar a los que pertenece el usuario
+                gui.irColectivos(this);
             }
 
         }
