@@ -203,7 +203,7 @@ public abstract class Proyecto implements GrantRequest, Serializable {
      * @return true si se ha sumado el voto al proyecto correctamente, false si ocurre lo contrario.
      */
     public boolean votar(Usuario u){
-    	if(this.estado == Estado.CADUCADO) return false;
+    	if(this.estado != Estado.ACTIVO && this.estado != Estado.ESPERA_FINANC) return false;
     	if(!u.isLogueado()) return false;
     	
         if(u.getListaProyecto().contains(this)) {

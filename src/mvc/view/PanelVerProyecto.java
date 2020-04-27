@@ -12,6 +12,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+/****************************************
+ * VOTAR COLECTIVOS Y PROYECTO CADUCADO *
+ * SETVISIBLE URL, DISTRITO             *
+ ****************************************/
+
 public class PanelVerProyecto extends JPanel implements ActionListener {
 
     private MiGUI gui;
@@ -244,6 +249,9 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
             gui.getController().votar(gui.getController().getLoggedUser(), p);
             votar.setEnabled(false);
             l8.setVisible(true);
+            if(gui.getController().cumpleNumVotos(p) == true) {
+                gui.getController().pedirFinanciacion(p);
+            }
         }
 
         try {
