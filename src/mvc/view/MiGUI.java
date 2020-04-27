@@ -1,6 +1,7 @@
 package mvc.view;
 import mvc.controller.Controller;
 import mvc.model.Colectivo;
+import mvc.model.Proyecto;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,8 +23,7 @@ public class MiGUI extends JFrame{
     private PanelProyectos panelProyectos;
     private PanelProyectosApoyo panelProyectosApoyo;
     private PanelProponerProyecto panelProponerProyecto;
-    private PanelProyectoSocial panelProyectoSocial;
-    private PanelProyectoInfra panelProyectoInfra;
+    private PanelVerProyecto panelVerProyecto;
     private PanelColectivo panelColectivo;
     private PanelColectivoPropio panelColectivoPropio;
     private PanelColectivosQueSigues panelColectivosQueSigues;
@@ -61,8 +61,7 @@ public class MiGUI extends JFrame{
         this.panelProyectos = new PanelProyectos(this);
         this.panelProyectosApoyo = new PanelProyectosApoyo(this);
         this.panelProponerProyecto = new PanelProponerProyecto(this);
-        this.panelProyectoSocial = new PanelProyectoSocial(this);
-        this.panelProyectoInfra = new PanelProyectoInfra(this);
+        this.panelVerProyecto = new PanelVerProyecto(this);
         this.panelColectivo = new PanelColectivo(this);
         this.panelColectivoPropio = new PanelColectivoPropio(this);
         this.panelCrearColectivo = new PanelCrearColectivo(this);
@@ -81,8 +80,7 @@ public class MiGUI extends JFrame{
         panelProyectos.setVisible(false);
         panelProyectosApoyo.setVisible(false);
         panelProponerProyecto.setVisible(false);
-        panelProyectoSocial.setVisible(false);
-        panelProyectoInfra.setVisible(false);
+        panelVerProyecto.setVisible(false);
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -148,14 +146,6 @@ public class MiGUI extends JFrame{
 
     }
 
-    /*public void irColectivos(JPanel panel){
-        panel.setVisible(false);
-
-        panelColectivos.asignarData();
-        container.add(panelColectivos);
-        panelColectivos.setVisible(true);
-    }*/
-
     public void irProyectos(JPanel panel){
         panel.setVisible(false);
 
@@ -191,22 +181,22 @@ public class MiGUI extends JFrame{
         panelProponerProyecto.setVisible(true);
     }
 
-    public void irProyectoSocial(JPanel panel){
+    public void irProyecto(JPanel panel){
         panel.setVisible(false);
 
-        if(panelProyectoSocial == null) this.panelProyectoSocial = new PanelProyectoSocial(this);
-        panelProyectoSocial.asignarData();
-        container.add(panelProyectoSocial);
-        panelProyectoSocial.setVisible(true);
+        if(panelVerProyecto == null) this.panelVerProyecto = new PanelVerProyecto(this);
+        panelVerProyecto.asignarData();
+        container.add(panelVerProyecto);
+        panelVerProyecto.setVisible(true);
     }
 
-    public void irProyectoInfra(JPanel panel){
+    public void crearProyectos(JPanel panel) {
         panel.setVisible(false);
 
-        if(panelProyectoInfra == null) this.panelProyectoInfra = new PanelProyectoInfra(this);
-        panelProyectoInfra.asignarData();
-        container.add(panelProyectoInfra);
-        panelProyectoInfra.setVisible(true);
+        if(panelProponerProyecto == null) this.panelProponerProyecto = new PanelProponerProyecto(this);
+        panelProponerProyecto.asignarData();
+        container.add(panelProponerProyecto);
+        panelProponerProyecto.setVisible(true);
     }
 
     public void irColectivos(JPanel panel) {
@@ -258,4 +248,20 @@ public class MiGUI extends JFrame{
         if(panelVerColectivo == null) this.panelVerColectivo = new PanelVerColectivo(this);
         panelVerColectivo.setColectivo(c);
     }
+
+    public void asignarProyecto(Proyecto p) {
+        if(panelVerProyecto == null) this.panelVerProyecto = new PanelVerProyecto(this);
+        panelVerProyecto.setProyecto(p);
+    }
+
+    public void verProyecto(JPanel panel) {
+        panel.setVisible(false);
+
+        if(panelVerProyecto == null) this.panelVerProyecto = new PanelVerProyecto(this);
+        panelVerProyecto.asignarData();
+        container.add(panelVerProyecto);
+        panelVerProyecto.setVisible(true);
+    }
+
+
 }

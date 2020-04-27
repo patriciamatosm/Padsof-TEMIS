@@ -1,5 +1,6 @@
 package mvc.controller;
 
+import es.uam.eps.sadp.grants.GrantRequest;
 import mvc.model.*;
 import mvc.view.*;
 
@@ -175,6 +176,13 @@ public class Controller {
     }
 
     /**
+     * Funcion que devuelve numero de votos de un proyecto
+     * @param p Proyecto
+     * @return numero de votos
+     */
+    public String getNumVotos(Proyecto p) { return p.getNumVotos().toString();}
+
+    /**
      * Función que acepta registro
      * @param u usuario
      */
@@ -296,29 +304,23 @@ public class Controller {
      * Funcion que llama al constructor de Proyecto Social
      * @return Proyecto social
      */
-    public Proyecto nuevoProyectoSocial(String titulo, String descripcion, Integer importe,
-                                        Actor creador, String grupoEtnico, boolean nacional){
+    public void nuevoProyectoSocial(String titulo, String descripcion, Integer importe,
+                                        Actor creador, String grupoEtnico, boolean nacional) throws Exception{
 
         Proyecto p = new ProyectoSocial(titulo, descripcion, importe, creador, grupoEtnico, nacional);
-        return p;
+        pTemis.anadirProyecto(p);
     }
 
     /**
      * Funcion que llama al constructor de Proyecto de Infraestructura
      * @return Proyecto Infraestructura
      */
-    public Proyecto nuevoProyectoInfra(String titulo, String descripcion, Integer importe,
-                                       Actor creador, String distrito, String urlCroquis, String descripcionEspecifica){
+    public void nuevoProyectoInfra(String titulo, String descripcion, Integer importe,
+                                       Actor creador, String distrito, String urlCroquis,
+                                    String descripcionEspecifica) throws Exception{
 
         Proyecto p = new ProyectoInfraestructura(titulo, descripcion, importe,
                 creador, distrito, urlCroquis, descripcionEspecifica);
-        return p;
-    }
-
-    /**
-     * Funcion que llama a la funcion que añade un proyecto a la lista de proyectos
-     */
-    public void anadirProyecto(Proyecto p){
         pTemis.anadirProyecto(p);
     }
 
@@ -330,7 +332,7 @@ public class Controller {
         ArrayList<Proyecto> proyectos = new ArrayList<>();
 
         for(Proyecto p : pTemis.getProyectos().values() ){
-            /*if(p.getEstado() == Proyecto.Estado.ACTIVO || p.getEstado() == Proyecto.Estado.CADUCADO)*/
+            if(p.getEstado() == Proyecto.Estado.ACTIVO || p.getEstado() == Proyecto.Estado.CADUCADO)
             proyectos.add(p);
         }
         return proyectos;
@@ -408,4 +410,19 @@ public class Controller {
     }
 
     public boolean getRepresentante() { return pTemis.isRepresentanteLegal(); }
+
+    public String getDescProy(Proyecto p) { return  p.getProjectDescription();}
+
+    public String getGrupo(ProyectoSocial p) { return p.getGrupoEtnico();}
+
+    public String isNacional(ProyectoSocial p) {
+        if(p.isNacional() == true) return "Ámbito nacional";
+        return "No nacional";
+    }
+
+    public String getDistrito(ProyectoInfraestructura p) { return p.getDistrito();}
+
+    public String getUrl(ProyectoInfraestructura p) { return  p.getUrlCroquis();}
+
+    public boolean votar(Usuario u, Proyecto p) { return p.votar(u);}
 }

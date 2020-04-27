@@ -50,6 +50,15 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
         this.setLayout(null);
         this.setBackground(new Color(124, 150, 197));
 
+        /*Logo*/
+        JLabel icon1 = new JLabel(" ");
+        ImageIcon icono = new ImageIcon("image/logoTemis.png");
+        Image imagen = icono.getImage();
+        ImageIcon iconScaled = new ImageIcon(imagen.getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+        icon1.setIcon(iconScaled);
+        icon1.setBounds(820, 10, 100, 100);
+        this.add(icon1);
+
         /*Botones*/
         pagPrinc.addActionListener(this);
         pagPrinc.setBounds(30, 160, 100, 40);
@@ -171,14 +180,6 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
         grupos.setVisible(false);
         this.add(grupos);
 
-        /*Resetear la informacion de los campos*/
-        social.setSelected(false);
-        infra.setSelected(false);
-        titulo.setText("");
-        descripcion.setText("");
-        grupos.setText("");
-        nacional.setSelected(false);
-
 
         back.setFont(back.getFont().deriveFont(16f));
         back.setBounds(750, 720, 75, 25);
@@ -258,30 +259,43 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
             grupos.setVisible(false);
         } else if(e.getSource() == proponer){
             if(social.isSelected()){
-                gui.getController().anadirProyecto(gui.getController().nuevoProyectoSocial(titulo.getText(),
-                        descripcion.getText(), 1000, gui.getController().getLoggedUser(),
-                        grupos.getText(), nacional.isSelected()));
-                JOptionPane.showMessageDialog(this, "Muchas gracias por su interés en hacer de\n" +
-                        "esta una comunidad mejor para todos. Su\n" +
-                        "propuesta será remitida al administrador,\n" +
-                        "que le comunicará su aceptación tan\n" +
-                        "pronto como sea posible.", "Formulario completado correctamente", JOptionPane.PLAIN_MESSAGE);
+                try {
+                    gui.getController().nuevoProyectoSocial(titulo.getText(),
+                            descripcion.getText(), 1000, gui.getController().getLoggedUser(),
+                            grupos.getText(), nacional.isSelected());
+                    JOptionPane.showMessageDialog(this, "Muchas gracias por su interés en hacer de\n" +
+                            "esta una comunidad mejor para todos. Su\n" +
+                            "propuesta será remitida al administrador,\n" +
+                            "que le comunicará su aceptación tan\n" +
+                            "pronto como sea posible.", "Formulario completado correctamente", JOptionPane.PLAIN_MESSAGE);
+                    gui.irProyectos(this);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(),"Error al crear",
+                            JOptionPane.PLAIN_MESSAGE);
+                    gui.crearProyectos(this);
+                }
             } else if(infra.isSelected()){
-                gui.getController().anadirProyecto(gui.getController().nuevoProyectoInfra(titulo.getText(),
-                        descripcion.getText(), 1000, gui.getController().getLoggedUser(),
-                        distrito.getName(), url.getText(), descripcion.getText()));
-                JOptionPane.showMessageDialog(this, "Muchas gracias por su interés en hacer de\n" +
-                        "esta una comunidad mejor para todos. Su\n" +
-                        "propuesta será remitida al administrador,\n" +
-                        "que le comunicará su aceptación tan\n" +
-                        "pronto como sea posible.", "Formulario completado correctamente", JOptionPane.PLAIN_MESSAGE);
+                try {
+                    gui.getController().nuevoProyectoInfra(titulo.getText(),
+                            descripcion.getText(), 1000, gui.getController().getLoggedUser(),
+                            distrito.getName(), url.getText(), descripcion.getText());
+                    JOptionPane.showMessageDialog(this, "Muchas gracias por su interés en hacer de\n" +
+                            "esta una comunidad mejor para todos. Su\n" +
+                            "propuesta será remitida al administrador,\n" +
+                            "que le comunicará su aceptación tan\n" +
+                            "pronto como sea posible.", "Formulario completado correctamente", JOptionPane.PLAIN_MESSAGE);
+                    gui.irProyectos(this);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(),"Error al crear",
+                            JOptionPane.PLAIN_MESSAGE);
+                    gui.crearProyectos(this);
+                }
             }
-        }
-
-        try {
-            pTemis.escribirFichero();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            try {
+                pTemis.escribirFichero();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
@@ -291,6 +305,14 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
             l3.setText(gui.getController().getLoggedUserName());
             l3.setVisible(true);
             this.add(l3);
+
+            /*Resetear la informacion de los campos*/
+            social.setSelected(false);
+            infra.setSelected(false);
+            titulo.setText("");
+            descripcion.setText("");
+            grupos.setText("");
+            nacional.setSelected(false);
         }
     }
 
