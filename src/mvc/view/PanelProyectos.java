@@ -27,6 +27,7 @@ public class PanelProyectos extends JPanel implements ActionListener {
     private JButton proyectosApoyo = new JButton("Proyectos que apoyas");
     private JButton proponerProyecto = new JButton("Proponer nuevo proyecto");
     private JButton back = new JButton("Volver");
+    private JButton cierraSesion = new JButton("Salir");
 
     /* Botones lista proyectos */
     private JButton siguientes = new JButton("Siguiente >");
@@ -122,6 +123,16 @@ public class PanelProyectos extends JPanel implements ActionListener {
         back.addActionListener(this);
         back.setVisible(true);
         this.add(back);
+
+        cierraSesion.setFont(cierraSesion.getFont().deriveFont(16f));
+        cierraSesion.setBounds(830, 130, 75, 25);
+        cierraSesion.setForeground(Color.black);
+        cierraSesion.setOpaque(false);
+        cierraSesion.setContentAreaFilled(false);
+        cierraSesion.setBorder(BorderFactory.createLineBorder(Color.black, 1, true));
+        cierraSesion.addActionListener(this);
+        cierraSesion.setVisible(true);
+        this.add(cierraSesion);
 
         this.setSize(new Dimension(981, 725));
         this.setVisible(true);
@@ -253,6 +264,9 @@ public class PanelProyectos extends JPanel implements ActionListener {
         else if(e.getSource() == bc3) {
             gui.asignarProyecto(this.actuales.get(2));
             gui.verProyecto(this);
+        }
+        else if(e.getSource() == cierraSesion) {
+            gui.volverAlLogin(this);
         }
 
         try {

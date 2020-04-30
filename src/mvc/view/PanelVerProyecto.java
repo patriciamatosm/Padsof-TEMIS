@@ -30,6 +30,7 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
     private JButton proyectosR = new JButton("Todos los proyectos");
     private JButton votar = new JButton("votar");
     private JButton back = new JButton("Volver");
+    private JButton cierraSesion = new JButton("Salir");
 
     /*labels*/
     private JLabel l1 = new JLabel("Proyecto");
@@ -202,6 +203,16 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
         numVotos.setSize(numVotos.getPreferredSize());
         this.add(numVotos);
 
+        cierraSesion.setFont(cierraSesion.getFont().deriveFont(16f));
+        cierraSesion.setBounds(830, 130, 75, 25);
+        cierraSesion.setForeground(Color.black);
+        cierraSesion.setOpaque(false);
+        cierraSesion.setContentAreaFilled(false);
+        cierraSesion.setBorder(BorderFactory.createLineBorder(Color.black, 1, true));
+        cierraSesion.addActionListener(this);
+        cierraSesion.setVisible(true);
+        this.add(cierraSesion);
+
         back.setFont(back.getFont().deriveFont(16f));
         back.setBounds(750, 720, 75, 25);
         back.setForeground(Color.black);
@@ -261,6 +272,8 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
                     gui.getController().pedirFinanciacion(p);
                 }
             }
+        } else if (e.getSource() == cierraSesion) {
+            gui.volverAlLogin(this);
         }
 
         try {
@@ -306,9 +319,12 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
                 }
             }
 
-            if(gui.getController().votar(gui.getController().getLoggedUser(), p) == false) {
+            if(gui.getController().haVotado(gui.getController().getLoggedUser(), p) == true) {
                 votar.setEnabled(false);
                 l8.setVisible(true);
+            } else {
+                votar.setEnabled(true);
+                l8.setVisible(false);
             }
 
         }

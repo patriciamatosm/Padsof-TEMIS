@@ -48,7 +48,8 @@ public abstract class Proyecto implements GrantRequest, Serializable {
         this.fechaCreacion = LocalDate.now();
         this.importe = importe;
         this.creador = creador;
-        this.estado = Estado.ACTIVO;
+        this.estado = Estado.EN_ESPERA;
+        this.numVotos = 0;
     }
     /**
      * Enumeracion que indica el estado del proyecto
@@ -58,7 +59,7 @@ public abstract class Proyecto implements GrantRequest, Serializable {
     }
     
     /**
-     * Funci�n para pedir el t�tulo del proyecto
+     * Funcion para pedir el titulo del proyecto
      * @return titulo del proyecto
      */
     public String getProjectTitle() {

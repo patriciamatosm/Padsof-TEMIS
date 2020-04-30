@@ -145,10 +145,14 @@ public class PanelPrincipal extends JPanel implements ActionListener {
         } else if(e.getSource() == usuario){
             colectivos.setVisible(true);
             proyectos.setVisible(true);
-
+            usuario.setVisible(false);
+            representante.setVisible(false);
+            representanteFlag = false;
         } else if(e.getSource() == representante){
             colectivos.setVisible(true);
             proyectos.setVisible(true);
+            usuario.setVisible(false);
+            representante.setVisible(false);
             representanteFlag = true;
         } else if(e.getSource() == proyectos){
             if(representanteFlag){

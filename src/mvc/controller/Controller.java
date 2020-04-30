@@ -441,6 +441,11 @@ public class Controller {
         return p.votarUsuarios(users);
     }
 
+    public boolean haVotado(Usuario u, Proyecto p){
+        if(u.getListaProyecto().contains(p)) return true;
+        return false;
+    }
+
     public boolean esRepresentante(Usuario u){
         if(u.getColectivosPropios().isEmpty()) return false;
         return true;
