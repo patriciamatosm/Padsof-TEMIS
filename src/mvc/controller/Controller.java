@@ -305,7 +305,7 @@ public class Controller {
      * @return Proyecto social
      */
     public void nuevoProyectoSocial(String titulo, String descripcion, Integer importe,
-                                        Actor creador, String grupoEtnico, boolean nacional) throws Exception{
+                                        Actor creador, String grupoEtnico, boolean nacional) {
 
         Proyecto p = new ProyectoSocial(titulo, descripcion, importe, creador, grupoEtnico, nacional);
         pTemis.anadirProyecto(p);
@@ -317,7 +317,7 @@ public class Controller {
      */
     public void nuevoProyectoInfra(String titulo, String descripcion, Integer importe,
                                        Actor creador, String distrito, String urlCroquis,
-                                    String descripcionEspecifica) throws Exception{
+                                    String descripcionEspecifica) {
 
         Proyecto p = new ProyectoInfraestructura(titulo, descripcion, importe,
                 creador, distrito, urlCroquis, descripcionEspecifica);
@@ -334,6 +334,22 @@ public class Controller {
         for(Proyecto p : pTemis.getProyectos().values() ){
             if(p.getEstado() == Proyecto.Estado.ACTIVO || p.getEstado() == Proyecto.Estado.CADUCADO)
             proyectos.add(p);
+        }
+        return proyectos;
+    }
+
+    /**
+     * Funcion que devuelve una lista con los proyectos apoyados por el usuario
+     * @param u Usuario
+     * @return Lista con los proyectos apoyados
+     */
+    public ArrayList<Proyecto> listaProyectosApoyo(Usuario u) {
+        ArrayList<Proyecto> proyectos = new ArrayList<>();
+
+        for(Proyecto p : pTemis.getProyectos().values()){
+           if(u.getListaProyecto().contains(p)){
+               proyectos.add(p);
+           }
         }
         return proyectos;
     }
@@ -422,35 +438,94 @@ public class Controller {
 
     public boolean getRepresentante() { return pTemis.isRepresentanteLegal(); }
 
+    /**
+     * Funcion que llama a la funcion que devuelve la descripcion de un proyecto
+     * @param p Proyecto
+     * @return String con descripcion del proyecto
+     */
     public String getDescProy(Proyecto p) { return  p.getProjectDescription();}
 
+    /**
+     * Funcion que llama a la funcion que devuelve el grupo al que va dirigido un
+     * proyecto social.
+     * @param p Proyecto social
+     * @return String con grupo al que va dirigido el proyecto
+     */
     public String getGrupo(ProyectoSocial p) { return p.getGrupoEtnico();}
 
+    /**
+     * Funcion que llama a la funcion que devuelve true/false dependiendo de si el
+     * proyecto es a nivel nacional o no
+     * @param p Proyecto social
+     * @return String nacional/no nacional
+     */
     public String isNacional(ProyectoSocial p) {
         if(p.isNacional() == true) return "Ámbito nacional";
         return "No nacional";
     }
 
+    /**
+     * Funcion que llama a la funcion que devuelve el distrito al que va dirigido un
+     * proyecto de infraestructura.
+     * @param p Proyecto infraestructura
+     * @return String con nombre de distrito
+     */
     public String getDistrito(ProyectoInfraestructura p) { return p.getDistrito();}
 
+    /**
+     * Funcion que llama a la funcion que devuelve la urldel croquis de un
+     * proyecto de infraestructura.
+     * @param p Proyecto infraestructura
+     * @return String con url del croquis
+     */
     public String getUrl(ProyectoInfraestructura p) { return  p.getUrlCroquis();}
 
+    /**
+     * Funcion que llama a la funcion votar
+     * @param u Usuario que vota
+     * @param p Proyecto a votar
+     * @return true/false dependiendo de si se ha votado con exito o no
+     */
     public boolean votar(Usuario u, Proyecto p) { return p.votar(u);}
 
+    /**
+     * Funcion que llama a la funcion votarUsuarios
+     * @param users Usuarios que votan como colectivo
+     * @param p Proyecto a votar
+     * @return true/false dependiendo de si se ha votado con exito o no
+     */
     public boolean votarUsuarios(List<Usuario> users, Proyecto p) {
         return p.votarUsuarios(users);
     }
 
+    /**
+     * Funcion que comprueba si un usuario ha votado ya o no un proyecto
+     * @param u Usuario que vota
+     * @param p Proyecto votado
+     * @return true si ya ha votado, false si aun no lo ha hecho
+     */
     public boolean haVotado(Usuario u, Proyecto p){
-        if(u.getListaProyecto().contains(p)) return true;
+        if(u.getListaProyecto().contains(p)){
+            return true;
+        }
         return false;
     }
 
+    /**
+     * Funcion que comprueba si el usuario es representante de algun colectivo
+     * @param u Usuario
+     * @return true/false dependiendo de si el usuario es o no representante
+     */
     public boolean esRepresentante(Usuario u){
         if(u.getColectivosPropios().isEmpty()) return false;
         return true;
     }
 
+    /**
+     * Funcion que llama al setter de votos minimos
+     * @param p Proyecto donde se establecen los votos
+     * @param min numero de votos a establecer
+     */
     public void setMinVotos(Proyecto p, int min){
         p.setMinVotos(min);
     }
