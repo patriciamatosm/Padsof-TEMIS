@@ -425,4 +425,9 @@ public class Controller {
     public String getUrl(ProyectoInfraestructura p) { return  p.getUrlCroquis();}
 
     public boolean votar(Usuario u, Proyecto p) { return p.votar(u);}
+
+    public boolean esRepresentante(Usuario u){
+        if(u.getColectivosPropios().isEmpty()) return false;
+        return true;
+    }
 }

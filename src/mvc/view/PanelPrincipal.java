@@ -58,17 +58,20 @@ public class PanelPrincipal extends JPanel implements ActionListener {
         l1.setBounds(380, 300, 250, 25);
         l1.setForeground(Color.black);
         l1.setSize(l1.getPreferredSize());
-        this.add(l1);
+
+
 
         usuario.setFont(usuario.getFont().deriveFont(16f));
         usuario.setBounds(380, 350, 90, 25);
         usuario.addActionListener(this);
-        this.add(usuario);
+
 
         representante.setFont(representante.getFont().deriveFont(16f));
         representante.setBounds(520, 350, 160, 25);
         representante.addActionListener(this);
-        this.add(representante);
+
+
+
 
 
         /***********************
@@ -109,14 +112,19 @@ public class PanelPrincipal extends JPanel implements ActionListener {
         proyectos.setBounds(20, 160, 160, 25);
         proyectos.addActionListener(this);
         proyectos.setVisible(false);
-        this.add(proyectos);
+
 
         colectivos.setFont(colectivos.getFont().deriveFont(16f));
         colectivos.setBounds(20, 205, 160, 25);
         colectivos.addActionListener(this);
         colectivos.setVisible(false);
-        this.add(colectivos);
 
+
+        this.add(l1);
+        this.add(usuario);
+        this.add(representante);
+        this.add(proyectos);
+        this.add(colectivos);
 
         //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(new Dimension(981, 725));
@@ -186,6 +194,24 @@ public class PanelPrincipal extends JPanel implements ActionListener {
             l3.setText(gui.getController().getLoggedUserName());
             l3.setVisible(true);
             this.add(l3);
+
+
+            if(!gui.getController().esRepresentante(gui.getController().getLoggedUser())){
+                l1.setVisible(false);
+                usuario.setVisible(false);
+                representante.setVisible(false);
+                colectivos.setVisible(true);
+                proyectos.setVisible(true);
+            } else {
+                l1.setVisible(true);
+                usuario.setVisible(true);
+                representante.setVisible(true);
+            }
+            this.add(l1);
+            this.add(usuario);
+            this.add(representante);
+            this.add(proyectos);
+            this.add(colectivos);
         }
     }
 }
