@@ -224,7 +224,7 @@ public abstract class Proyecto implements GrantRequest, Serializable {
     public boolean votarUsuarios(List<Usuario> usuarios) {
         if(this.estado == Estado.ACTIVO || this.estado == Estado.ESPERA_FINANC) {
             for (Usuario u : usuarios) {
-                if (!u.getListaProyecto().contains(this)) {
+                if (u.getListaProyecto().contains(this) == false) {
                     u.anadirProyecto(this);
                     this.setFechaUltimoVoto(LocalDate.now());
                     this.setNumVotos(this.getNumVotos() + 1);
