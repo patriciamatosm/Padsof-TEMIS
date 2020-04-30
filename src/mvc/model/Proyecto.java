@@ -204,16 +204,16 @@ public abstract class Proyecto implements GrantRequest, Serializable {
      * @return true si se ha sumado el voto al proyecto correctamente, false si ocurre lo contrario.
      */
     public boolean votar(Usuario u){
-    	if(this.estado != Estado.ACTIVO && this.estado != Estado.ESPERA_FINANC) return false;
     	if(!u.isLogueado()) return false;
-    	
-        if(u.getListaProyecto().contains(this)) {
-            return false;
+        if(u.getListaProyecto().contains(this)) return false;
+
+        if(this.estado == Estado.ACTIVO || this.estado == Estado.ESPERA_FINANC) {
+            u.anadirProyecto(this);
+            this.setFechaUltimoVoto(LocalDate.now());
+            this.setNumVotos(this.getNumVotos() + 1);
+            return true;
         }
-        u.anadirProyecto(this);
-        this.setFechaUltimoVoto(LocalDate.now());
-        this.setNumVotos(this.getNumVotos()+1);
-        return true;
+        return false;
     }
     
     /**
@@ -222,16 +222,17 @@ public abstract class Proyecto implements GrantRequest, Serializable {
      * @return true si se ha sumado el voto al proyecto correctamente, false si ocurre lo contrario.
      */
     public boolean votarUsuarios(List<Usuario> usuarios) {
-        if(this.estado != Estado.ACTIVO && this.estado != Estado.ESPERA_FINANC) return false;
-
-    	for (Usuario u : usuarios) {
-    		if(u.getListaProyecto().contains(this)) {
-    			u.anadirProyecto(this);
-    			this.setFechaUltimoVoto(LocalDate.now());
-            	this.setNumVotos(this.getNumVotos()+1);
-    		}
-    	}
-    	return true;
+        if(this.estado == Estado.ACTIVO || this.estado == Estado.ESPERA_FINANC) {
+            for (Usuario u : usuarios) {
+                if (!u.getListaProyecto().contains(this)) {
+                    u.anadirProyecto(this);
+                    this.setFechaUltimoVoto(LocalDate.now());
+                    this.setNumVotos(this.getNumVotos() + 1);
+                }
+            }
+            return true;
+        }
+        return false;
     }
     
     /**
@@ -288,9 +289,9 @@ public abstract class Proyecto implements GrantRequest, Serializable {
      * @return true si el proyecto cumple con los requisitos, false en el caso contrario
      */
     public boolean esperarFinanc() {
-    	if(this.estado == Estado.CADUCADO) return false;
+    	if(this.estado != Estado.ACTIVO) return false;
     	
-    	if(this.getNumVotos() >= this.getMinVotos() && this.estado == Estado.ACTIVO) {
+    	if(this.getNumVotos() >= this.getMinVotos()) {
     		this.estado = Estado.ESPERA_FINANC;
     		return true;
     	}
