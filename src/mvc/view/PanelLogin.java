@@ -186,6 +186,11 @@ public class PanelLogin extends JPanel implements ActionListener{
             ex.printStackTrace();
         }
 
+
+        System.out.println(pTemis.getUsuarios());
+        System.out.println(pTemis.getProyectos());
+        System.out.println(pTemis.getColectivos());
+
         if(e.getSource() == login){
             String pwd = String.valueOf(this.contrasena.getPassword());
 

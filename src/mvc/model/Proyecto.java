@@ -54,7 +54,7 @@ public abstract class Proyecto implements GrantRequest, Serializable {
      * Enumeracion que indica el estado del proyecto
      */
     public enum Estado {
-    	ACTIVO, EN_ESPERA, CADUCADO, ESPERA_FINANC, FINANCIADO, NO_FINANCIADO
+    	ACTIVO, EN_ESPERA, CADUCADO, ESPERA_FINANC, FINANCIADO, NO_FINANCIADO, RECHAZADO
     }
     
     /**
@@ -260,7 +260,7 @@ public abstract class Proyecto implements GrantRequest, Serializable {
      * Funcion para no aceptar un proyecto que estaba en espera
      */
     public void noAceptarProyecto() {
-        this.estado = Estado.CADUCADO;
+        this.estado = Estado.RECHAZADO;
     }
     
     /**

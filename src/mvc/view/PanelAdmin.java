@@ -241,7 +241,7 @@ public class PanelAdmin extends JPanel implements ActionListener {
                         "" ,JOptionPane.PLAIN_MESSAGE);
 
             } else {
-                System.out.println(this.proyectos);
+
                 this.proyecto = true;
                 this.muestraProyectosPendientes();
             }

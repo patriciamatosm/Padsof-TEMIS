@@ -296,6 +296,7 @@ public class Temis {
      */
     public void anadirProyecto(Proyecto p) {
         this.proyectos.put(p.getProjectTitle(), p);
+        System.out.println(this.proyectos);
     }
 
     /**
