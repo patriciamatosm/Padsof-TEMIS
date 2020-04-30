@@ -430,4 +430,8 @@ public class Controller {
         if(u.getColectivosPropios().isEmpty()) return false;
         return true;
     }
+
+    public void setMinVotos(Proyecto p, int min){
+        p.setMinVotos(min);
+    }
 }

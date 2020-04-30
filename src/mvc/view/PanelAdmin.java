@@ -49,6 +49,7 @@ public class PanelAdmin extends JPanel implements ActionListener {
     private JButton bloquear3 = new JButton("Bloquear");
     private JButton a = new JButton("< Anterior");
     private JButton s = new JButton("Siguiente >");
+    private JTextField minVotos = new JTextField(10);
     //Label
     private JLabel icon1 = new JLabel("");
     private JLabel l1 = new JLabel("Perfil del administrador");
@@ -62,6 +63,7 @@ public class PanelAdmin extends JPanel implements ActionListener {
     private JLabel l9 = new JLabel("");
     private JLabel l10 = new JLabel("");
     private JLabel l11 = new JLabel("");
+    private JLabel l12 = new JLabel("");
 
     /**
      * Constructor de la clase
@@ -134,6 +136,7 @@ public class PanelAdmin extends JPanel implements ActionListener {
         l9.setVisible(false);
         l10.setVisible(false);
         l11.setVisible(false);
+        l12.setVisible(false);
         this.add(l2);
         this.add(l3);
         this.add(l4);
@@ -144,6 +147,7 @@ public class PanelAdmin extends JPanel implements ActionListener {
         this.add(l9);
         this.add(l10);
         this.add(l11);
+        this.add(l12);
 
         volver.setVisible(false);
         this.add(volver);
@@ -161,6 +165,8 @@ public class PanelAdmin extends JPanel implements ActionListener {
         this.add(a);
         s.setVisible(false);
         this.add(s);
+        minVotos.setVisible(false);
+        this.add(minVotos);
 
         //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(new Dimension(981, 725));
@@ -353,9 +359,16 @@ public class PanelAdmin extends JPanel implements ActionListener {
                 }
             } else if(proyecto){
                 if(!proyectos.isEmpty()){
-                    gui.getController().aceptarProyecto(this.proyectos.get(0));
-                    this.assignProyectos();
-                    this.muestraProyectosPendientes();
+                    if(minVotos.getText().equals("")){
+                        JOptionPane.showMessageDialog(this, "Escoge un número mínimo de votos!",
+                                "" ,JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        gui.getController().setMinVotos(this.proyectos.get(0), Integer.parseInt(minVotos.getText()));
+                        gui.getController().aceptarProyecto(this.proyectos.get(0));
+                        this.assignProyectos();
+                        this.muestraProyectosPendientes();
+                    }
+
                 }
             } else if(finan){
                 if(!proyectosF.isEmpty()){
@@ -567,14 +580,27 @@ public class PanelAdmin extends JPanel implements ActionListener {
             l5.setVisible(true);
             this.add(l5);
 
+
+            l12.setText("Número mínimo de votos: ");
+            l12.setFont(l12.getFont().deriveFont(16f));
+            l12.setBounds(390, 430, 100, 25);
+            l12.setForeground(Color.black);
+            l12.setSize(l12.getPreferredSize());
+            l12.setVisible(true);
+            this.add(l12);
+
+            minVotos.setBounds(595, 430, 50, 25);
+            minVotos.setVisible(true);
+            this.add(minVotos);
+
             rechazar.setFont(rechazar.getFont().deriveFont(14f));
-            rechazar.setBounds(400, 425, 100, 25);
+            rechazar.setBounds(400, 475, 100, 25);
             rechazar.addActionListener(this);
             rechazar.setVisible(true);
             this.add(rechazar);
 
             aceptar.setFont(aceptar.getFont().deriveFont(14f));
-            aceptar.setBounds(540, 425, 100, 25);
+            aceptar.setBounds(540, 475, 100, 25);
             aceptar.addActionListener(this);
             aceptar.setVisible(true);
             this.add(aceptar);
