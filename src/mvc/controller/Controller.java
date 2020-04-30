@@ -349,6 +349,17 @@ public class Controller {
         return colectivos;
     }
 
+    public ArrayList<Usuario> listaUsuariosRepresentados(Usuario u){
+        ArrayList<Usuario> usuarios = new ArrayList<>();
+
+        for(Colectivo col : listaColectivosPropios()){
+            for(Usuario user : col.getListaUsuario()){
+                usuarios.add(user);
+            }
+        }
+        return usuarios;
+    }
+
     public ArrayList<Colectivo> listaColectivosSeguidos() {
         ArrayList<Colectivo> colectivos = new ArrayList<>();
 
@@ -425,6 +436,10 @@ public class Controller {
     public String getUrl(ProyectoInfraestructura p) { return  p.getUrlCroquis();}
 
     public boolean votar(Usuario u, Proyecto p) { return p.votar(u);}
+
+    public boolean votarUsuarios(List<Usuario> users, Proyecto p) {
+        return p.votarUsuarios(users);
+    }
 
     public boolean esRepresentante(Usuario u){
         if(u.getColectivosPropios().isEmpty()) return false;

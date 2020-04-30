@@ -48,7 +48,7 @@ public abstract class Proyecto implements GrantRequest, Serializable {
         this.fechaCreacion = LocalDate.now();
         this.importe = importe;
         this.creador = creador;
-        this.estado = Estado.EN_ESPERA;
+        this.estado = Estado.ACTIVO;
     }
     /**
      * Enumeracion que indica el estado del proyecto
@@ -221,10 +221,10 @@ public abstract class Proyecto implements GrantRequest, Serializable {
      * @return true si se ha sumado el voto al proyecto correctamente, false si ocurre lo contrario.
      */
     public boolean votarUsuarios(List<Usuario> usuarios) {
-    	if(this.estado == Estado.CADUCADO) return false;
-    	
+        if(this.estado != Estado.ACTIVO && this.estado != Estado.ESPERA_FINANC) return false;
+
     	for (Usuario u : usuarios) {
-    		if(!u.getListaProyecto().contains(this)) {
+    		if(u.getListaProyecto().contains(this)) {
     			u.anadirProyecto(this);
     			this.setFechaUltimoVoto(LocalDate.now());
             	this.setNumVotos(this.getNumVotos()+1);

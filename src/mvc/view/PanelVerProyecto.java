@@ -12,10 +12,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-/****************************************
- * VOTAR COLECTIVOS Y PROYECTO CADUCADO *
- * SETVISIBLE URL, DISTRITO             *
- ****************************************/
+/**********************************************
+ * VOTAR COLECTIVOS Y PROYECTO CADUCADO       *
+ * URL, DISTRITO, ACTUAR COMO REPRESENTANTE   *
+ **********************************************/
 
 public class PanelVerProyecto extends JPanel implements ActionListener {
 
@@ -38,7 +38,7 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
     private JLabel l4 = new JLabel("Descripción:");
     private JLabel l5 = new JLabel("Grupo:");
     private JLabel l6 = new JLabel("Distrito:");
-    private JLabel l7 = new JLabel("Croquis");
+    private JLabel l7 = new JLabel("Croquis:");
     private JLabel l8 = new JLabel("Ya has votado por este proyecto");
     private JLabel l9 = new JLabel("Numero de votos:");
 
@@ -157,14 +157,14 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
         this.add(titulo);
 
         desc.setFont(desc.getFont().deriveFont(13f));
-        desc.setBounds(300, 250, 10, 400);
+        desc.setBounds(300, 250, 300, 400);
         desc.setBackground(Color.white);
         desc.setForeground(Color.black);
         desc.setSize(desc.getPreferredSize());
         this.add(desc);
 
         grupo.setFont(grupo.getFont().deriveFont(13f));
-        grupo.setBounds(300, 350, 10, 400);
+        grupo.setBounds(300, 350, 300, 40);
         grupo.setBackground(Color.white);
         grupo.setForeground(Color.black);
         grupo.setSize(grupo.getPreferredSize());
@@ -172,7 +172,7 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
         this.add(grupo);
 
         nacional.setFont(nacional.getFont().deriveFont(13f));
-        nacional.setBounds(300, 400, 10, 400);
+        nacional.setBounds(300, 400, 100, 40);
         nacional.setBackground(Color.white);
         nacional.setForeground(Color.black);
         nacional.setSize(nacional.getPreferredSize());
@@ -180,7 +180,7 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
         this.add(nacional);
 
         distrito.setFont(distrito.getFont().deriveFont(13f));
-        distrito.setBounds(300, 350, 10, 400);
+        distrito.setBounds(300, 350, 100, 40);
         distrito.setBackground(Color.white);
         distrito.setForeground(Color.black);
         distrito.setSize(distrito.getPreferredSize());
@@ -188,7 +188,7 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
         this.add(distrito);
 
         url.setFont(url.getFont().deriveFont(13f));
-        url.setBounds(300, 400, 200, 400);
+        url.setBounds(300, 400, 200, 40);
         url.setBackground(Color.white);
         url.setForeground(Color.black);
         url.setSize(url.getPreferredSize());
@@ -246,11 +246,20 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
         } else if (e.getSource() == proyectosR) {
             gui.irProyectos(this);
         } else if (e.getSource() == votar) {
-            gui.getController().votar(gui.getController().getLoggedUser(), p);
-            votar.setEnabled(false);
-            l8.setVisible(true);
-            if(gui.getController().cumpleNumVotos(p) == true) {
-                gui.getController().pedirFinanciacion(p);
+            if(gui.getController().getRepresentante() == false) {
+                gui.getController().votar(gui.getController().getLoggedUser(), p);
+                votar.setEnabled(false);
+                l8.setVisible(true);
+                if (gui.getController().cumpleNumVotos(p) == true) {
+                    gui.getController().pedirFinanciacion(p);
+                }
+            } else if(gui.getController().getRepresentante() == true){
+                gui.getController().votarUsuarios(gui.getController().listaUsuariosRepresentados(gui.getController().getLoggedUser()), p);
+                votar.setEnabled(false);
+                l8.setVisible(true);
+                if (gui.getController().cumpleNumVotos(p) == true) {
+                    gui.getController().pedirFinanciacion(p);
+                }
             }
         }
 
@@ -271,12 +280,14 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
             if(p != null) {
                 titulo.setText(gui.getController().getTitulo(p));
                 desc.setText(gui.getController().getDescProy(p));
-                numVotos.setText(gui.getController().getNumVotos(p).toString());
+                numVotos.setText(gui.getController().getNumVotos(p));
                 if(p instanceof ProyectoSocial) {
                     ProyectoSocial pSoc = (ProyectoSocial) p;
                     l5.setVisible(true);
                     l6.setVisible(false);
                     l7.setVisible(false);
+                    url.setVisible(false);
+                    distrito.setVisible(false);
                     grupo.setText(gui.getController().getGrupo(pSoc));
                     grupo.setVisible(true);
                     nacional.setText(gui.getController().isNacional(pSoc));
@@ -286,6 +297,8 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
                     l5.setVisible(false);
                     l6.setVisible(true);
                     l7.setVisible(true);
+                    grupo.setVisible(false);
+                    nacional.setVisible(false);
                     distrito.setText(gui.getController().getDistrito(pInfra));
                     distrito.setVisible(true);
                     url.setText(gui.getController().getUrl(pInfra));
