@@ -15,7 +15,9 @@ import java.io.IOException;
 /**************************************************
  * VOTAR COLECTIVOS (ACTUAR COMO REPRESENTANTE)   *
  * PROYECTO CADUCADO, DISTRITO SELECCION MULTIPLE *
- * ASPECTO COLECTIVOS                             *
+ * ASPECTO COLECTIVOS          <-------           *
+ * SCROLLBAR TAMAÑO TEXTAREA                      *
+ * NOTIFICACIONES              <-------           *
  **************************************************/
 
 public class PanelVerProyecto extends JPanel implements ActionListener {
@@ -46,11 +48,14 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
 
     private JTextArea titulo = new JTextArea("No title",1, 50);
     private JTextArea desc = new JTextArea("No desc", 40, 50);
+    private JScrollPane scrollDesc = new JScrollPane(desc,
+            JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     private JTextArea grupo = new JTextArea("No group", 1,100);
     private JTextArea nacional = new JTextArea("Nacional", 1, 100);
     private JTextArea url = new JTextArea("No url", 1, 100);
     private JTextArea distrito = new JTextArea("No district", 1, 100);
     private JLabel numVotos = new JLabel("No votes");
+    private JLabel caducado = new JLabel("(CADUCADO)");
 
     public PanelVerProyecto(MiGUI gui) {
         this.gui = gui;
@@ -87,6 +92,13 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
         votar.addActionListener(this);
         votar.setBounds(400, 500, 90, 40);
         this.add(votar);
+
+        caducado.setFont(l2.getFont().deriveFont(18f));
+        caducado.setBounds(650, 500, 300, 40);
+        caducado.setForeground(Color.black);
+        caducado.setSize(caducado.getPreferredSize());
+        caducado.setVisible(false);
+        this.add(caducado);
 
         /*Logo*/
         JLabel icon1 = new JLabel(" ");
@@ -155,7 +167,7 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
         titulo.setBounds(200, 200, 50, 40);
         titulo.setForeground(Color.black);
         titulo.setSize(titulo.getPreferredSize());
-        Font boldFont=new Font(titulo.getFont().getName(), Font.BOLD, titulo.getFont().getSize());
+        Font boldFont = new Font(titulo.getFont().getName(), Font.BOLD, titulo.getFont().getSize());
         titulo.setFont(boldFont);
         titulo.setOpaque(false);
         titulo.setEditable(false);
@@ -164,14 +176,17 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
         this.add(titulo);
 
         desc.setFont(desc.getFont().deriveFont(13f));
-        desc.setBounds(300, 250, 300, 200);
-        desc.setOpaque(false);
+        desc.setBackground(new Color(124, 150, 197));
         desc.setEditable(false);
         desc.setForeground(Color.black);
-        desc.setSize(desc.getPreferredSize());
         desc.setLineWrap(true);
         desc.setWrapStyleWord(true);
-        this.add(desc);
+
+        scrollDesc.setViewportView(desc);
+        scrollDesc.setBackground(new Color(124, 150, 197));
+        scrollDesc.setBounds(300, 250, 500, 100);
+        scrollDesc.setVisible(true);
+        this.add(scrollDesc, BorderLayout.EAST);
 
         grupo.setFont(grupo.getFont().deriveFont(13f));
         grupo.setBounds(300, 350, 300, 40);
@@ -315,6 +330,7 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
                 titulo.setText(gui.getController().getTitulo(p));
                 desc.setText(gui.getController().getDescProy(p));
                 numVotos.setText(gui.getController().getNumVotos(p));
+                caducado.setVisible(false);
                 if(p instanceof ProyectoSocial) {
                     ProyectoSocial pSoc = (ProyectoSocial) p;
                     l5.setVisible(true);
@@ -338,14 +354,18 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
                     url.setText(gui.getController().getUrl(pInfra));
                     url.setVisible(true);
                 }
-            }
-
-            if(gui.getController().haVotado(gui.getController().getLoggedUser(), p) == true) {
-                votar.setEnabled(false);
-                l8.setVisible(true);
-            } else {
-                votar.setEnabled(true);
-                l8.setVisible(false);
+                if(gui.getController().haVotado(gui.getController().getLoggedUser(), p) == true) {
+                    votar.setEnabled(false);
+                    l8.setVisible(true);
+                } else {
+                    votar.setEnabled(true);
+                    l8.setVisible(false);
+                }
+                if(gui.getController().getEstado(p) == Proyecto.Estado.CADUCADO){
+                    votar.setEnabled(false);
+                    l8.setVisible(false);
+                    caducado.setVisible(true);
+                }
             }
 
         }

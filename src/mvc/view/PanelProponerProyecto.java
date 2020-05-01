@@ -32,6 +32,8 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
     private ButtonGroup group = new ButtonGroup();
     private JTextField titulo = new JTextField(25);
     private JTextArea descripcion = new JTextArea(40, 50);
+    private JScrollPane scrollDesc = new JScrollPane(descripcion,
+                    JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     private JTextField grupos = new JTextField(200);
     private JFormattedTextField importe = new JFormattedTextField(new Integer(0));
     private JCheckBox nacional = new JCheckBox("Nacional");
@@ -202,11 +204,15 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
         titulo.setBounds(350, 250, 400, 30);
         titulo.setVisible(false);
         this.add(titulo);
-        descripcion.setBounds(350, 300, 400, 100);
+
         descripcion.setLineWrap(true);
         descripcion.setWrapStyleWord(true);
-        descripcion.setVisible(false);
-        this.add(descripcion);
+
+        scrollDesc.setViewportView(descripcion);
+        scrollDesc.setBounds(350, 300, 400, 100);
+        scrollDesc.setVisible(false);
+        this.add(scrollDesc, BorderLayout.EAST);
+
         grupos.setBounds(200, 450, 550, 30);
         grupos.setVisible(false);
         this.add(grupos);
@@ -268,7 +274,7 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
             l11.setVisible(true);
             importe.setVisible(true);
             titulo.setVisible(true);
-            descripcion.setVisible(true);
+            scrollDesc.setVisible(true);
             l7.setVisible(true);
             l8.setVisible(true);
             nacional.setVisible(true);
@@ -283,7 +289,7 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
             l11.setVisible(true);
             importe.setVisible(true);
             titulo.setVisible(true);
-            descripcion.setVisible(true);
+            scrollDesc.setVisible(true);
             l9.setVisible(true);
             l10.setVisible(true);
             scroll.setVisible(true);

@@ -160,21 +160,33 @@ public class PanelProyectos extends JPanel implements ActionListener {
         bc3.setVisible(false);
 
         if(this.actuales.size() > 0){
-            this.bc1.setText(this.actuales.get(0).getProjectTitle());
+            if(gui.getController().getEstado(this.actuales.get(0))== Proyecto.Estado.CADUCADO){
+                this.bc1.setText(this.actuales.get(0).getProjectTitle()+"   (Caducado)");
+            } else {
+                this.bc1.setText(this.actuales.get(0).getProjectTitle());
+            }
             bc1.setVisible(true);
             bc1.setBounds(200, 300, 400, 40);
             bc1.addActionListener(this);
             this.add(bc1);
 
             if(this.actuales.size() > 1) {
-                this.bc2.setText(this.actuales.get(1).getProjectTitle());
+                if(gui.getController().getEstado(this.actuales.get(1))== Proyecto.Estado.CADUCADO){
+                    this.bc2.setText(this.actuales.get(1).getProjectTitle()+"   (Caducado)");
+                } else {
+                    this.bc2.setText(this.actuales.get(1).getProjectTitle());
+                }
                 bc2.setVisible(true);
                 bc2.setBounds(200, 340, 400, 40);
                 bc2.addActionListener(this);
                 this.add(bc2);
 
                 if (this.actuales.size() > 2) {
-                    this.bc3.setText(this.actuales.get(2).getProjectTitle());
+                    if(gui.getController().getEstado(this.actuales.get(2))== Proyecto.Estado.CADUCADO){
+                        this.bc3.setText(this.actuales.get(2).getProjectTitle()+"   (Caducado)");
+                    } else {
+                        this.bc3.setText(this.actuales.get(2).getProjectTitle());
+                    }
                     bc3.setVisible(true);
                     bc3.setBounds(200, 380, 400, 40);
                     bc3.addActionListener(this);
@@ -217,6 +229,14 @@ public class PanelProyectos extends JPanel implements ActionListener {
                     this.actuales.add(this.todos.get(this.posicion - contador));
                 }
                 this.posicion = this.posicion - 3;
+            }
+        }
+    }
+
+    public void caducarProyectos(List<Proyecto> proyectos){
+        for(Proyecto p : proyectos){
+            if(p.getEstado() != Proyecto.Estado.CADUCADO){
+                gui.getController().caducado(p);
             }
         }
     }
@@ -296,6 +316,7 @@ public class PanelProyectos extends JPanel implements ActionListener {
                 this.actuales.addAll(this.todos);
             }
             this.mostrarProyectos();
+
         }
     }
 

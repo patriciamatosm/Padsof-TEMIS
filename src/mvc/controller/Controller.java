@@ -331,7 +331,8 @@ public class Controller {
         ArrayList<Proyecto> proyectos = new ArrayList<>();
 
         for(Proyecto p : pTemis.getProyectos().values() ){
-            if(p.getEstado() == Proyecto.Estado.ACTIVO || p.getEstado() == Proyecto.Estado.CADUCADO)
+            if(p.getEstado() == Proyecto.Estado.ACTIVO || p.getEstado() == Proyecto.Estado.CADUCADO ||
+                p.getEstado() == Proyecto.Estado.ESPERA_FINANC)
             proyectos.add(p);
         }
         return proyectos;
@@ -484,9 +485,14 @@ public class Controller {
      * Funcion que llama a la funcion votar
      * @param u Usuario que vota
      * @param p Proyecto a votar
-     * @return true/false dependiendo de si se ha votado con exito o no
      */
-    public boolean votar(Usuario u, Proyecto p) { return p.votar(u);}
+    public void votar(Usuario u, Proyecto p) { p.votar(u);}
+
+    /**
+     * Funcion que llama a la funcion que cambia el estado de un proyecto a caducado.
+     * @param p Proyecto
+     */
+    public void caducado(Proyecto p) { p.caducado();}
 
     /**
      * Funcion que llama a la funcion votarUsuarios
