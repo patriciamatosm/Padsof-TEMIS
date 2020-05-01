@@ -30,14 +30,14 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
     private JRadioButton social = new JRadioButton("Social");
     private JRadioButton infra = new JRadioButton("Infraestructura");
     private ButtonGroup group = new ButtonGroup();
-    private JTextArea titulo = new JTextArea(1,25);
+    private JTextField titulo = new JTextField(25);
     private JTextArea descripcion = new JTextArea(40, 50);
     private JTextField grupos = new JTextField(200);
     private JFormattedTextField importe = new JFormattedTextField(new Integer(0));
     private JCheckBox nacional = new JCheckBox("Nacional");
     private JList distrito = new JList(array2);
     private JScrollPane scroll = new JScrollPane(distrito);
-    private JTextArea url = new JTextArea(1,50);
+    private JTextField url = new JTextField(100);
 
     /*labels*/
     private JLabel l2 = new JLabel("Perfil de ");
@@ -112,14 +112,20 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
         this.add(importe);
 
         distrito.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        distrito.addListSelectionListener(new ListSelectionListener () {
+            public void valueChanged(ListSelectionEvent arg0) {
+                if (arg0.getValueIsAdjusting() == false) {
+                    JList distrito = (JList) arg0.getSource();
+                }
+            }
+        });
+
         scroll.setViewportView(distrito);
         scroll.setBounds(350, 420, 150, 30);
         scroll.setVisible(false);
         this.add(scroll, BorderLayout.EAST);
 
         url.setBounds(640, 465, 170, 30);
-        url.setLineWrap(true);
-        url.setWrapStyleWord(true);
         url.setVisible(false);
         this.add(url);
 
@@ -194,8 +200,6 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
 
         /*Cuadros de texto*/
         titulo.setBounds(350, 250, 400, 30);
-        titulo.setLineWrap(true);
-        titulo.setWrapStyleWord(true);
         titulo.setVisible(false);
         this.add(titulo);
         descripcion.setBounds(350, 300, 400, 100);
@@ -204,8 +208,6 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
         descripcion.setVisible(false);
         this.add(descripcion);
         grupos.setBounds(200, 450, 550, 30);
-        titulo.setLineWrap(true);
-        titulo.setWrapStyleWord(true);
         grupos.setVisible(false);
         this.add(grupos);
 
@@ -291,7 +293,16 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
             nacional.setVisible(false);
             grupos.setVisible(false);
         } else if(e.getSource() == proponer){
-            if(social.isSelected()){
+            if(titulo.getText().length() > 50){
+                JOptionPane.showMessageDialog(this,"Error, el titulo no puede" +
+                                "tener mas de 50 caracteres.","Error al crear",
+                        JOptionPane.PLAIN_MESSAGE);
+            } else if(descripcion.getText().length() > 500){
+                JOptionPane.showMessageDialog(this,"Error, la descripcion no puede" +
+                                "tener mas de 500 caracteres.","Error al crear",
+                        JOptionPane.PLAIN_MESSAGE);
+            }
+            else if(social.isSelected()){
                 try {
                     gui.getController().nuevoProyectoSocial(titulo.getText(),
                             descripcion.getText(), (Integer) importe.getValue(), gui.getController().getLoggedUser(),
@@ -311,7 +322,7 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
                 try {
                     gui.getController().nuevoProyectoInfra(titulo.getText(),
                             descripcion.getText(), (Integer) importe.getValue(), gui.getController().getLoggedUser(),
-                            distrito.getName(), url.getText(), descripcion.getText());
+                            (String)distrito.getSelectedValue(), url.getText(), descripcion.getText());
                     JOptionPane.showMessageDialog(this, "Muchas gracias por su interés en hacer de\n" +
                             "esta una comunidad mejor para todos. Su\n" +
                             "propuesta será remitida al administrador,\n" +

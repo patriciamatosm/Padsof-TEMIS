@@ -12,10 +12,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-/************************************************
- * VOTAR COLECTIVOS (ACTUAR COMO REPRESENTANTE) *
- * PROYECTO CADUCADO, DISTRITO                  *
- ************************************************/
+/**************************************************
+ * VOTAR COLECTIVOS (ACTUAR COMO REPRESENTANTE)   *
+ * PROYECTO CADUCADO, DISTRITO SELECCION MULTIPLE *
+ * ASPECTO COLECTIVOS                             *
+ **************************************************/
 
 public class PanelVerProyecto extends JPanel implements ActionListener {
 
@@ -48,7 +49,7 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
     private JTextArea grupo = new JTextArea("No group", 1,100);
     private JTextArea nacional = new JTextArea("Nacional", 1, 100);
     private JTextArea url = new JTextArea("No url", 1, 100);
-    private JLabel distrito = new JLabel("No district");
+    private JTextArea distrito = new JTextArea("No district", 1, 100);
     private JLabel numVotos = new JLabel("No votes");
 
     public PanelVerProyecto(MiGUI gui) {
@@ -119,7 +120,7 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
         l5.setVisible(false);
 
         l6.setFont(l6.getFont().deriveFont(13f));
-        l6.setBounds(200, 350, 10, 25);
+        l6.setBounds(200, 375, 10, 25);
         l6.setForeground(Color.black);
         l6.setSize(l6.getPreferredSize());
         l6.setVisible(false);
@@ -154,6 +155,8 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
         titulo.setBounds(200, 200, 50, 40);
         titulo.setForeground(Color.black);
         titulo.setSize(titulo.getPreferredSize());
+        Font boldFont=new Font(titulo.getFont().getName(), Font.BOLD, titulo.getFont().getSize());
+        titulo.setFont(boldFont);
         titulo.setOpaque(false);
         titulo.setEditable(false);
         titulo.setLineWrap(true);
@@ -193,10 +196,13 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
         this.add(nacional);
 
         distrito.setFont(distrito.getFont().deriveFont(13f));
-        distrito.setBounds(300, 350, 100, 40);
-        distrito.setBackground(Color.white);
+        distrito.setBounds(300, 375, 100, 40);
         distrito.setForeground(Color.black);
         distrito.setSize(distrito.getPreferredSize());
+        distrito.setOpaque(false);
+        distrito.setEditable(false);
+        distrito.setLineWrap(true);
+        distrito.setWrapStyleWord(true);
         distrito.setVisible(false);
         this.add(distrito);
 
