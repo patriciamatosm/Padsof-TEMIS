@@ -3,6 +3,8 @@ package mvc.view;
 import mvc.model.Temis;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,13 +24,15 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
     private JRadioButton social = new JRadioButton("Social");
     private JRadioButton infra = new JRadioButton("Infraestructura");
     private ButtonGroup group = new ButtonGroup();
-    private JTextField titulo = new JTextField(25);
-    private JTextField descripcion = new JTextField(500);
+    private JTextArea titulo = new JTextArea(1,25);
+    private JTextArea descripcion = new JTextArea(40, 50);
     private JTextField grupos = new JTextField(200);
+    private JFormattedTextField importe = new JFormattedTextField(new Integer(0));
     private JCheckBox nacional = new JCheckBox("Nacional");
-    private String[] array2 = {"Distrito1", "Distrito2"};
-    private JComboBox distrito = new JComboBox(array2);
-    private JButton url = new JButton("Adjuntar imagen");
+    private String[] array2 = {"Distrito1", "Distrito2", "Distrito3"};
+    private JList distrito = new JList(array2);
+    private JScrollPane scroll = new JScrollPane(distrito);
+    private JTextArea url = new JTextArea(1,100);
 
     /*labels*/
     private JLabel l2 = new JLabel("Perfil de ");
@@ -38,8 +42,9 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
     private JLabel l6 = new JLabel("Descripción:    ");
     private JLabel l7 = new JLabel("¿A qué grupo(s) beneficiaría este proyecto?");
     private JLabel l8 = new JLabel("¿A nivel nacional o internacional?");
-    private JLabel l9 = new JLabel("Selecciona un distrito: ");
-    private JLabel l10 = new JLabel("Adjunta, al menos, una imagen que represente la idea que propones: ");
+    private JLabel l9 = new JLabel("Selecciona distrito(s): ");
+    private JLabel l10 = new JLabel("Incluye la url de una imagen que represente la idea que propones: ");
+    private JLabel l11 = new JLabel("Importe requerido:");
 
     public PanelProponerProyecto(MiGUI gui) {
         this.gui = gui;
@@ -97,13 +102,28 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
         nacional.setVisible(false);
         this.add(nacional);
 
-        distrito.addActionListener(this);
+        importe.setBounds(680, 500, 50, 30);
+        importe.setVisible(false);
+        this.add(importe);
+
+        distrito.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent arg0) {
+                if (arg0.getValueIsAdjusting()==false) {
+                    JList distrito = (JList)arg0.getSource();
+                    String valorSeleccionado = (String)distrito.getSelectedValue();
+                }
+            }
+        });
+        distrito.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         distrito.setBounds(350, 420, 150, 30);
         distrito.setVisible(false);
         this.add(distrito);
+        this.add(scroll, BorderLayout.EAST);
 
-        url.addActionListener(this);
-        url.setBounds(670, 465, 140, 30);
+        url.setBounds(640, 465, 170, 30);
+        url.setLineWrap(true);
+        url.setWrapStyleWord(true);
         url.setVisible(false);
         this.add(url);
 
@@ -159,6 +179,12 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
         l10.setSize(l10.getPreferredSize());
         l10.setVisible(false);
 
+        l11.setFont(l11.getFont().deriveFont(13f));
+        l11.setBounds(550, 500, 300, 40);
+        l11.setForeground(Color.black);
+        l11.setSize(l11.getPreferredSize());
+        l11.setVisible(false);
+
         this.add(l2);
         this.add(l3);
         this.add(l4);
@@ -168,15 +194,22 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
         this.add(l8);
         this.add(l9);
         this.add(l10);
+        this.add(l11);
 
         /*Cuadros de texto*/
         titulo.setBounds(350, 250, 400, 30);
+        titulo.setLineWrap(true);
+        titulo.setWrapStyleWord(true);
         titulo.setVisible(false);
         this.add(titulo);
         descripcion.setBounds(350, 300, 400, 100);
+        descripcion.setLineWrap(true);
+        descripcion.setWrapStyleWord(true);
         descripcion.setVisible(false);
         this.add(descripcion);
         grupos.setBounds(200, 450, 550, 30);
+        titulo.setLineWrap(true);
+        titulo.setWrapStyleWord(true);
         grupos.setVisible(false);
         this.add(grupos);
 
@@ -216,12 +249,12 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
             infra.setSelected(false);
             nacional.setSelected(false);
             gui.irPaginaPrincipal(this);
-        } /*else if(e.getSource() == colectivos){
+        } else if(e.getSource() == colectivos){
             social.setSelected(false);
             infra.setSelected(false);
             nacional.setSelected(false);
             gui.irColectivos(this);
-        }*/ else if(e.getSource() == proyectos){
+        } else if(e.getSource() == proyectos){
             social.setSelected(false);
             infra.setSelected(false);
             nacional.setSelected(false);
@@ -234,6 +267,8 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
         } else if(e.getSource() == social){
             l5.setVisible(true);
             l6.setVisible(true);
+            l11.setVisible(true);
+            importe.setVisible(true);
             titulo.setVisible(true);
             descripcion.setVisible(true);
             l7.setVisible(true);
@@ -247,6 +282,8 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
         } else if(e.getSource() == infra){
             l5.setVisible(true);
             l6.setVisible(true);
+            l11.setVisible(true);
+            importe.setVisible(true);
             titulo.setVisible(true);
             descripcion.setVisible(true);
             l9.setVisible(true);
@@ -261,7 +298,7 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
             if(social.isSelected()){
                 try {
                     gui.getController().nuevoProyectoSocial(titulo.getText(),
-                            descripcion.getText(), 1000, gui.getController().getLoggedUser(),
+                            descripcion.getText(), (Integer) importe.getValue(), gui.getController().getLoggedUser(),
                             grupos.getText(), nacional.isSelected());
                     JOptionPane.showMessageDialog(this, "Muchas gracias por su interés en hacer de\n" +
                             "esta una comunidad mejor para todos. Su\n" +
@@ -277,7 +314,7 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
             } else if(infra.isSelected()){
                 try {
                     gui.getController().nuevoProyectoInfra(titulo.getText(),
-                            descripcion.getText(), 1000, gui.getController().getLoggedUser(),
+                            descripcion.getText(), (Integer) importe.getValue(), gui.getController().getLoggedUser(),
                             distrito.getName(), url.getText(), descripcion.getText());
                     JOptionPane.showMessageDialog(this, "Muchas gracias por su interés en hacer de\n" +
                             "esta una comunidad mejor para todos. Su\n" +

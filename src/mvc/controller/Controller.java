@@ -1,6 +1,5 @@
 package mvc.controller;
 
-import es.uam.eps.sadp.grants.GrantRequest;
 import mvc.model.*;
 import mvc.view.*;
 
@@ -473,12 +472,13 @@ public class Controller {
     public String getDistrito(ProyectoInfraestructura p) { return p.getDistrito();}
 
     /**
-     * Funcion que llama a la funcion que devuelve la urldel croquis de un
+     * Funcion que llama a la funcion que devuelve la url del croquis de un
      * proyecto de infraestructura.
      * @param p Proyecto infraestructura
      * @return String con url del croquis
      */
     public String getUrl(ProyectoInfraestructura p) { return  p.getUrlCroquis();}
+
 
     /**
      * Funcion que llama a la funcion votar

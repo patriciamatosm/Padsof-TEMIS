@@ -29,7 +29,7 @@ public abstract class Proyecto implements GrantRequest, Serializable {
     private LocalDate fechaCreacion;
     private Integer numVotos = 0;
     private Integer minVotos;
-    private Integer importe;
+    private double importe;
     private Actor creador;
     private Estado estado;
     private String id;
@@ -42,13 +42,13 @@ public abstract class Proyecto implements GrantRequest, Serializable {
      * @param importe        importe destinado al proyecto
      * @param creador        usuario creador del proyecto
      */
-    public Proyecto(String titulo, String descripcion, Integer importe, Actor creador) {
+    public Proyecto(String titulo, String descripcion, double importe, Actor creador) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fechaCreacion = LocalDate.now();
         this.importe = importe;
         this.creador = creador;
-        this.estado = Estado.EN_ESPERA;
+        this.estado = Estado.ACTIVO;
         this.numVotos = 0;
     }
     /**
@@ -154,9 +154,18 @@ public abstract class Proyecto implements GrantRequest, Serializable {
      * Funcion para establecer el importe de un proyecto
      * @param importe del proyecto
      */
-    public void setImporte(Integer importe) {
+    public void setImporte(double importe) {
         this.importe = importe;
     }
+
+    /**
+     * Funcion para llamar al importe de un proyecto
+     * @param importe del proyecto
+     * @return cantidad del importe
+
+    public double getImporte() {
+        return this.importe;
+    }*/
 
     /**
      * Funcion para pedir el creador de un proyecto

@@ -12,10 +12,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-/**********************************************
- * VOTAR COLECTIVOS Y PROYECTO CADUCADO       *
- * URL, DISTRITO, ACTUAR COMO REPRESENTANTE   *
- **********************************************/
+/************************************************
+ * VOTAR COLECTIVOS (ACTUAR COMO REPRESENTANTE) *
+ * PROYECTO CADUCADO, DISTRITO                  *
+ ************************************************/
 
 public class PanelVerProyecto extends JPanel implements ActionListener {
 
@@ -43,11 +43,11 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
     private JLabel l8 = new JLabel("Ya has votado por este proyecto");
     private JLabel l9 = new JLabel("Numero de votos:");
 
-    private JLabel titulo = new JLabel("No title");
-    private JLabel desc = new JLabel("No desc");
-    private JLabel grupo = new JLabel("No group");
-    private JLabel nacional = new JLabel("Nacional");
-    private JLabel url = new JLabel("No url");
+    private JTextArea titulo = new JTextArea("No title",1, 50);
+    private JTextArea desc = new JTextArea("No desc", 40, 50);
+    private JTextArea grupo = new JTextArea("No group", 1,100);
+    private JTextArea nacional = new JTextArea("Nacional", 1, 100);
+    private JTextArea url = new JTextArea("No url", 1, 100);
     private JLabel distrito = new JLabel("No district");
     private JLabel numVotos = new JLabel("No votes");
 
@@ -141,7 +141,6 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
         l9.setForeground(Color.black);
         l9.setSize(l9.getPreferredSize());
 
-
         this.add(l2);
         this.add(l3);
         this.add(l4);
@@ -152,31 +151,44 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
         this.add(l9);
 
         titulo.setFont(titulo.getFont().deriveFont(16f));
-        titulo.setBounds(200, 200, 10, 40);
+        titulo.setBounds(200, 200, 50, 40);
         titulo.setForeground(Color.black);
         titulo.setSize(titulo.getPreferredSize());
+        titulo.setOpaque(false);
+        titulo.setEditable(false);
+        titulo.setLineWrap(true);
+        titulo.setWrapStyleWord(true);
         this.add(titulo);
 
         desc.setFont(desc.getFont().deriveFont(13f));
-        desc.setBounds(300, 250, 300, 400);
-        desc.setBackground(Color.white);
+        desc.setBounds(300, 250, 300, 200);
+        desc.setOpaque(false);
+        desc.setEditable(false);
         desc.setForeground(Color.black);
         desc.setSize(desc.getPreferredSize());
+        desc.setLineWrap(true);
+        desc.setWrapStyleWord(true);
         this.add(desc);
 
         grupo.setFont(grupo.getFont().deriveFont(13f));
         grupo.setBounds(300, 350, 300, 40);
-        grupo.setBackground(Color.white);
         grupo.setForeground(Color.black);
         grupo.setSize(grupo.getPreferredSize());
+        grupo.setOpaque(false);
+        grupo.setEditable(false);
+        grupo.setLineWrap(true);
+        grupo.setWrapStyleWord(true);
         grupo.setVisible(false);
         this.add(grupo);
 
         nacional.setFont(nacional.getFont().deriveFont(13f));
-        nacional.setBounds(300, 400, 100, 40);
-        nacional.setBackground(Color.white);
+        nacional.setBounds(300, 400, 100, 100);;
         nacional.setForeground(Color.black);
         nacional.setSize(nacional.getPreferredSize());
+        nacional.setOpaque(false);
+        nacional.setEditable(false);
+        nacional.setLineWrap(true);
+        nacional.setWrapStyleWord(true);
         nacional.setVisible(false);
         this.add(nacional);
 
@@ -190,9 +202,12 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
 
         url.setFont(url.getFont().deriveFont(13f));
         url.setBounds(300, 400, 200, 40);
-        url.setBackground(Color.white);
         url.setForeground(Color.black);
         url.setSize(url.getPreferredSize());
+        url.setOpaque(false);
+        url.setEditable(false);
+        url.setLineWrap(true);
+        url.setWrapStyleWord(true);
         url.setVisible(false);
         this.add(url);
 
