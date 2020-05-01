@@ -14,6 +14,12 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
 
     private MiGUI gui;
 
+    /*Array de distritos*/
+    private String[] array2 = {"Arganzuela","Barajas","Carabanchel","Centro","Chamartin","Chamberi",
+            "Ciudad Lineal","Fuencarral-El Pardo","Hortaleza","Latina","Moncloa-Aravaca","Moratalaz",
+            "Puente de Vallecas","Retiro","Salamanca","San Blas-Canillejas","Tetuan","Usera",
+            "Vicalvaro","Villa de Vallecas","Villaverde"};
+
     /*Fields*/
     private JButton pagPrinc = new JButton("Página principal");
     private JButton proyectos = new JButton("Proyectos");
@@ -29,10 +35,9 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
     private JTextField grupos = new JTextField(200);
     private JFormattedTextField importe = new JFormattedTextField(new Integer(0));
     private JCheckBox nacional = new JCheckBox("Nacional");
-    private String[] array2 = {"Distrito1", "Distrito2", "Distrito3"};
     private JList distrito = new JList(array2);
     private JScrollPane scroll = new JScrollPane(distrito);
-    private JTextArea url = new JTextArea(1,100);
+    private JTextArea url = new JTextArea(1,50);
 
     /*labels*/
     private JLabel l2 = new JLabel("Perfil de ");
@@ -41,7 +46,7 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
     private JLabel l5 = new JLabel("Título del proyecto:    ");
     private JLabel l6 = new JLabel("Descripción:    ");
     private JLabel l7 = new JLabel("¿A qué grupo(s) beneficiaría este proyecto?");
-    private JLabel l8 = new JLabel("¿A nivel nacional o internacional?");
+    private JLabel l8 = new JLabel("¿A nivel nacional o local?");
     private JLabel l9 = new JLabel("Selecciona distrito(s): ");
     private JLabel l10 = new JLabel("Incluye la url de una imagen que represente la idea que propones: ");
     private JLabel l11 = new JLabel("Importe requerido:");
@@ -106,19 +111,10 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
         importe.setVisible(false);
         this.add(importe);
 
-        distrito.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent arg0) {
-                if (arg0.getValueIsAdjusting()==false) {
-                    JList distrito = (JList)arg0.getSource();
-                    String valorSeleccionado = (String)distrito.getSelectedValue();
-                }
-            }
-        });
         distrito.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        distrito.setBounds(350, 420, 150, 30);
-        distrito.setVisible(false);
-        this.add(distrito);
+        scroll.setViewportView(distrito);
+        scroll.setBounds(350, 420, 150, 30);
+        scroll.setVisible(false);
         this.add(scroll, BorderLayout.EAST);
 
         url.setBounds(640, 465, 170, 30);
@@ -277,7 +273,7 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
             grupos.setVisible(true);
             l9.setVisible(false);
             l10.setVisible(false);
-            distrito.setVisible(false);
+            scroll.setVisible(false);
             url.setVisible(false);
         } else if(e.getSource() == infra){
             l5.setVisible(true);
@@ -288,7 +284,7 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
             descripcion.setVisible(true);
             l9.setVisible(true);
             l10.setVisible(true);
-            distrito.setVisible(true);
+            scroll.setVisible(true);
             url.setVisible(true);
             l7.setVisible(false);
             l8.setVisible(false);
