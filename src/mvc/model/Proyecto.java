@@ -45,7 +45,7 @@ public abstract class Proyecto implements GrantRequest, Serializable {
     public Proyecto(String titulo, String descripcion, double importe, Actor creador) {
         this.titulo = titulo;
         this.descripcion = descripcion;
-        this.fechaCreacion = LocalDate.now();
+        this.fechaCreacion = LocalDate.now().minusDays(45);
         this.importe = importe;
         this.creador = creador;
         this.estado = Estado.ACTIVO;

@@ -489,12 +489,6 @@ public class Controller {
     public void votar(Usuario u, Proyecto p) { p.votar(u);}
 
     /**
-     * Funcion que llama a la funcion que cambia el estado de un proyecto a caducado.
-     * @param p Proyecto
-     */
-    public void caducado(Proyecto p) { p.caducado();}
-
-    /**
      * Funcion que llama a la funcion votarUsuarios
      * @param users Usuarios que votan como colectivo
      * @param p Proyecto a votar

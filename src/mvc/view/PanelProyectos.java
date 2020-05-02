@@ -233,13 +233,6 @@ public class PanelProyectos extends JPanel implements ActionListener {
         }
     }
 
-    public void caducarProyectos(List<Proyecto> proyectos){
-        for(Proyecto p : proyectos){
-            if(p.getEstado() != Proyecto.Estado.CADUCADO){
-                gui.getController().caducado(p);
-            }
-        }
-    }
 
     /**
      * Invoked when an action occurs.

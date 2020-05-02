@@ -147,6 +147,7 @@ public class Temis {
 
         oos.writeObject(this.proyectos);
 
+
         oos.close();
     }
 
@@ -297,6 +298,18 @@ public class Temis {
     public void anadirProyecto(Proyecto p) {
         this.proyectos.put(p.getProjectTitle(), p);
         System.out.println(this.proyectos);
+    }
+
+    /**
+     * Funcion que llama a la funcion caducado para cada uno de los proyectos existentes
+     * @param proyectos existentes en el programa
+     */
+    public void caducarProyectos(Collection<Proyecto> proyectos){
+        for(Proyecto p : proyectos){
+            if(p.getEstado() != Proyecto.Estado.CADUCADO){
+                p.caducado();
+            }
+        }
     }
 
     /**
