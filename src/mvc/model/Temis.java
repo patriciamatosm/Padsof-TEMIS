@@ -307,8 +307,10 @@ public class Temis {
      */
     public void caducarProyectos(Collection<Proyecto> proyectos){
         for(Proyecto p : proyectos){
-            if(p.getEstado() != Proyecto.Estado.CADUCADO){
-                p.caducado();
+            if(p.getEstado() == Proyecto.Estado.ACTIVO) {
+                if (p.getEstado() != Proyecto.Estado.CADUCADO) {
+                    p.caducado();
+                }
             }
         }
     }

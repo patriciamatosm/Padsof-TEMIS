@@ -46,10 +46,10 @@ public abstract class Proyecto implements GrantRequest, Serializable {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fechaCreacion = LocalDate.now();
-        this.fechaUltimoVoto = LocalDate.now().minusDays(40);
+        this.fechaUltimoVoto = LocalDate.now();
         this.importe = importe;
         this.creador = creador;
-        this.estado = Estado.ACTIVO;
+        this.estado = Estado.EN_ESPERA;
         this.numVotos = 0;
         this.minVotos = 999999;
     }
