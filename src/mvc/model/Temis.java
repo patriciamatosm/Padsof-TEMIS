@@ -302,6 +302,58 @@ public class Temis {
     }
 
     /**
+     * Funcion que llama a la funcion votar
+     * @param p Proyecto a votar
+     */
+    public void votar(Proyecto p) {
+        for(Proyecto proyecto : this.proyectos.values()) {
+            if(proyecto.getProjectTitle().equals(p.getProjectTitle())) {
+                for(Usuario u : this.usuarios.values()){
+                    if(u.getNombre().equals(this.getUsuarioConectado().getNombre())) {
+                        proyecto.votar(u);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Funcion que llama a la funcion votarUsuarios
+     * @param p Proyecto a votar
+     */
+    public void votarUsuarios(List<Usuario> users, Proyecto p) {
+        for(Proyecto proyecto : this.proyectos.values()) {
+            if(proyecto.getProjectTitle().equals(p.getProjectTitle())) {
+                for(Usuario u : this.usuarios.values()){
+                    if(u.getNombre().equals(this.getUsuarioConectado().getNombre())) {
+                        proyecto.votarUsuarios(users);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Funcion que determina si un usuario ha votado ya o no un proyecto
+     * @param p Proyecto votado
+     * @return true/false dependiendo de si el usuario ha votado ya o no
+     */
+    public boolean haVotado(Proyecto p){
+        for(Proyecto proyecto : this.proyectos.values()) {
+            if(proyecto.getProjectTitle().equals(p.getProjectTitle())) {
+                for(Usuario u : this.usuarios.values()){
+                    if(u.getNombre().equals(this.getUsuarioConectado().getNombre())){
+                        if(u.getListaProyecto().contains(p) == true){
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * Funcion que llama a la funcion caducado para cada uno de los proyectos existentes
      * @param proyectos existentes en el programa
      */

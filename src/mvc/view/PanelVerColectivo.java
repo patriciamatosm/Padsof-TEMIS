@@ -27,7 +27,9 @@ public class PanelVerColectivo extends JPanel implements ActionListener {
     private JScrollPane scrollDesc = new JScrollPane(desc,
             JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-    private JButton back = new JButton("Volver");
+    private JButton back = new JButton("Página Principal");
+    private JButton proyectos = new JButton("Proyectos");
+    private JButton colectivos = new JButton("Colectivos");
     private JButton cierraSesion = new JButton("Salir");
     private JButton unirse = new JButton("Unirse al colectivo");
     private JButton abandonar = new JButton("Abandonar el colectivo");
@@ -116,13 +118,23 @@ public class PanelVerColectivo extends JPanel implements ActionListener {
         back.addActionListener(this);
         this.add(back);
 
+        proyectos.addActionListener(this);
+        proyectos.setFont(proyectos.getFont().deriveFont(16f));
+        proyectos.setBounds(20, 186, 160, 25);
+        this.add(proyectos);
+
+        colectivos.addActionListener(this);
+        colectivos.setFont(colectivos.getFont().deriveFont(16f));
+        colectivos.setBounds(20, 212, 160, 25);
+        this.add(colectivos);
+
         unirse.setFont(unirse.getFont().deriveFont(16f));
-        unirse.setBounds(200, 400, 200, 40);
+        unirse.setBounds(200, 500, 200, 40);
         unirse.addActionListener(this);
         this.add(unirse);
 
         abandonar.setFont(abandonar.getFont().deriveFont(16f));
-        abandonar.setBounds(200, 400, 200, 40);
+        abandonar.setBounds(200, 500, 200, 40);
         abandonar.addActionListener(this);
         this.add(abandonar);
     }
@@ -173,6 +185,12 @@ public class PanelVerColectivo extends JPanel implements ActionListener {
         }
         else if(e.getSource() == back) {
             gui.irPaginaPrincipal(this);
+        }
+        else if (e.getSource() == colectivos) {
+            gui.irColectivos(this);
+        }
+        else if (e.getSource() == proyectos) {
+            gui.irProyectos(this);
         }
         else if(e.getSource() == unirse) {
             gui.getController().unirseCol(c);

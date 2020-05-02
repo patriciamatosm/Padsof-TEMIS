@@ -20,7 +20,7 @@ public class PanelProyectosApoyo extends JPanel implements ActionListener {
     private int posicion = 0;
 
     /*Fields*/
-    private JButton pagPrinc = new JButton("Página principal");
+    private JButton pagPrinc = new JButton("Página Principal");
     private JButton proyectos = new JButton("Proyectos");
     private JButton colectivos = new JButton("Colectivos");
     private JButton proyectosR = new JButton("Todos los proyectos");
@@ -66,15 +66,18 @@ public class PanelProyectosApoyo extends JPanel implements ActionListener {
 
         /*Botones*/
         pagPrinc.addActionListener(this);
-        pagPrinc.setBounds(30, 160, 100, 40);
+        pagPrinc.setFont(pagPrinc.getFont().deriveFont(16f));
+        pagPrinc.setBounds(20, 160, 160, 25);
         this.add(pagPrinc);
 
         proyectos.addActionListener(this);
-        proyectos.setBounds(30, 201, 100, 40);
+        proyectos.setFont(proyectos.getFont().deriveFont(16f));
+        proyectos.setBounds(20, 186, 160, 25);
         this.add(proyectos);
 
         colectivos.addActionListener(this);
-        colectivos.setBounds(30, 242, 100, 40);
+        colectivos.setFont(colectivos.getFont().deriveFont(16f));
+        colectivos.setBounds(20, 212, 160, 25);
         this.add(colectivos);
 
         proyectosR.addActionListener(this);
@@ -276,7 +279,7 @@ public class PanelProyectosApoyo extends JPanel implements ActionListener {
             this.posicion = 1;
             this.actuales.clear();
 
-            this.todos = gui.getController().listaProyectosApoyo(gui.getController().getLoggedUser());
+            this.todos = gui.getController().listaProyectosApoyo();
 
             if (this.todos.size() > 2) {
                 for (int i = 0; i < 3; i++) {

@@ -13,11 +13,12 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 /**************************************************
- * VOTAR COLECTIVOS (ACTUAR COMO REPRESENTANTE)   *
+ * VOTAR COLECTIVOS            <-------           *
  * DISTRITO SELECCION MULTIPLE                    *
  * JPanelOption VOTOS          <-------           *
  * SCROLLBAR TAMAÑO TEXTAREA                      *
  * NOTIFICACIONES              <-------           *
+ * COMPROBAR USUARIO LOGUEADO                     *
  **************************************************/
 
 public class PanelVerProyecto extends JPanel implements ActionListener {
@@ -32,7 +33,6 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
     private JButton colectivos = new JButton("Colectivos");
     private JButton proyectosR = new JButton("Todos los proyectos");
     private JButton votar = new JButton("votar");
-    private JButton back = new JButton("Volver");
     private JButton cierraSesion = new JButton("Salir");
 
     /*labels*/
@@ -74,15 +74,18 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
 
         /*Botones*/
         pagPrinc.addActionListener(this);
-        pagPrinc.setBounds(30, 160, 100, 40);
+        pagPrinc.setFont(pagPrinc.getFont().deriveFont(16f));
+        pagPrinc.setBounds(20, 160, 160, 25);
         this.add(pagPrinc);
 
         proyectos.addActionListener(this);
-        proyectos.setBounds(30, 201, 100, 40);
+        proyectos.setFont(proyectos.getFont().deriveFont(16f));
+        proyectos.setBounds(20, 186, 160, 25);
         this.add(proyectos);
 
         colectivos.addActionListener(this);
-        colectivos.setBounds(30, 242, 100, 40);
+        colectivos.setFont(colectivos.getFont().deriveFont(16f));
+        colectivos.setBounds(20, 212, 160, 25);
         this.add(colectivos);
 
         proyectosR.addActionListener(this);
@@ -249,16 +252,6 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
         cierraSesion.setVisible(true);
         this.add(cierraSesion);
 
-        back.setFont(back.getFont().deriveFont(16f));
-        back.setBounds(750, 720, 75, 25);
-        back.setForeground(Color.black);
-        back.setOpaque(false);
-        back.setContentAreaFilled(false);
-        back.setBorder(BorderFactory.createLineBorder(Color.black, 1, true));
-        back.addActionListener(this);
-        back.setVisible(true);
-        this.add(back);
-
         this.setSize(new Dimension(981, 725));
         this.setVisible(true);
 
@@ -294,14 +287,16 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
             gui.irProyectos(this);
         } else if (e.getSource() == votar) {
             if(gui.getController().getRepresentante() == false) {
-                gui.getController().votar(gui.getController().getLoggedUser(), p);
+                gui.getController().votar(p);
+                numVotos.setText(gui.getController().calcularPopularidad(p));
                 votar.setEnabled(false);
                 l8.setVisible(true);
                 if (gui.getController().cumpleNumVotos(p) == true) {
                     gui.getController().pedirFinanciacion(p);
                 }
             } else if(gui.getController().getRepresentante() == true){
-                gui.getController().votarUsuarios(gui.getController().listaUsuariosRepresentados(gui.getController().getLoggedUser()), p);
+                gui.getController().votarUsuarios(p);
+                numVotos.setText(gui.getController().calcularPopularidad(p));
                 votar.setEnabled(false);
                 l8.setVisible(true);
                 if (gui.getController().cumpleNumVotos(p) == true) {
@@ -329,8 +324,15 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
             if(p != null) {
                 titulo.setText(gui.getController().getTitulo(p));
                 desc.setText(gui.getController().getDescProy(p));
-                numVotos.setText(gui.getController().getNumVotos(p));
+                numVotos.setText(gui.getController().calcularPopularidad(p));
                 caducado.setVisible(false);
+                if(gui.getController().haVotado(p) == true) {
+                    votar.setEnabled(false);
+                    l8.setVisible(true);
+                } else {
+                    votar.setEnabled(true);
+                    l8.setVisible(false);
+                }
                 if(p instanceof ProyectoSocial) {
                     ProyectoSocial pSoc = (ProyectoSocial) p;
                     l5.setVisible(true);
@@ -355,13 +357,6 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
                     distrito.setVisible(true);
                     url.setText(gui.getController().getUrl(pInfra));
                     url.setVisible(true);
-                }
-                if(gui.getController().haVotado(gui.getController().getLoggedUser(), p) == true) {
-                    votar.setEnabled(false);
-                    l8.setVisible(true);
-                } else {
-                    votar.setEnabled(true);
-                    l8.setVisible(false);
                 }
                 if(gui.getController().getEstado(p) == Proyecto.Estado.CADUCADO){
                     votar.setEnabled(false);

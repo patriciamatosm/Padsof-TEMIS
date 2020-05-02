@@ -49,7 +49,7 @@ public abstract class Proyecto implements GrantRequest, Serializable {
         this.fechaUltimoVoto = LocalDate.now();
         this.importe = importe;
         this.creador = creador;
-        this.estado = Estado.EN_ESPERA;
+        this.estado = Estado.ACTIVO;
         this.numVotos = 0;
         this.minVotos = 999999;
     }
@@ -161,15 +161,6 @@ public abstract class Proyecto implements GrantRequest, Serializable {
     }
 
     /**
-     * Funcion para llamar al importe de un proyecto
-     * @param importe del proyecto
-     * @return cantidad del importe
-
-    public double getImporte() {
-        return this.importe;
-    }*/
-
-    /**
      * Funcion para pedir el creador de un proyecto
      * @return creador del proyecto
      */
@@ -233,6 +224,7 @@ public abstract class Proyecto implements GrantRequest, Serializable {
      * @return true si se ha sumado el voto al proyecto correctamente, false si ocurre lo contrario.
      */
     public boolean votarUsuarios(List<Usuario> usuarios) {
+
         if(this.estado == Estado.ACTIVO || this.estado == Estado.ESPERA_FINANC) {
             for (Usuario u : usuarios) {
                 if (u.getListaProyecto().contains(this) == false) {
@@ -303,9 +295,6 @@ public abstract class Proyecto implements GrantRequest, Serializable {
      */
     public boolean esperarFinanc() {
     	if(this.estado != Estado.ACTIVO) return false;
-
-System.out.println(numVotos);
-System.out.println(minVotos);
 
     	if(this.getNumVotos() >= this.getMinVotos()) {
     		this.estado = Estado.ESPERA_FINANC;

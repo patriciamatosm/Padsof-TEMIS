@@ -340,18 +340,30 @@ public class Controller {
 
     /**
      * Funcion que devuelve una lista con los proyectos apoyados por el usuario
-     * @param u Usuario
      * @return Lista con los proyectos apoyados
      */
-    public ArrayList<Proyecto> listaProyectosApoyo(Usuario u) {
+    public ArrayList<Proyecto> listaProyectosApoyo() {
         ArrayList<Proyecto> proyectos = new ArrayList<>();
 
         for(Proyecto p : pTemis.getProyectos().values()){
-           if(u.getListaProyecto().contains(p)){
-               proyectos.add(p);
-           }
+            for(Usuario u : pTemis.getUsuarios().values()){
+                if(u.getDni().equals(this.getLoggedUser().getDni())) {
+                    if (u.getListaProyecto().contains(p)) {
+                        proyectos.add(p);
+                    }
+                }
+            }
         }
         return proyectos;
+    }
+
+    /**
+     * Funcion que llama a la funcion de calcular popularidad.
+     * @param p Proyecto
+     * @return String con el numero de votos del proyecto
+     */
+    public String calcularPopularidad(Proyecto p){
+        return p.calcularPopularidad(this.listaUsuarios()).toString();
     }
 
     public ArrayList<Colectivo> listaColectivosPropios() {
@@ -365,7 +377,7 @@ public class Controller {
         return colectivos;
     }
 
-    public ArrayList<Usuario> listaUsuariosRepresentados(Usuario u){
+    public ArrayList<Usuario> listaUsuariosRepresentados(){
         ArrayList<Usuario> usuarios = new ArrayList<>();
 
         for(Colectivo col : listaColectivosPropios()){
@@ -483,32 +495,25 @@ public class Controller {
 
     /**
      * Funcion que llama a la funcion votar
-     * @param u Usuario que vota
      * @param p Proyecto a votar
      */
-    public void votar(Usuario u, Proyecto p) { p.votar(u);}
+    public void votar(Proyecto p) { pTemis.votar(p);}
 
     /**
      * Funcion que llama a la funcion votarUsuarios
-     * @param users Usuarios que votan como colectivo
      * @param p Proyecto a votar
-     * @return true/false dependiendo de si se ha votado con exito o no
      */
-    public boolean votarUsuarios(List<Usuario> users, Proyecto p) {
-        return p.votarUsuarios(users);
+    public void votarUsuarios(Proyecto p) {
+        pTemis.votarUsuarios(this.listaUsuariosRepresentados(), p);
     }
 
     /**
      * Funcion que comprueba si un usuario ha votado ya o no un proyecto
-     * @param u Usuario que vota
      * @param p Proyecto votado
      * @return true si ya ha votado, false si aun no lo ha hecho
      */
-    public boolean haVotado(Usuario u, Proyecto p){
-        if(u.getListaProyecto().contains(p)){
-            return true;
-        }
-        return false;
+    public boolean haVotado(Proyecto p){
+        return pTemis.haVotado(p);
     }
 
     /**
