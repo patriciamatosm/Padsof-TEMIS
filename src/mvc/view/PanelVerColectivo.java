@@ -23,7 +23,9 @@ public class PanelVerColectivo extends JPanel implements ActionListener {
     private JLabel rep = new JLabel("No name");
 
     private JLabel l5 = new JLabel("Descripcion: ");
-    private JLabel desc = new JLabel("No descripcion");
+    private JTextArea desc = new JTextArea("No desc", 40, 50);
+    private JScrollPane scrollDesc = new JScrollPane(desc,
+            JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
     private JButton back = new JButton("Volver");
     private JButton cierraSesion = new JButton("Salir");
@@ -87,11 +89,17 @@ public class PanelVerColectivo extends JPanel implements ActionListener {
         this.add(l5);
 
         desc.setFont(desc.getFont().deriveFont(13f));
-        desc.setBounds(200, 350, 10, 400);
-        desc.setBackground(Color.white);
+        desc.setBackground(new Color(124, 150, 197));
+        desc.setEditable(false);
         desc.setForeground(Color.black);
-        desc.setSize(desc.getPreferredSize());
-        this.add(desc);
+        desc.setLineWrap(true);
+        desc.setWrapStyleWord(true);
+
+        scrollDesc.setViewportView(desc);
+        scrollDesc.setBackground(new Color(124, 150, 197));
+        scrollDesc.setBounds(200, 350, 500, 100);
+        scrollDesc.setVisible(true);
+        this.add(scrollDesc, BorderLayout.EAST);
 
         cierraSesion.setFont(cierraSesion.getFont().deriveFont(16f));
         cierraSesion.setBounds(830, 130, 75, 25);

@@ -27,7 +27,7 @@ public abstract class Proyecto implements GrantRequest, Serializable {
     private String descripcion;
     private LocalDate fechaUltimoVoto;
     private LocalDate fechaCreacion;
-    private Integer numVotos = 0;
+    private Integer numVotos;
     private Integer minVotos;
     private double importe;
     private Actor creador;
@@ -45,11 +45,13 @@ public abstract class Proyecto implements GrantRequest, Serializable {
     public Proyecto(String titulo, String descripcion, double importe, Actor creador) {
         this.titulo = titulo;
         this.descripcion = descripcion;
-        this.fechaCreacion = LocalDate.now().minusDays(45);
+        this.fechaCreacion = LocalDate.now();
+        this.fechaUltimoVoto = LocalDate.now().minusDays(40);
         this.importe = importe;
         this.creador = creador;
         this.estado = Estado.ACTIVO;
         this.numVotos = 0;
+        this.minVotos = 999999;
     }
     /**
      * Enumeracion que indica el estado del proyecto
@@ -249,15 +251,17 @@ public abstract class Proyecto implements GrantRequest, Serializable {
      */
     public void caducado() {
     	
-    	LocalDate fechaUltimo = this.getFechaUltimoVoto();
-		
+    	LocalDate fechaUltimo = getFechaUltimoVoto();
+
     	LocalDate fechaActual = LocalDate.now();
 
     	LocalDate dias = (fechaActual.minusDays(30));
 
-    	if(dias.isEqual(fechaUltimo) || dias.isAfter(fechaUltimo)) {
-    		this.estado = Estado.CADUCADO;
-    	}
+    	if(dias != null) {
+            if (dias.isEqual(fechaUltimo) || dias.isAfter(fechaUltimo)) {
+                this.estado = Estado.CADUCADO;
+            }
+        }
     }
     
     /**
@@ -299,7 +303,10 @@ public abstract class Proyecto implements GrantRequest, Serializable {
      */
     public boolean esperarFinanc() {
     	if(this.estado != Estado.ACTIVO) return false;
-    	
+
+System.out.println(numVotos);
+System.out.println(minVotos);
+
     	if(this.getNumVotos() >= this.getMinVotos()) {
     		this.estado = Estado.ESPERA_FINANC;
     		return true;

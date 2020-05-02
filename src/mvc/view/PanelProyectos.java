@@ -21,12 +21,11 @@ public class PanelProyectos extends JPanel implements ActionListener {
     private int posicion = 0;
 
     /*Fields*/
-    private JButton pagPrinc = new JButton("Página principal");
+    private JButton pagPrinc = new JButton("Página Principal");
     private JButton proyectos = new JButton("Proyectos");
     private JButton colectivos = new JButton("Colectivos");
     private JButton proyectosApoyo = new JButton("Proyectos que apoyas");
     private JButton proponerProyecto = new JButton("Proponer nuevo proyecto");
-    private JButton back = new JButton("Volver");
     private JButton cierraSesion = new JButton("Salir");
 
     /* Botones lista proyectos */
@@ -68,15 +67,18 @@ public class PanelProyectos extends JPanel implements ActionListener {
 
         /*Botones*/
         pagPrinc.addActionListener(this);
-        pagPrinc.setBounds(30, 160, 100, 40);
+        pagPrinc.setFont(pagPrinc.getFont().deriveFont(16f));
+        pagPrinc.setBounds(20, 160, 160, 25);
         this.add(pagPrinc);
 
         proyectos.addActionListener(this);
-        proyectos.setBounds(30, 201, 100, 40);
+        proyectos.setFont(proyectos.getFont().deriveFont(16f));
+        proyectos.setBounds(20, 186, 160, 25);
         this.add(proyectos);
 
         colectivos.addActionListener(this);
-        colectivos.setBounds(30, 242, 100, 40);
+        colectivos.setFont(colectivos.getFont().deriveFont(16f));
+        colectivos.setBounds(20, 212, 160, 25);
         this.add(colectivos);
 
         proyectosApoyo.addActionListener(this);
@@ -112,17 +114,6 @@ public class PanelProyectos extends JPanel implements ActionListener {
 
         this.add(l2);
         this.add(l3);
-
-
-        back.setFont(back.getFont().deriveFont(16f));
-        back.setBounds(750, 720, 75, 25);
-        back.setForeground(Color.black);
-        back.setOpaque(false);
-        back.setContentAreaFilled(false);
-        back.setBorder(BorderFactory.createLineBorder(Color.black, 1, true));
-        back.addActionListener(this);
-        back.setVisible(true);
-        this.add(back);
 
         cierraSesion.setFont(cierraSesion.getFont().deriveFont(16f));
         cierraSesion.setBounds(830, 130, 75, 25);

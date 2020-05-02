@@ -14,8 +14,8 @@ import java.io.IOException;
 
 /**************************************************
  * VOTAR COLECTIVOS (ACTUAR COMO REPRESENTANTE)   *
- * PROYECTO CADUCADO, DISTRITO SELECCION MULTIPLE *
- * ASPECTO COLECTIVOS          <-------           *
+ * DISTRITO SELECCION MULTIPLE                    *
+ * JPanelOption VOTOS          <-------           *
  * SCROLLBAR TAMAÑO TEXTAREA                      *
  * NOTIFICACIONES              <-------           *
  **************************************************/
@@ -336,6 +336,7 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
                     l5.setVisible(true);
                     l6.setVisible(false);
                     l7.setVisible(false);
+                    l8.setVisible(false);
                     url.setVisible(false);
                     distrito.setVisible(false);
                     grupo.setText(gui.getController().getGrupo(pSoc));
@@ -347,6 +348,7 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
                     l5.setVisible(false);
                     l6.setVisible(true);
                     l7.setVisible(true);
+                    l8.setVisible(false);
                     grupo.setVisible(false);
                     nacional.setVisible(false);
                     distrito.setText(gui.getController().getDistrito(pInfra));

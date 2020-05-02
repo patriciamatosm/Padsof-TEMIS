@@ -14,7 +14,9 @@ public class PanelCrearColectivo extends JPanel implements ActionListener {
     private MiGUI gui;
 
     private JTextField nombre = new JTextField(20);
-    private JTextField descripcion = new JTextField(500);
+    private JTextArea descripcion = new JTextArea(40, 50);
+    private JScrollPane scrollDesc = new JScrollPane(descripcion,
+            JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
     private JLabel l1 = new JLabel("Crear colectivo" );
     private JLabel l2 = new JLabel("Perfil de ");
@@ -96,8 +98,12 @@ public class PanelCrearColectivo extends JPanel implements ActionListener {
         l5.setSize(l5.getPreferredSize());
         this.add(l5);
 
-        descripcion.setBounds(400, 300, 400, 100);
-        this.add(descripcion);
+        descripcion.setLineWrap(true);
+        descripcion.setWrapStyleWord(true);
+
+        scrollDesc.setViewportView(descripcion);
+        scrollDesc.setBounds(400, 300, 400, 100);
+        this.add(scrollDesc, BorderLayout.EAST);
 
         crear.addActionListener(this);
         crear.setBounds(400, 550, 100, 40);
@@ -133,10 +139,18 @@ public class PanelCrearColectivo extends JPanel implements ActionListener {
         }
 
         if(e.getSource() == crear) {
-            if(gui.getController().getRepresentante()) {
+            if(nombre.getText().length() > 20){
+                JOptionPane.showMessageDialog(this,"Error, el titulo no puede" +
+                                "tener mas de 50 caracteres.","Error al crear",
+                        JOptionPane.PLAIN_MESSAGE);
+            } else if(descripcion.getText().length() > 500){
+                JOptionPane.showMessageDialog(this,"Error, la descripcion no puede" +
+                                "tener mas de 500 caracteres.","Error al crear",
+                        JOptionPane.PLAIN_MESSAGE);
+            }
+            else if(gui.getController().getRepresentante()) {
                 try {
                     gui.getController().crearColectivo(descripcion.getText(), nombre.getText());
-
                     JOptionPane.showMessageDialog(this, nombre.getText() +" creado correctamente\n"
                             ,"Exito creando el colectivo"
                             , JOptionPane.PLAIN_MESSAGE);

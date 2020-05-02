@@ -131,6 +131,7 @@ public class Temis {
      * @throws IOException en caso de que ocurra algun error
      */
     public void escribirFichero() throws IOException {
+        this.caducarProyectos(pTemis.proyectos.values());
         FileOutputStream fos = new FileOutputStream("Temis.txt");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
 
