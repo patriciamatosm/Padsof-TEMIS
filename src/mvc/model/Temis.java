@@ -155,6 +155,10 @@ public class Temis {
 
         oos.writeObject(this.proyectos);
 
+        // Escribe notificaciones
+
+        oos.writeObject(this.notificaciones);
+
 
         oos.close();
     }
@@ -173,6 +177,7 @@ public class Temis {
         Map<String, Usuario> usuarioMap;
         Map<String, Colectivo> colectivoMap;
         Map<String, Proyecto> proyectoMap;
+        Map<String, Notificacion> notificacionMap;
 
         /* Leer componentes */
         try {
@@ -193,6 +198,12 @@ public class Temis {
             objLeido = ois.readObject();
             proyectoMap = (Map<String, Proyecto>) objLeido;
             pTemis.proyectos = proyectoMap;
+
+            // Leer notificaciones
+
+            objLeido = ois.readObject();
+            notificacionMap = (Map<String, Notificacion>) objLeido;
+            pTemis.notificaciones = notificacionMap;
 
 
         } catch (ClassNotFoundException e) {
@@ -309,6 +320,15 @@ public class Temis {
     }
 
     /**
+     * Funcion que permite añadir una notificacion a la aplicacion
+     * @param n Notificacion a añadir
+     */
+    public void anadirNotificacion(Notificacion n) {
+        this.notificaciones.put(n.getEmisor().getProjectTitle(), n);
+        System.out.println(this.notificaciones);
+    }
+
+    /**
      * Funcion que llama a la funcion votar
      * @param p Proyecto a votar
      */
@@ -369,7 +389,20 @@ public class Temis {
         for(Proyecto p : proyectos){
             if(p.getEstado() == Proyecto.Estado.ACTIVO) {
                 if (p.getEstado() != Proyecto.Estado.CADUCADO) {
-                    p.caducado();
+                    if(p.caducado() == true){
+                        for(Colectivo c : this.getColectivos().values()) {
+                            for (Usuario u : this.getUsuarios().values()) {
+                                if(c.getRepresentante().equals(u)) {
+                                    if (u.getListaProyecto().contains(p)) {
+                                        Notificacion n = new Notificacion(p, c, "¡El proyecto "+
+                                                p.getProjectTitle()+" ha caducado!");
+                                        this.anadirNotificacion(n);
+                                        c.addNotificacion(n);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

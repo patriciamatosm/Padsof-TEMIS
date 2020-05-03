@@ -119,9 +119,9 @@ public class PanelPrincipal extends JPanel implements ActionListener {
         this.add(l3);
 
         l4.setFont(l4.getFont().deriveFont(30f));
-        l4.setBounds(110, 110, 100, 25);
+        l4.setBounds(350, 145, 300, 40);
         l4.setForeground(Color.black);
-        l4.setSize(l3.getPreferredSize());
+        l4.setSize(l4.getPreferredSize());
         l4.setVisible(false);
         this.add(l4);
 
@@ -338,6 +338,19 @@ public class PanelPrincipal extends JPanel implements ActionListener {
             l3.setVisible(true);
             this.add(l3);
 
+            this.posicion = 1;
+            this.actuales.clear();
+
+            this.todos = gui.getController().listaNotificacionesSubs();
+
+            if (this.todos.size() > 2) {
+                for (int i = 0; i < 3; i++) {
+                    this.actuales.add(this.todos.get(i));
+                }
+            } else {
+                this.actuales.addAll(this.todos);
+            }
+            this.mostrarNotificaciones();
 
             if(!gui.getController().esRepresentante(gui.getController().getLoggedUser())){
                 l1.setVisible(false);

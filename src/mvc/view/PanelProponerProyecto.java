@@ -16,12 +16,6 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
 
     private MiGUI gui;
 
-    /*Array de distritos*/
-    /*private String[] array2 = {"Arganzuela","Barajas","Carabanchel","Centro","Chamartin","Chamberi",
-            "Ciudad Lineal","Fuencarral-El Pardo","Hortaleza","Latina","Moncloa-Aravaca","Moratalaz",
-            "Puente de Vallecas","Retiro","Salamanca","San Blas-Canillejas","Tetuan","Usera",
-            "Vicalvaro","Villa de Vallecas","Villaverde"};*/
-
     private List<String> d;
 
     /*Fields*/
@@ -296,7 +290,7 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
             nacional.setVisible(false);
             grupos.setVisible(false);
         } else if(e.getSource() == proponer){
-            if(titulo.getText().length() > 50){
+            if(titulo.getText().length() > 20){
                 JOptionPane.showMessageDialog(this,"Error, el titulo no puede" +
                                 "tener mas de 50 caracteres.","Error al crear",
                         JOptionPane.PLAIN_MESSAGE);

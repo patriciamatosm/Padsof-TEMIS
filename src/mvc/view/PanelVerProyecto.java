@@ -1,10 +1,7 @@
 package mvc.view;
 
 import es.uam.eps.sadp.grants.GrantRequest;
-import mvc.model.Proyecto;
-import mvc.model.ProyectoInfraestructura;
-import mvc.model.ProyectoSocial;
-import mvc.model.Temis;
+import mvc.model.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,12 +10,9 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 /**************************************************
- * DISTRITO SELECCION MULTIPLE                    *
  * SCROLLBAR TAMAÑO TEXTAREA                      *
  * NOTIFICACIONES              <-------           *
  * COMPROBAR USUARIO LOGUEADO  <-------           *
- * CREAR SUBCOLECTIVOS                            *
- * COMENTARIOS FUNCIONES                          *
  **************************************************/
 
 public class PanelVerProyecto extends JPanel implements ActionListener {
@@ -296,6 +290,16 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
                     l8.setVisible(true);
                     if (gui.getController().cumpleNumVotos(p) == true) {
                         gui.getController().pedirFinanciacion(p);
+System.out.println(p.getEstado().toString());
+                        for(Colectivo c : gui.getController().listaColectivos()){
+                            if(c.getRepresentante().equals(gui.getController().getLoggedUser())){
+                                if(gui.getController().getLoggedUser().getListaProyecto().contains(p)){
+                                    c.addNotificacion(gui.getController().nuevaNotificacion(p, c, "El proyecto "+
+                                            p.getProjectTitle()+" ha conseguido votos suficientes" +
+                                            "para pedir financiacion."));
+                                }
+                            }
+                        }
                     }
                 }
             } else if(gui.getController().getRepresentante()){
@@ -307,6 +311,16 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
                     l8.setVisible(true);
                     if (gui.getController().cumpleNumVotos(p) == true) {
                         gui.getController().pedirFinanciacion(p);
+System.out.println(p.getEstado().toString());
+                        for(Colectivo c : gui.getController().listaColectivos()){
+                            if(c.getRepresentante().equals(gui.getController().getLoggedUser())){
+                                if(gui.getController().getLoggedUser().getListaProyecto().contains(p)){
+                                    gui.getController().nuevaNotificacion(p, c, "El proyecto "+
+                                            p.getProjectTitle()+" ha conseguido votos suficientes" +
+                                            "para pedir financiacion.");
+                                }
+                            }
+                        }
                     }
                 }
             }
