@@ -343,7 +343,7 @@ System.out.println(p.getEstado().toString());
             this.add(l3);
 
             if(p != null) {
-                titulo.setText(gui.getController().getTitulo(p));
+                titulo.setText("Creador: "+gui.getController().getNombreCreador(p));
                 desc.setText(gui.getController().getDescProy(p));
                 numVotos.setText(gui.getController().calcularPopularidad(p));
                 caducado.setVisible(false);
