@@ -544,4 +544,10 @@ public class Controller {
     public void setMinVotos(Proyecto p, int min){
         p.setMinVotos(min);
     }
+
+    /**
+     * Funcion que devuelve los distritos
+     * @return distritos
+     */
+    public List<String> getDistritos(){return Temis.getInstance().getDistritos();}
 }

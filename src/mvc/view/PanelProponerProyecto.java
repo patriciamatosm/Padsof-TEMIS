@@ -6,9 +6,11 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.time.Month;
 
 public class PanelProponerProyecto extends JPanel implements ActionListener {
 
@@ -19,6 +21,8 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
             "Ciudad Lineal","Fuencarral-El Pardo","Hortaleza","Latina","Moncloa-Aravaca","Moratalaz",
             "Puente de Vallecas","Retiro","Salamanca","San Blas-Canillejas","Tetuan","Usera",
             "Vicalvaro","Villa de Vallecas","Villaverde"};
+
+    private List<String> d;
 
     /*Fields*/
     private JButton pagPrinc = new JButton("Página principal");
@@ -37,6 +41,7 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
     private JTextField grupos = new JTextField(200);
     private JFormattedTextField importe = new JFormattedTextField(new Integer(0));
     private JCheckBox nacional = new JCheckBox("Nacional");
+    private JComboBox<String> distritos = new JComboBox<>();
     private JList distrito = new JList(array2);
     private JScrollPane scroll = new JScrollPane(distrito);
     private JTextField url = new JTextField(100);
@@ -70,6 +75,8 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
         icon1.setIcon(iconScaled);
         icon1.setBounds(820, 10, 100, 100);
         this.add(icon1);
+
+
 
         /*Botones*/
         pagPrinc.addActionListener(this);
@@ -113,19 +120,22 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
         importe.setVisible(false);
         this.add(importe);
 
-        distrito.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        distritos.setBounds(680, 550, 50, 30);
+        distritos.setVisible(true);
+        this.add(distritos);
+        /*distrito.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         distrito.addListSelectionListener(new ListSelectionListener () {
             public void valueChanged(ListSelectionEvent arg0) {
                 if (arg0.getValueIsAdjusting() == false) {
                     JList distrito = (JList) arg0.getSource();
                 }
             }
-        });
+        });*/
 
-        scroll.setViewportView(distrito);
+        /*scroll.setViewportView(distrito);
         scroll.setBounds(350, 420, 150, 30);
         scroll.setVisible(false);
-        this.add(scroll, BorderLayout.EAST);
+        this.add(scroll, BorderLayout.EAST);*/
 
         url.setBounds(640, 465, 170, 30);
         url.setVisible(false);
@@ -363,6 +373,13 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
             descripcion.setText("");
             grupos.setText("");
             nacional.setSelected(false);
+
+            d = gui.getController().getDistritos();
+            for(String s : d){
+                distritos.addItem(s);
+                System.out.println(s);
+            }
+
         }
     }
 
