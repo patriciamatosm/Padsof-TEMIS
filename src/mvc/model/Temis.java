@@ -327,6 +327,7 @@ public class Temis {
                 for(Usuario u : this.usuarios.values()){
                     if(u.getNombre().equals(this.getUsuarioConectado().getNombre())) {
                         proyecto.votarUsuarios(users);
+                        this.votar(p);
                     }
                 }
             }

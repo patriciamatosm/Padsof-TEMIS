@@ -149,6 +149,7 @@ public class PanelPrincipal extends JPanel implements ActionListener {
             usuario.setVisible(false);
             representante.setVisible(false);
             representanteFlag = false;
+            gui.getController().setRepresentante(false);
         } else if(e.getSource() == representante){
             l1.setVisible(false);
             colectivos.setVisible(true);
@@ -156,6 +157,7 @@ public class PanelPrincipal extends JPanel implements ActionListener {
             usuario.setVisible(false);
             representante.setVisible(false);
             representanteFlag = true;
+            gui.getController().setRepresentante(true);
         } else if(e.getSource() == proyectos){
             if(representanteFlag){
                 //mostrar proyectos apoyados por los colectivos creados

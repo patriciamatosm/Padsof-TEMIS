@@ -13,12 +13,10 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 /**************************************************
- * VOTAR COLECTIVOS            <-------           *
  * DISTRITO SELECCION MULTIPLE                    *
- * JPanelOption VOTOS          <-------           *
  * SCROLLBAR TAMAÑO TEXTAREA                      *
  * NOTIFICACIONES              <-------           *
- * COMPROBAR USUARIO LOGUEADO                     *
+ * COMPROBAR USUARIO LOGUEADO  <-------           *
  **************************************************/
 
 public class PanelVerProyecto extends JPanel implements ActionListener {
@@ -94,6 +92,7 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
 
         votar.addActionListener(this);
         votar.setBounds(400, 500, 90, 40);
+        votar.setEnabled(false);
         this.add(votar);
 
         caducado.setFont(l2.getFont().deriveFont(18f));
@@ -286,21 +285,27 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
         } else if (e.getSource() == proyectosR) {
             gui.irProyectos(this);
         } else if (e.getSource() == votar) {
-            if(gui.getController().getRepresentante() == false) {
-                gui.getController().votar(p);
-                numVotos.setText(gui.getController().calcularPopularidad(p));
-                votar.setEnabled(false);
-                l8.setVisible(true);
-                if (gui.getController().cumpleNumVotos(p) == true) {
-                    gui.getController().pedirFinanciacion(p);
+            if(!gui.getController().getRepresentante()) {
+                if(JOptionPane.showConfirmDialog(null, "No podrás retirar tu voto",
+                        "Estás seguro?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    gui.getController().votar(p);
+                    numVotos.setText(gui.getController().calcularPopularidad(p));
+                    votar.setEnabled(false);
+                    l8.setVisible(true);
+                    if (gui.getController().cumpleNumVotos(p) == true) {
+                        gui.getController().pedirFinanciacion(p);
+                    }
                 }
-            } else if(gui.getController().getRepresentante() == true){
-                gui.getController().votarUsuarios(p);
-                numVotos.setText(gui.getController().calcularPopularidad(p));
-                votar.setEnabled(false);
-                l8.setVisible(true);
-                if (gui.getController().cumpleNumVotos(p) == true) {
-                    gui.getController().pedirFinanciacion(p);
+            } else if(gui.getController().getRepresentante()){
+                if(JOptionPane.showConfirmDialog(null, "No podrás retirar tu voto",
+                        "Estás seguro?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    gui.getController().votarUsuarios(p);
+                    numVotos.setText(gui.getController().calcularPopularidad(p));
+                    votar.setEnabled(false);
+                    l8.setVisible(true);
+                    if (gui.getController().cumpleNumVotos(p) == true) {
+                        gui.getController().pedirFinanciacion(p);
+                    }
                 }
             }
         } else if (e.getSource() == cierraSesion) {
@@ -326,10 +331,11 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
                 desc.setText(gui.getController().getDescProy(p));
                 numVotos.setText(gui.getController().calcularPopularidad(p));
                 caducado.setVisible(false);
+                votar.setEnabled(false);
                 if(gui.getController().haVotado(p) == true) {
                     votar.setEnabled(false);
                     l8.setVisible(true);
-                } else {
+                } else if(gui.getController().haVotado(p) == false){
                     votar.setEnabled(true);
                     l8.setVisible(false);
                 }

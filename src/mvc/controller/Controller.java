@@ -448,7 +448,17 @@ public class Controller {
         return null;
     }
 
+    /**
+     * Funcion que llama a la funcion que devuelve la flag de representante
+     * @return true o false
+     */
     public boolean getRepresentante() { return pTemis.isRepresentanteLegal(); }
+
+    /**
+     * Funcion que llama a la funcion que establece la flag de representante
+     * @param bool true o false
+     */
+    public void setRepresentante(boolean bool){ pTemis.setRepresentanteLegal(bool);}
 
     /**
      * Funcion que llama a la funcion que devuelve la descripcion de un proyecto
