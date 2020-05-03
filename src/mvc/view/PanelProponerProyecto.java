@@ -17,10 +17,10 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
     private MiGUI gui;
 
     /*Array de distritos*/
-    private String[] array2 = {"Arganzuela","Barajas","Carabanchel","Centro","Chamartin","Chamberi",
+    /*private String[] array2 = {"Arganzuela","Barajas","Carabanchel","Centro","Chamartin","Chamberi",
             "Ciudad Lineal","Fuencarral-El Pardo","Hortaleza","Latina","Moncloa-Aravaca","Moratalaz",
             "Puente de Vallecas","Retiro","Salamanca","San Blas-Canillejas","Tetuan","Usera",
-            "Vicalvaro","Villa de Vallecas","Villaverde"};
+            "Vicalvaro","Villa de Vallecas","Villaverde"};*/
 
     private List<String> d;
 
@@ -42,8 +42,6 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
     private JFormattedTextField importe = new JFormattedTextField(new Integer(0));
     private JCheckBox nacional = new JCheckBox("Nacional");
     private JComboBox<String> distritos = new JComboBox<>();
-    private JList distrito = new JList(array2);
-    private JScrollPane scroll = new JScrollPane(distrito);
     private JTextField url = new JTextField(100);
 
     /*labels*/
@@ -77,18 +75,20 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
         this.add(icon1);
 
 
-
         /*Botones*/
         pagPrinc.addActionListener(this);
-        pagPrinc.setBounds(30, 160, 100, 40);
+        pagPrinc.setFont(pagPrinc.getFont().deriveFont(16f));
+        pagPrinc.setBounds(20, 160, 160, 25);
         this.add(pagPrinc);
 
         proyectos.addActionListener(this);
-        proyectos.setBounds(30, 201, 100, 40);
+        proyectos.setFont(proyectos.getFont().deriveFont(16f));
+        proyectos.setBounds(20, 186, 160, 25);
         this.add(proyectos);
 
         colectivos.addActionListener(this);
-        colectivos.setBounds(30, 242, 100, 40);
+        colectivos.setFont(colectivos.getFont().deriveFont(16f));
+        colectivos.setBounds(20, 212, 160, 25);
         this.add(colectivos);
 
         proyectosR.addActionListener(this);
@@ -120,22 +120,9 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
         importe.setVisible(false);
         this.add(importe);
 
-        distritos.setBounds(680, 550, 50, 30);
-        distritos.setVisible(true);
+        distritos.setBounds(350, 420, 150, 30);
+        distritos.setVisible(false);
         this.add(distritos);
-        /*distrito.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        distrito.addListSelectionListener(new ListSelectionListener () {
-            public void valueChanged(ListSelectionEvent arg0) {
-                if (arg0.getValueIsAdjusting() == false) {
-                    JList distrito = (JList) arg0.getSource();
-                }
-            }
-        });*/
-
-        /*scroll.setViewportView(distrito);
-        scroll.setBounds(350, 420, 150, 30);
-        scroll.setVisible(false);
-        this.add(scroll, BorderLayout.EAST);*/
 
         url.setBounds(640, 465, 170, 30);
         url.setVisible(false);
@@ -291,7 +278,7 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
             grupos.setVisible(true);
             l9.setVisible(false);
             l10.setVisible(false);
-            scroll.setVisible(false);
+            distritos.setVisible(false);
             url.setVisible(false);
         } else if(e.getSource() == infra){
             l5.setVisible(true);
@@ -302,7 +289,7 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
             scrollDesc.setVisible(true);
             l9.setVisible(true);
             l10.setVisible(true);
-            scroll.setVisible(true);
+            distritos.setVisible(true);
             url.setVisible(true);
             l7.setVisible(false);
             l8.setVisible(false);
@@ -338,7 +325,7 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
                 try {
                     gui.getController().nuevoProyectoInfra(titulo.getText(),
                             descripcion.getText(), (Integer) importe.getValue(), gui.getController().getLoggedUser(),
-                            (String)distrito.getSelectedValue(), url.getText(), descripcion.getText());
+                            (String)distritos.getSelectedItem(), url.getText(), descripcion.getText());
                     JOptionPane.showMessageDialog(this, "Muchas gracias por su interés en hacer de\n" +
                             "esta una comunidad mejor para todos. Su\n" +
                             "propuesta será remitida al administrador,\n" +

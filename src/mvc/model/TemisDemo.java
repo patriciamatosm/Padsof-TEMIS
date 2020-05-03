@@ -80,31 +80,7 @@ public class TemisDemo {
         System.out.println("Numero de votantes de Proyecto1: " + pTemis.getProyectos().get("Proyecto1").getNumVotos());
 
         pTemis.cierraSesion();
-
-        /*************************************************/
-
-        /*if (!pTemis.registrarse("00000007D", "Silsil", "12345")){
-            System.out.println("Error: No se ha podido registrar el usuario");
-            return;
-        }
-        pTemis.getUsuarios().get("00000007D").aceptarRegistro();
-        if (!pTemis.iniciaSesion("00000007D","12345")){
-            System.out.println("Error: No se ha podido loggear el usuario con dni");
-            return;
-        }
-
-        System.out.println("Apoyando proyecto como " + pTemis.getUsuarioConectado().getNombre() + "...");
-
-        if(!pTemis.getProyectos().get("Proyecto1").votar(pTemis.getUsuarioConectado())){
-            System.out.println("Error: No se ha podido votar");
-            return;
-        }
-
-        System.out.println("Numero de votantes de Proyecto1: " + pTemis.getProyectos().get("Proyecto1").getNumVotos());
-
-        pTemis.cierraSesion();*/
-
-        /**********************************************/
+        
 
         if (!pTemis.iniciaSesion("Jane","12345")){
             System.out.println("Error: No se ha podido loggear el usuario con nombre");

@@ -546,6 +546,31 @@ public class Controller {
     }
 
     /**
+     * Funcion que devuelve el emisor (titulo) de una Notificacion
+     * @param n Notificacion
+     * @return Emisor de la notificacion
+     */
+    public String getEmisor(Notificacion n){
+        return n.getEmisor().getProjectTitle();
+    }
+
+    /**
+     * Funcion que devuelve el emisor (nombre) de una Notificacion
+     * @param n Notificacion
+     * @return Receptor de la notificacion
+     */
+    public String getReceptor(Notificacion n){
+        return n.getReceptor().getNombre();
+    }
+
+    /**
+     * Funcion que devuelve el mensaje de una notificacion
+     * @param n Notificacion
+     * @return Mensaje de la notificacion
+     */
+    public String getMensaje(Notificacion n){ return n.getMensaje();}
+
+    /**
      * Funcion que devuelve los distritos
      * @return distritos
      */

@@ -24,6 +24,7 @@ public class Temis {
     private Map<String, Usuario> usuarios = new HashMap<>();
     private Map<String, Colectivo> colectivos = new HashMap<>();
     private Map<String, Proyecto> proyectos = new HashMap<>();
+    private Map<String, Notificacion> notificaciones = new HashMap<>();
     List<Proyecto> solicitudes = new ArrayList<>();
     private List<String> distritos = new ArrayList<>();
 
@@ -109,6 +110,12 @@ public class Temis {
     public Map<String, Proyecto> getProyectos() {
         return proyectos;
     }
+
+    /**
+     * Funcion que devuelve las notificaciones de la aplicacion
+     * @return mapa con las notificaciones de la aplicacion
+     */
+    public Map<String, Notificacion> getNotificaciones() { return notificaciones; }
 
     /**
      * Funcion que devuelve el flag de representante

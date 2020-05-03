@@ -25,7 +25,9 @@ public class PanelCrearColectivo extends JPanel implements ActionListener {
     private JLabel l4 = new JLabel("Nombre del colectivo:");
     private JLabel l5 = new JLabel("Descripción del colectivo:");
 
-    private JButton back = new JButton("Volver");
+    private JButton back = new JButton("Página Principal");
+    private JButton proyectos = new JButton("Proyectos");
+    private JButton colectivos = new JButton("Colectivos");
     private JButton cierraSesion = new JButton("Salir");
     private JButton crear = new JButton("Crear colectivo");
 
@@ -70,6 +72,16 @@ public class PanelCrearColectivo extends JPanel implements ActionListener {
         back.setBounds(20, 160, 160, 25);
         back.addActionListener(this);
         this.add(back);
+
+        proyectos.addActionListener(this);
+        proyectos.setFont(proyectos.getFont().deriveFont(16f));
+        proyectos.setBounds(20, 186, 160, 25);
+        this.add(proyectos);
+
+        colectivos.addActionListener(this);
+        colectivos.setFont(colectivos.getFont().deriveFont(16f));
+        colectivos.setBounds(20, 212, 160, 25);
+        this.add(colectivos);
 
         cierraSesion.setFont(cierraSesion.getFont().deriveFont(16f));
         cierraSesion.setBounds(830, 130, 75, 25);
@@ -137,7 +149,12 @@ public class PanelCrearColectivo extends JPanel implements ActionListener {
         else if(e.getSource() == back) {
             gui.irPaginaPrincipal(this);
         }
-
+        else if (e.getSource() == colectivos) {
+            gui.irColectivos(this);
+        }
+        else if (e.getSource() == proyectos) {
+            gui.irProyectos(this);
+        }
         if(e.getSource() == crear) {
             if(gui.getController().getRepresentante()) {
                 try {

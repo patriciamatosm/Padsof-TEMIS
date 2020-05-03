@@ -17,6 +17,8 @@ import java.io.IOException;
  * SCROLLBAR TAMAÑO TEXTAREA                      *
  * NOTIFICACIONES              <-------           *
  * COMPROBAR USUARIO LOGUEADO  <-------           *
+ * CREAR SUBCOLECTIVOS                            *
+ * COMENTARIOS FUNCIONES                          *
  **************************************************/
 
 public class PanelVerProyecto extends JPanel implements ActionListener {
