@@ -371,18 +371,23 @@ public class Controller {
      * Funcion que devuelve lista con las notificaciones propias
      * @return lista de notificaciones propias
      */
-    public ArrayList<Notificacion> listaNotificacionesSubs(){
+    public ArrayList<Notificacion> listaNotificacionesSubs(Usuario u){
         ArrayList<Notificacion> notificaciones = new ArrayList<>();
 
         for(Notificacion n : this.listaNotificaciones()){
             for(Colectivo c: pTemis.getColectivos().values()){
-                if(c.getNotificacionesRecibidas().contains(n)){
+                if(u.getSuscritoNoticias().contains(c)){
                     notificaciones.add(n);
                 }
             }
         }
         return notificaciones;
     }
+
+    /**
+     * Funcion que llama a subscribirseNoticias
+     */
+    public void subscribirseNoticias(Colectivo c){ pTemis.subscribirseNoticias(c); }
 
     /**
      * Funcion que devuelve una lista con los proyectos apoyados por el usuario

@@ -454,4 +454,16 @@ public class Temis {
             }
         }
     }
+
+    /**
+     * Funcion que llama a subscribirseNoticias
+     * @param c Colectivo a cuyas noticias se subscribe el usuario
+     */
+    public void subscribirseNoticias(Colectivo c){
+        for(Usuario u : this.getUsuarios().values()){
+            if(u.getDni().equals(this.getUsuarioConectado().getDni())){
+                c.subscribirseNoticias(u);
+            }
+        }
+    }
 }

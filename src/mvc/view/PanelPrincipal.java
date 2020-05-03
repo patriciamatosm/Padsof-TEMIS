@@ -341,7 +341,7 @@ public class PanelPrincipal extends JPanel implements ActionListener {
             this.posicion = 1;
             this.actuales.clear();
 
-            this.todos = gui.getController().listaNotificacionesSubs();
+            this.todos = gui.getController().listaNotificacionesSubs(gui.getController().getLoggedUser());
 
             if (this.todos.size() > 2) {
                 for (int i = 0; i < 3; i++) {
