@@ -1,5 +1,6 @@
 package mvc.view;
 
+import mvc.model.Colectivo;
 import mvc.model.Temis;
 
 import javax.swing.*;
@@ -156,7 +157,7 @@ public class PanelCrearColectivo extends JPanel implements ActionListener {
             gui.irProyectos(this);
         }
         if(e.getSource() == crear) {
-            if(gui.getController().getRepresentante()) {
+           /* if(gui.getController().getRepresentante()) {*/
                 try {
                     gui.getController().crearColectivo(descripcion.getText(), nombre.getText());
                     JOptionPane.showMessageDialog(this, nombre.getText() +" creado correctamente\n"
@@ -170,7 +171,7 @@ public class PanelCrearColectivo extends JPanel implements ActionListener {
                             JOptionPane.PLAIN_MESSAGE);
                     gui.crearColectivos(this);
                 }
-            }
+            /*}
             else {
                 try {
                     gui.getController().crearColectivo(descripcion.getText(), nombre.getText());
@@ -186,7 +187,7 @@ public class PanelCrearColectivo extends JPanel implements ActionListener {
                             JOptionPane.PLAIN_MESSAGE);
                     gui.crearColectivos(this);
                 }
-            }
+            }*/
             try {
                 pTemis.escribirFichero();
             } catch (IOException ex) {

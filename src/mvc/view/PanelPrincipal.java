@@ -264,16 +264,16 @@ public class PanelPrincipal extends JPanel implements ActionListener {
                 this.mostrarNotificaciones();
             }
             else if(e.getSource() == bc1) {
-                gui.asignarNotificacion(this.actuales.get(0));
-                gui.verNotificacion(this);
+                //gui.asignarNotificacion(this.actuales.get(0));
+                //gui.verNotificacion(this);
             }
             else if(e.getSource() == bc2) {
-                gui.asignarNotificacion(this.actuales.get(1));
-                gui.verNotificacion(this);
+                //gui.asignarNotificacion(this.actuales.get(1));
+                //gui.verNotificacion(this);
             }
             else if(e.getSource() == bc3) {
-                gui.asignarNotificacion(this.actuales.get(2));
-                gui.verNotificacion(this);
+                //gui.asignarNotificacion(this.actuales.get(2));
+                //gui.verNotificacion(this);
             }
         } else if(e.getSource() == representante){
             l1.setVisible(false);
@@ -283,6 +283,7 @@ public class PanelPrincipal extends JPanel implements ActionListener {
             usuario.setVisible(false);
             representante.setVisible(false);
             representanteFlag = true;
+            gui.representante(this);
             gui.getController().setRepresentante(true);
             if(e.getSource() == siguientes) {
                 this.siguienteNotificaciones();
@@ -293,16 +294,16 @@ public class PanelPrincipal extends JPanel implements ActionListener {
                 this.mostrarNotificaciones();
             }
             else if(e.getSource() == bc1) {
-                gui.asignarNotificacion(this.actuales.get(0));
-                gui.verNotificacion(this);
+                //gui.asignarNotificacion(this.actuales.get(0));
+                //gui.verNotificacion(this);
             }
             else if(e.getSource() == bc2) {
-                gui.asignarNotificacion(this.actuales.get(1));
-                gui.verNotificacion(this);
+                //gui.asignarNotificacion(this.actuales.get(1));
+                //gui.verNotificacion(this);
             }
             else if(e.getSource() == bc3) {
-                gui.asignarNotificacion(this.actuales.get(2));
-                gui.verNotificacion(this);
+                //gui.asignarNotificacion(this.actuales.get(2));
+                //gui.verNotificacion(this);
             }
         } else if(e.getSource() == proyectos){
             if(representanteFlag){

@@ -20,6 +20,7 @@ public class Temis {
     private String contrasenaAdmin = "adminadmin";
     private Usuario usuarioConectado = null;
     private boolean representanteLegal = false;
+    private Colectivo colRepresentado = null;
     private boolean adminFlag = false;
     private Map<String, Usuario> usuarios = new HashMap<>();
     private Map<String, Colectivo> colectivos = new HashMap<>();
@@ -88,6 +89,14 @@ public class Temis {
     }
 
     /**
+     * Funcion que devuelve el colectivo representado
+     * @return Colectivo del que representa el usuario
+     */
+    public Colectivo getColRepresentado() {
+        return colRepresentado;
+    }
+
+    /**
      * Funcion que devuelve los usuarios de la aplicacion
      * @return mapa con los usuarios de la aplicacion
      */
@@ -128,7 +137,16 @@ public class Temis {
      * @param representanteLegal boolean
      */
     public void setRepresentanteLegal(boolean representanteLegal) {
+        if(!representanteLegal) { this.colRepresentado = null; }
         this.representanteLegal = representanteLegal;
+    }
+
+    /**
+     * Funcion que modifica el campo de colRepresentado
+     * @param c Colectivo que representa
+     */
+    public void setColRepresentado(Colectivo c) {
+        this.colRepresentado = c;
     }
 
     /**
@@ -396,6 +414,14 @@ public class Temis {
             }
         }
         return c;
+    }
+
+    public void crearSubColectivo(String descripcion, String nombre) throws Exception {
+        for(Colectivo c : this.colectivos.values()) {
+            if(c.getNombre().equals(colRepresentado.getNombre())) {
+                c.crearSubcolectivo(nombre, descripcion);
+            }
+        }
     }
 
     public void unirse(Colectivo c) {

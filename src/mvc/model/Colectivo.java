@@ -177,6 +177,7 @@ public class Colectivo extends Actor implements Serializable {
         try {
             Colectivo colectivoHijo = new Colectivo(descripcion, nombre, this.representante);
             colectivoHijo.padre = this;
+            System.out.println("col.crearSub...");
             this.subcolectivos.add(colectivoHijo);
             Temis pTemis = Temis.getInstance();
             pTemis.anadirColectivo(colectivoHijo);

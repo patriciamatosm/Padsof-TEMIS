@@ -401,13 +401,20 @@ public class Controller {
         return colectivos;
     }
 
+    public void setColRep(Colectivo c) { pTemis.setColRepresentado(c); }
+
     public ArrayList<Colectivo> listaColectivos() {
         return new ArrayList<>(pTemis.getColectivos().values());
     }
 
     public void crearColectivo(String descripcion, String nombre) throws Exception {
-        Colectivo c = pTemis.crearCol(nombre, descripcion);
-        pTemis.anadirColectivo(c);
+        if(getRepresentante()) {
+            pTemis.crearSubColectivo(descripcion, nombre);
+        }
+        else {
+            Colectivo c = pTemis.crearCol(nombre, descripcion);
+            pTemis.anadirColectivo(c);
+        }
     }
 
     public String getNombreColectivo(Colectivo c) { return c.getNombre(); }
@@ -443,6 +450,15 @@ public class Controller {
         for(Colectivo col : pTemis.getColectivos().values()) {
             if(col.getNombre().equals(c.getNombre())) {
                 return col;
+            }
+        }
+        return null;
+    }
+
+    public Colectivo getPadre(Colectivo c) {
+        for(Colectivo col : pTemis.getColectivos().values()) {
+            if(col.getNombre().equals(c.getNombre())) {
+                return col.getPadre();
             }
         }
         return null;

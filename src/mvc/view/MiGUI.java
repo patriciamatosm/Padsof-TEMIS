@@ -20,7 +20,7 @@ public class MiGUI extends JFrame{
     private PanelLogin panelLogin;
     private PanelPrincipal panelPrincipal;
     private PanelAdmin panelAdmin;
-    private PanelNotificacion panelNotificacion;
+    //private PanelNotificacion panelNotificacion;
     private PanelProyectos panelProyectos;
     private PanelProyectosApoyo panelProyectosApoyo;
     private PanelProponerProyecto panelProponerProyecto;
@@ -30,6 +30,8 @@ public class MiGUI extends JFrame{
     private PanelColectivosQueSigues panelColectivosQueSigues;
     private PanelCrearColectivo panelCrearColectivo;
     private PanelVerColectivo panelVerColectivo;
+    private PanelRepresentante panelRepresentante;
+    private PanelColectivoRep panelColectivoRep;
     private Container container = this.getContentPane();
 
     /**
@@ -58,7 +60,7 @@ public class MiGUI extends JFrame{
         this.panelLogin = new PanelLogin(this);
         this.panelPrincipal = new PanelPrincipal(this);
         this.panelAdmin = new PanelAdmin(this);
-        this.panelNotificacion = new PanelNotificacion(this);
+        //this.panelNotificacion = new PanelNotificacion(this);
         this.panelProyectos = new PanelProyectos(this);
         this.panelProyectosApoyo = new PanelProyectosApoyo(this);
         this.panelProponerProyecto = new PanelProponerProyecto(this);
@@ -67,6 +69,8 @@ public class MiGUI extends JFrame{
         this.panelColectivoPropio = new PanelColectivoPropio(this);
         this.panelCrearColectivo = new PanelCrearColectivo(this);
         this.panelVerColectivo = new PanelVerColectivo(this);
+        this.panelRepresentante = new PanelRepresentante(this);
+        this.panelColectivoRep = new PanelColectivoRep(this);
 
         //añadir SOLO login
         container.add(panelLogin);
@@ -77,7 +81,7 @@ public class MiGUI extends JFrame{
         panelAdmin.setVisible(false);
 
 
-        panelNotificacion.setVisible(false);
+        //panelNotificacion.setVisible(false);
         panelProyectos.setVisible(false);
         panelProyectosApoyo.setVisible(false);
         panelProponerProyecto.setVisible(false);
@@ -156,13 +160,13 @@ public class MiGUI extends JFrame{
         panelProyectos.setVisible(true);
     }
 
-    public void irNotificacion(JPanel panel){
+    /*public void irNotificacion(JPanel panel){
         panel.setVisible(false);
 
         panelNotificacion.asignarData();
         container.add(panelNotificacion);
         panelNotificacion.setVisible(true);
-    }
+    }*/
 
     public void irProyectosApoyo(JPanel panel){
         panel.setVisible(false);
@@ -251,15 +255,38 @@ public class MiGUI extends JFrame{
         panelVerColectivo.setColectivo(c);
     }
 
+    public void representante(JPanel panel) {
+        panel.setVisible(false);
+
+        if(panelRepresentante == null) this.panelRepresentante = new PanelRepresentante(this);
+        panelRepresentante.asignarData();
+        container.add(panelRepresentante);
+        panelRepresentante.setVisible(true);
+    }
+
+    public void colectivoRep(JPanel panel) {
+        panel.setVisible(false);
+
+        if(panelColectivoRep == null) this.panelColectivoRep = new PanelColectivoRep(this);
+        panelColectivoRep.asignarData();
+        container.add(panelColectivoRep);
+        panelColectivoRep.setVisible(true);
+    }
+
+    public void asignarColectivoRep(Colectivo c) {
+        if(panelColectivoRep == null) this.panelColectivoRep = new PanelColectivoRep(this);
+        panelColectivoRep.setColectivo(c);
+    }
+
     public void asignarProyecto(Proyecto p) {
         if(panelVerProyecto == null) this.panelVerProyecto = new PanelVerProyecto(this);
         panelVerProyecto.setProyecto(p);
     }
 
-    public void asignarNotificacion(Notificacion n) {
+    /*public void asignarNotificacion(Notificacion n) {
         if(panelNotificacion == null) this.panelNotificacion = new PanelNotificacion(this);
         panelNotificacion.setNotificacion(n);
-    }
+    }*/
 
     public void verProyecto(JPanel panel) {
         panel.setVisible(false);
@@ -270,12 +297,12 @@ public class MiGUI extends JFrame{
         panelVerProyecto.setVisible(true);
     }
 
-    public void verNotificacion(JPanel panel) {
+    /*public void verNotificacion(JPanel panel) {
         panel.setVisible(false);
 
         if(panelNotificacion == null) this.panelNotificacion = new PanelNotificacion(this);
         panelNotificacion.asignarData();
         container.add(panelNotificacion);
         panelNotificacion.setVisible(true);
-    }
+    }*/
 }
