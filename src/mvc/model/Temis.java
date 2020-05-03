@@ -388,22 +388,27 @@ public class Temis {
     public void caducarProyectos(Collection<Proyecto> proyectos){
         for(Proyecto p : proyectos){
             if(p.getEstado() == Proyecto.Estado.ACTIVO) {
-                if (p.getEstado() != Proyecto.Estado.CADUCADO) {
-                    if(p.caducado() == true){
-                        for(Colectivo c : this.getColectivos().values()) {
-                            for (Usuario u : this.getUsuarios().values()) {
-                                if(c.getRepresentante().equals(u)) {
-                                    if (u.getListaProyecto().contains(p)) {
-                                        Notificacion n = new Notificacion(p, c, "¡El proyecto "+
-                                                p.getProjectTitle()+" ha caducado!");
-                                        this.anadirNotificacion(n);
-                                        c.addNotificacion(n);
-                                    }
+
+                if(p.caducado()){
+
+                    for(Colectivo c : this.getColectivos().values()) {
+
+                        for (Usuario u : this.getUsuarios().values()) {
+
+                            if(c.getRepresentante().equals(u)) {
+
+                                if (u.getListaProyecto().contains(p)) {
+
+                                    Notificacion n = new Notificacion(p, c, "¡El proyecto "+
+                                            p.getProjectTitle()+" ha caducado!");
+                                    this.anadirNotificacion(n);
+                                    c.addNotificacion(n);
                                 }
                             }
                         }
                     }
                 }
+
             }
         }
     }

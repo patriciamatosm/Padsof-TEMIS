@@ -40,11 +40,11 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
     private JLabel l8 = new JLabel("Ya has votado por este proyecto");
     private JLabel l9 = new JLabel("Numero de votos:");
 
-    private JTextArea titulo = new JTextArea("No title",1, 50);
+    private JTextArea titulo = new JTextArea("No title", 1, 50);
     private JTextArea desc = new JTextArea("No desc", 40, 50);
     private JScrollPane scrollDesc = new JScrollPane(desc,
-            JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-    private JTextArea grupo = new JTextArea("No group", 1,100);
+            JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    private JTextArea grupo = new JTextArea("No group", 1, 100);
     private JTextArea nacional = new JTextArea("Nacional", 1, 100);
     private JTextArea url = new JTextArea("No url", 1, 100);
     private JTextArea distrito = new JTextArea("No district", 1, 100);
@@ -198,7 +198,8 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
         this.add(grupo);
 
         nacional.setFont(nacional.getFont().deriveFont(13f));
-        nacional.setBounds(300, 400, 100, 100);;
+        nacional.setBounds(300, 400, 100, 100);
+        ;
         nacional.setForeground(Color.black);
         nacional.setSize(nacional.getPreferredSize());
         nacional.setOpaque(false);
@@ -281,8 +282,8 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
         } else if (e.getSource() == proyectosR) {
             gui.irProyectos(this);
         } else if (e.getSource() == votar) {
-            if(!gui.getController().getRepresentante()) {
-                if(JOptionPane.showConfirmDialog(null, "No podrás retirar tu voto",
+            if (!gui.getController().getRepresentante()) {
+                if (JOptionPane.showConfirmDialog(null, "No podrás retirar tu voto",
                         "Estás seguro?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     gui.getController().votar(p);
                     numVotos.setText(gui.getController().calcularPopularidad(p));
@@ -290,33 +291,34 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
                     l8.setVisible(true);
                     if (gui.getController().cumpleNumVotos(p) == true) {
                         gui.getController().pedirFinanciacion(p);
-System.out.println(p.getEstado().toString());
-                        for(Colectivo c : gui.getController().listaColectivos()){
-                            if(c.getRepresentante().equals(gui.getController().getLoggedUser())){
-                                if(gui.getController().getLoggedUser().getListaProyecto().contains(p)){
-                                    c.addNotificacion(gui.getController().nuevaNotificacion(p, c, "El proyecto "+
-                                            p.getProjectTitle()+" ha conseguido votos suficientes" +
+                        System.out.println(p.getEstado().toString());
+                        for (Colectivo c : gui.getController().listaColectivos()) {
+                            if (c.getRepresentante().equals(gui.getController().getLoggedUser())) {
+                                if (gui.getController().getLoggedUser().getListaProyecto().contains(p)) {
+                                    c.addNotificacion(gui.getController().nuevaNotificacion(p, c, "El proyecto " +
+                                            p.getProjectTitle() + " ha conseguido votos suficientes" +
                                             "para pedir financiacion."));
                                 }
                             }
                         }
                     }
                 }
-            } else if(gui.getController().getRepresentante()){
-                if(JOptionPane.showConfirmDialog(null, "No podrás retirar tu voto",
+            } else if (gui.getController().getRepresentante()) {
+                if (JOptionPane.showConfirmDialog(null, "No podrás retirar tu voto",
                         "Estás seguro?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     gui.getController().votarUsuarios(p);
+                    //gui.getController().colectivoApoyaProyecto();
                     numVotos.setText(gui.getController().calcularPopularidad(p));
                     votar.setEnabled(false);
                     l8.setVisible(true);
                     if (gui.getController().cumpleNumVotos(p) == true) {
                         gui.getController().pedirFinanciacion(p);
-System.out.println(p.getEstado().toString());
-                        for(Colectivo c : gui.getController().listaColectivos()){
-                            if(c.getRepresentante().equals(gui.getController().getLoggedUser())){
-                                if(gui.getController().getLoggedUser().getListaProyecto().contains(p)){
-                                    gui.getController().nuevaNotificacion(p, c, "El proyecto "+
-                                            p.getProjectTitle()+" ha conseguido votos suficientes" +
+                        System.out.println(p.getEstado().toString());
+                        for (Colectivo c : gui.getController().listaColectivos()) {
+                            if (c.getRepresentante().equals(gui.getController().getLoggedUser())) {
+                                if (gui.getController().getLoggedUser().getListaProyecto().contains(p)) {
+                                    gui.getController().nuevaNotificacion(p, c, "El proyecto " +
+                                            p.getProjectTitle() + " ha conseguido votos suficientes" +
                                             "para pedir financiacion.");
                                 }
                             }
@@ -342,20 +344,20 @@ System.out.println(p.getEstado().toString());
             l3.setVisible(true);
             this.add(l3);
 
-            if(p != null) {
+            if (p != null) {
                 titulo.setText(gui.getController().getTitulo(p));
                 desc.setText(gui.getController().getDescProy(p));
                 numVotos.setText(gui.getController().calcularPopularidad(p));
                 caducado.setVisible(false);
                 votar.setEnabled(false);
-                if(gui.getController().haVotado(p) == true) {
+                if (gui.getController().haVotado(p) == true) {
                     votar.setEnabled(false);
                     l8.setVisible(true);
-                } else if(gui.getController().haVotado(p) == false){
+                } else if (gui.getController().haVotado(p) == false) {
                     votar.setEnabled(true);
                     l8.setVisible(false);
                 }
-                if(p instanceof ProyectoSocial) {
+                if (p instanceof ProyectoSocial) {
                     ProyectoSocial pSoc = (ProyectoSocial) p;
                     l5.setVisible(true);
                     l6.setVisible(false);
@@ -367,7 +369,7 @@ System.out.println(p.getEstado().toString());
                     grupo.setVisible(true);
                     nacional.setText(gui.getController().isNacional(pSoc));
                     nacional.setVisible(true);
-                } else if(p instanceof ProyectoInfraestructura) {
+                } else if (p instanceof ProyectoInfraestructura) {
                     ProyectoInfraestructura pInfra = (ProyectoInfraestructura) p;
                     l5.setVisible(false);
                     l6.setVisible(true);
@@ -380,7 +382,7 @@ System.out.println(p.getEstado().toString());
                     url.setText(gui.getController().getUrl(pInfra));
                     url.setVisible(true);
                 }
-                if(gui.getController().getEstado(p) == Proyecto.Estado.CADUCADO){
+                if (gui.getController().getEstado(p) == Proyecto.Estado.CADUCADO) {
                     votar.setEnabled(false);
                     l8.setVisible(false);
                     caducado.setVisible(true);

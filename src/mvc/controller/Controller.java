@@ -461,6 +461,8 @@ public class Controller {
         pTemis.anadirColectivo(c);
     }
 
+
+
     public String getNombreColectivo(Colectivo c) { return c.getNombre(); }
 
     public String getRepColectivo(Colectivo c) {
@@ -626,4 +628,8 @@ public class Controller {
      * @return distritos
      */
     public List<String> getDistritos(){return Temis.getInstance().getDistritos();}
+
+    public void colectivoApoyaProyecto(Colectivo c, Proyecto p){
+        c.addProyectoApoyado(p);
+    }
 }

@@ -31,7 +31,7 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
     private JTextField titulo = new JTextField(25);
     private JTextArea descripcion = new JTextArea(40, 50);
     private JScrollPane scrollDesc = new JScrollPane(descripcion,
-                    JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     private JTextField grupos = new JTextField(200);
     private JFormattedTextField importe = new JFormattedTextField(new Integer(0));
     private JCheckBox nacional = new JCheckBox("Nacional");
@@ -239,27 +239,27 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
             ex.printStackTrace();
         }
 
-        if(e.getSource() == pagPrinc){
+        if (e.getSource() == pagPrinc) {
             social.setSelected(false);
             infra.setSelected(false);
             nacional.setSelected(false);
             gui.irPaginaPrincipal(this);
-        } else if(e.getSource() == colectivos){
+        } else if (e.getSource() == colectivos) {
             social.setSelected(false);
             infra.setSelected(false);
             nacional.setSelected(false);
             gui.irColectivos(this);
-        } else if(e.getSource() == proyectos){
+        } else if (e.getSource() == proyectos) {
             social.setSelected(false);
             infra.setSelected(false);
             nacional.setSelected(false);
             gui.irProyectos(this);
-        } else if(e.getSource() == proyectosR){
+        } else if (e.getSource() == proyectosR) {
             social.setSelected(false);
             infra.setSelected(false);
             nacional.setSelected(false);
             gui.irProyectos(this);
-        } else if(e.getSource() == social){
+        } else if (e.getSource() == social) {
             l5.setVisible(true);
             l6.setVisible(true);
             l11.setVisible(true);
@@ -274,7 +274,7 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
             l10.setVisible(false);
             distritos.setVisible(false);
             url.setVisible(false);
-        } else if(e.getSource() == infra){
+        } else if (e.getSource() == infra) {
             l5.setVisible(true);
             l6.setVisible(true);
             l11.setVisible(true);
@@ -289,17 +289,16 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
             l8.setVisible(false);
             nacional.setVisible(false);
             grupos.setVisible(false);
-        } else if(e.getSource() == proponer){
-            if(titulo.getText().length() > 20){
-                JOptionPane.showMessageDialog(this,"Error, el titulo no puede" +
-                                "tener mas de 50 caracteres.","Error al crear",
+        } else if (e.getSource() == proponer) {
+            if (titulo.getText().length() > 20) {
+                JOptionPane.showMessageDialog(this, "Error, el titulo no puede" +
+                                "tener mas de 50 caracteres.", "Error al crear",
                         JOptionPane.PLAIN_MESSAGE);
-            } else if(descripcion.getText().length() > 500){
-                JOptionPane.showMessageDialog(this,"Error, la descripcion no puede" +
-                                "tener mas de 500 caracteres.","Error al crear",
+            } else if (descripcion.getText().length() > 500) {
+                JOptionPane.showMessageDialog(this, "Error, la descripcion no puede" +
+                                "tener mas de 500 caracteres.", "Error al crear",
                         JOptionPane.PLAIN_MESSAGE);
-            }
-            else if(social.isSelected()){
+            } else if (social.isSelected()) {
                 try {
                     gui.getController().nuevoProyectoSocial(titulo.getText(),
                             descripcion.getText(), (Integer) importe.getValue(), gui.getController().getLoggedUser(),
@@ -311,15 +310,15 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
                             "pronto como sea posible.", "Formulario completado correctamente", JOptionPane.PLAIN_MESSAGE);
                     gui.irProyectos(this);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(this, ex.getMessage(),"Error al crear",
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al crear",
                             JOptionPane.PLAIN_MESSAGE);
                     gui.crearProyectos(this);
                 }
-            } else if(infra.isSelected()){
+            } else if (infra.isSelected()) {
                 try {
                     gui.getController().nuevoProyectoInfra(titulo.getText(),
                             descripcion.getText(), (Integer) importe.getValue(), gui.getController().getLoggedUser(),
-                            (String)distritos.getSelectedItem(), url.getText(), descripcion.getText());
+                            (String) distritos.getSelectedItem(), url.getText(), descripcion.getText());
                     JOptionPane.showMessageDialog(this, "Muchas gracias por su interés en hacer de\n" +
                             "esta una comunidad mejor para todos. Su\n" +
                             "propuesta será remitida al administrador,\n" +
@@ -327,7 +326,7 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
                             "pronto como sea posible.", "Formulario completado correctamente", JOptionPane.PLAIN_MESSAGE);
                     gui.irProyectos(this);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(this, ex.getMessage(),"Error al crear",
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Error al crear",
                             JOptionPane.PLAIN_MESSAGE);
                     gui.crearProyectos(this);
                 }
@@ -340,9 +339,9 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
         }
     }
 
-    public void asignarData(){
+    public void asignarData() {
 
-        if(gui.getController().getLoggedUser() != null){
+        if (gui.getController().getLoggedUser() != null) {
             l3.setText(gui.getController().getLoggedUserName());
             l3.setVisible(true);
             this.add(l3);
@@ -356,7 +355,7 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
             nacional.setSelected(false);
 
             d = gui.getController().getDistritos();
-            for(String s : d){
+            for (String s : d) {
                 distritos.addItem(s);
                 System.out.println(s);
             }
