@@ -20,6 +20,7 @@ public class Colectivo extends Actor implements Serializable {
     private Colectivo padre = null;
     private ArrayList<Colectivo> subcolectivos = new ArrayList<>();
     private List<Notificacion> notificacionesRecibidas = new ArrayList<>();
+    private List<Proyecto> proyectosApoyados = new ArrayList<>();
 
     public Colectivo(String descripcion, String nombre, Usuario representante) throws Exception {
         super(nombre);
@@ -67,6 +68,14 @@ public class Colectivo extends Actor implements Serializable {
      */
     public void addNotificacion(Notificacion n){
         this.notificacionesRecibidas.add(n);
+    }
+
+    /**
+     * Funcion que añade proyecto apoyado
+     * @param p proyecto
+     */
+    public void addProyectoApoyado(Proyecto p){
+        this.proyectosApoyados.add(p);
     }
 
     /**
@@ -177,7 +186,6 @@ public class Colectivo extends Actor implements Serializable {
         try {
             Colectivo colectivoHijo = new Colectivo(descripcion, nombre, this.representante);
             colectivoHijo.padre = this;
-            System.out.println("col.crearSub...");
             this.subcolectivos.add(colectivoHijo);
             Temis pTemis = Temis.getInstance();
             pTemis.anadirColectivo(colectivoHijo);

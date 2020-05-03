@@ -18,6 +18,7 @@ public class Usuario extends Actor implements Serializable {
     private String contrasena;
     private List<Colectivo> colectivosPropios;
     private List<Colectivo> suscritoNoticias;
+    private List<Notificacion> notificaciones;
     private boolean logueado = false;
     private EstadoUsuario estado;
 
@@ -35,6 +36,7 @@ public class Usuario extends Actor implements Serializable {
         this.contrasena = contrasena;
         this.suscritoNoticias = new ArrayList<>();
         this.colectivosPropios = new ArrayList<>();
+        this.notificaciones = new ArrayList<>();
         this.estado = EstadoUsuario.EN_ESPERA;
     }
 
@@ -90,7 +92,6 @@ public class Usuario extends Actor implements Serializable {
 
     /**
      * Funcion que devuelve el array que contiene los colectivos a los que esta suscrito el usuario
-     *
      * @return Array de colectivos a los que se está suscrito
      */
     public List<Colectivo> getSuscritoNoticias() {

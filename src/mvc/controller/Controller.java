@@ -324,6 +324,20 @@ public class Controller {
     }
 
     /**
+     * Funcion que llama al constructor de Notificacion
+     * @param p Proyecto emisor
+     * @param c Colectivo receptor
+     * @param mensaje Mensaje de la notificacion
+     */
+    public Notificacion nuevaNotificacion(Proyecto p, Colectivo c, String mensaje){
+        Notificacion n = new Notificacion(p, c, mensaje);
+        if(n != null){
+            pTemis.anadirNotificacion(n);
+        }
+        return n;
+    }
+
+    /**
      * Funcion que devuelve lista con los proyectos
      * @return lista de proyectos
      */
@@ -337,6 +351,43 @@ public class Controller {
         }
         return proyectos;
     }
+
+    /**
+     * Funcion que devuelve lista con las notificaciones
+     * @return lista de notificaciones
+     */
+    public ArrayList<Notificacion> listaNotificaciones(){
+        ArrayList<Notificacion> notificaciones = new ArrayList<>();
+
+        for(Notificacion n : pTemis.getNotificaciones().values()){
+            if(n != null){
+                notificaciones.add(n);
+            }
+        }
+        return notificaciones;
+    }
+
+    /**
+     * Funcion que devuelve lista con las notificaciones propias
+     * @return lista de notificaciones propias
+     */
+    public ArrayList<Notificacion> listaNotificacionesSubs(Usuario u){
+        ArrayList<Notificacion> notificaciones = new ArrayList<>();
+
+        for(Notificacion n : this.listaNotificaciones()){
+            for(Colectivo c: pTemis.getColectivos().values()){
+                if(u.getSuscritoNoticias().contains(c)){
+                    notificaciones.add(n);
+                }
+            }
+        }
+        return notificaciones;
+    }
+
+    /**
+     * Funcion que llama a subscribirseNoticias
+     */
+    public void subscribirseNoticias(Colectivo c){ pTemis.subscribirseNoticias(c); }
 
     /**
      * Funcion que devuelve una lista con los proyectos apoyados por el usuario
@@ -416,6 +467,8 @@ public class Controller {
             pTemis.anadirColectivo(c);
         }
     }
+
+
 
     public String getNombreColectivo(Colectivo c) { return c.getNombre(); }
 
@@ -591,4 +644,8 @@ public class Controller {
      * @return distritos
      */
     public List<String> getDistritos(){return Temis.getInstance().getDistritos();}
+
+    public void colectivoApoyaProyecto(Colectivo c, Proyecto p){
+        c.addProyectoApoyado(p);
+    }
 }

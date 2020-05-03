@@ -33,6 +33,7 @@ public class PanelVerColectivo extends JPanel implements ActionListener {
     private JButton cierraSesion = new JButton("Salir");
     private JButton unirse = new JButton("Unirse al colectivo");
     private JButton abandonar = new JButton("Abandonar el colectivo");
+    private JButton noticias = new JButton("subscribirse a noticias");
 
     public PanelVerColectivo(MiGUI gui) {
         this.gui = gui;
@@ -137,6 +138,11 @@ public class PanelVerColectivo extends JPanel implements ActionListener {
         abandonar.setBounds(200, 500, 200, 40);
         abandonar.addActionListener(this);
         this.add(abandonar);
+
+        noticias.setFont(noticias.getFont().deriveFont(16f));
+        noticias.setBounds(400, 500, 200, 40);
+        noticias.addActionListener(this);
+        this.add(noticias);
     }
 
     public void asignarData() {
@@ -201,6 +207,9 @@ public class PanelVerColectivo extends JPanel implements ActionListener {
             gui.getController().abandonarCol(c);
             this.c = gui.getController().getColectivo(c);
             gui.verColectivo(this);
+        }
+        else if(e.getSource() == noticias) {
+            gui.getController().subscribirseNoticias(c);
         }
         try {
             pTemis.escribirFichero();

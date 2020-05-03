@@ -49,9 +49,9 @@ public abstract class Proyecto implements GrantRequest, Serializable {
         this.fechaUltimoVoto = LocalDate.now();
         this.importe = importe;
         this.creador = creador;
-        this.estado = Estado.EN_ESPERA;
+        this.estado = Estado.ACTIVO;
         this.numVotos = 0;
-        this.minVotos = 999999;
+        this.minVotos = 2;
     }
     /**
      * Enumeracion que indica el estado del proyecto
@@ -240,8 +240,9 @@ public abstract class Proyecto implements GrantRequest, Serializable {
     
     /**
      * Funcion para poner un proyecto como caducado cuando sobrepasa el tiempo limite establecido
+     * @return true/false dependiendo de si se ha caducado el proyecto o no
      */
-    public void caducado() {
+    public boolean caducado() {
     	
     	LocalDate fechaUltimo = getFechaUltimoVoto();
 
@@ -252,8 +253,10 @@ public abstract class Proyecto implements GrantRequest, Serializable {
     	if(dias != null) {
             if (dias.isEqual(fechaUltimo) || dias.isAfter(fechaUltimo)) {
                 this.estado = Estado.CADUCADO;
+                return true;
             }
         }
+    	return false;
     }
     
     /**
