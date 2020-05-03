@@ -139,16 +139,7 @@ public class PanelCrearColectivo extends JPanel implements ActionListener {
         }
 
         if(e.getSource() == crear) {
-            if(nombre.getText().length() > 20){
-                JOptionPane.showMessageDialog(this,"Error, el titulo no puede" +
-                                "tener mas de 50 caracteres.","Error al crear",
-                        JOptionPane.PLAIN_MESSAGE);
-            } else if(descripcion.getText().length() > 500){
-                JOptionPane.showMessageDialog(this,"Error, la descripcion no puede" +
-                                "tener mas de 500 caracteres.","Error al crear",
-                        JOptionPane.PLAIN_MESSAGE);
-            }
-            else if(gui.getController().getRepresentante()) {
+            if(gui.getController().getRepresentante()) {
                 try {
                     gui.getController().crearColectivo(descripcion.getText(), nombre.getText());
                     JOptionPane.showMessageDialog(this, nombre.getText() +" creado correctamente\n"
