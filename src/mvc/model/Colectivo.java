@@ -23,6 +23,9 @@ public class Colectivo extends Actor implements Serializable {
 
     public Colectivo(String descripcion, String nombre, Usuario representante) throws Exception {
         super(nombre);
+        if(nombre.length() > 20) {
+            throw new Exception("El nombre no puede superar los 20 caracteres");
+        }
         if (descripcion.length() < 5) {
             throw new Exception("La descripcion tiene que ser al menos 5 caracteres");
         }
