@@ -183,6 +183,7 @@ public class PanelVerColectivo extends JPanel implements ActionListener {
                 abandonar.setVisible(false);
                 unirse.setVisible(true);
             }
+
         }
     }
 
@@ -193,6 +194,15 @@ public class PanelVerColectivo extends JPanel implements ActionListener {
     public void setColectivo(Colectivo c) {
         this.c = c;
         l1.setText(gui.getController().getNombreColectivo(c));
+        if(gui.getController().isSuscrito(c, gui.getController().getLoggedUser())){
+            this.noticias.setVisible(false);
+            this.add(noticias);
+        } else {
+
+            this.noticias.setVisible(true);
+            this.add(noticias);
+        }
+
     }
 
     /**
@@ -233,7 +243,7 @@ public class PanelVerColectivo extends JPanel implements ActionListener {
         }
         else if(e.getSource() == noticias) {
             gui.getController().subscribirseNoticias(c);
-            noticias.setEnabled(false);
+
         }
         try {
             pTemis.escribirFichero();

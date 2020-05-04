@@ -408,27 +408,27 @@ public class Temis {
      * @param proyectos existentes en el programa
      */
     public void caducarProyectos(Collection<Proyecto> proyectos){
-        for(Proyecto p : proyectos){
-            if(p.getEstado() == Proyecto.Estado.ACTIVO) {
-                if(p.caducado()){
-                    for(Colectivo c : this.getColectivos().values()) {
-                        if(c.getProyectosApoyados().contains(p)){
-                            Notificacion n = new Notificacion(p, c, "¡El proyecto "+
-                                    p.getProjectTitle()+" ha caducado!");
-                            this.anadirNotificacion(n);
-                            c.addNotificacion(n);
-                            for(Usuario u : c.getListaUsuario()){
-                                if(u.getSuscritoNoticias().contains(c)){
-                                    if(!u.getNotificaciones().contains(n)) {
-                                        u.addNotificacion(n);
-                                    }
-                                }
+        for(Proyecto p : proyectos) {
+            if (p.getEstado() != Proyecto.Estado.CADUCADO || p.getEstado() != Proyecto.Estado.RECHAZADO) {
+                if (p.caducado()) {
+                    for (Colectivo c : this.getColectivos().values()) {
+                        System.out.println("apoyados " + c.getProyectosApoyados());
+                        for (Proyecto proy1 : c.getProyectosApoyados()) {
+                            System.out.println("proy1 " + proy1);
+                            System.out.println("p " + p);
+                            if (proy1.getProjectTitle().equals(p.getProjectTitle())) {
+                                Notificacion n = new Notificacion(p, c, "¡El proyecto " +
+                                        p.getProjectTitle() + " ha caducado!");
+                                this.anadirNotificacion(n);
+                                c.addNotificacion(n);
+                                System.out.println("caducarProyectos" + c.getNotificacionesRecibidas());
                             }
+
                         }
                     }
                 }
-
             }
+
         }
     }
 
@@ -520,7 +520,9 @@ public class Temis {
     public void subscribirseNoticias(Colectivo c){
         for(Usuario u : this.getUsuarios().values()){
             if(u.getDni().equals(this.getUsuarioConectado().getDni())){
-                c.subscribirseNoticias(u);
+                System.out.println("usuario encontrado");
+                if(!c.subscribirseNoticias(u)) System.out.println("ERROR");
+                System.out.println(u.getSuscritoNoticias());
             }
         }
     }

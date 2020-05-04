@@ -1,5 +1,7 @@
 package mvc.model;
 
+import java.io.Serializable;
+
 /**
  * Clase que define una notificacion
  *
@@ -9,7 +11,7 @@ package mvc.model;
  * @version 27/03/2020
  */
 @SuppressWarnings("unused")
-public class Notificacion {
+public class Notificacion implements Serializable {
     private Proyecto emisor;
     private Colectivo receptor;
     private String mensaje;

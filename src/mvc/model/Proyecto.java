@@ -227,7 +227,7 @@ public abstract class Proyecto implements GrantRequest, Serializable {
 
         if(this.estado == Estado.ACTIVO || this.estado == Estado.ESPERA_FINANC) {
             for (Usuario u : usuarios) {
-                if (u.getListaProyecto().contains(this) == false) {
+                if (!u.getListaProyecto().contains(this)) {
                     u.anadirProyecto(this);
                     this.setFechaUltimoVoto(LocalDate.now());
                     this.setNumVotos(this.getNumVotos() + 1);
@@ -256,7 +256,7 @@ public abstract class Proyecto implements GrantRequest, Serializable {
                 return true;
             }
         }
-    	return false;
+    	return true;
     }
     
     /**

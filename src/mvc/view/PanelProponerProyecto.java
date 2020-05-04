@@ -357,7 +357,6 @@ public class PanelProponerProyecto extends JPanel implements ActionListener {
             d = gui.getController().getDistritos();
             for (String s : d) {
                 distritos.addItem(s);
-                System.out.println(s);
             }
 
         }

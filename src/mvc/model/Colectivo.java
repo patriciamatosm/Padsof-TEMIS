@@ -130,6 +130,7 @@ public class Colectivo extends Actor implements Serializable {
         if (inPadre(usuario) || this.representante.equals(usuario)) {
             return false;
         } else {
+            System.out.println("GOOD");
             this.listaUsuario.add(usuario);
             return true;
         }
@@ -172,12 +173,16 @@ public class Colectivo extends Actor implements Serializable {
      * false si el usuario no esta en el colectivo o no se puede añadir a la lista
      */
     public boolean subscribirseNoticias(Usuario usuario) {
-        if (this.listaUsuario.contains(usuario)) {
-            usuario.addSuscritoNoticias(this);
-            return true;
-        } else {
-            return false;
+
+        for(Usuario u : this.listaUsuario){
+            if(u.getDni().equals(usuario.getDni())){
+                System.out.println("usuario encontrado");
+                usuario.addSuscritoNoticias(this);
+                return true;
+            }
         }
+
+        return false;
     }
 
     /**
