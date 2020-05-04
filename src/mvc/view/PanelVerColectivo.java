@@ -9,6 +9,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+/**
+ * Clase que define el Panel que muestra detalles de un colectivo
+ *
+ * @author Daniel Prieto Fernández
+ *         Silvia Tomey Prieto
+ *         Patricia Matos Meza
+ * @version 20/04/2020
+ */
 public class PanelVerColectivo extends JPanel implements ActionListener {
 
     private MiGUI gui;
@@ -35,6 +43,10 @@ public class PanelVerColectivo extends JPanel implements ActionListener {
     private JButton abandonar = new JButton("Abandonar el colectivo");
     private JButton noticias = new JButton("subscribirse a noticias");
 
+    /**
+     * Constructor de la clase
+     * @param gui de la aplicacion
+     */
     public PanelVerColectivo(MiGUI gui) {
         this.gui = gui;
         this.setLayout(new BorderLayout());
@@ -145,6 +157,9 @@ public class PanelVerColectivo extends JPanel implements ActionListener {
         this.add(noticias);
     }
 
+    /**
+     * Funcion que puebla de datos el panel en cuestión
+     */
     public void asignarData() {
         if(gui.getController().getLoggedUser() != null){
             l3.setText(gui.getController().getLoggedUserName());
@@ -171,11 +186,19 @@ public class PanelVerColectivo extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Funcion que pone el colectivo que se usara en el panel
+     * @param c colectivo que se quiere mostrar
+     */
     public void setColectivo(Colectivo c) {
         this.c = c;
         l1.setText(gui.getController().getNombreColectivo(c));
     }
 
+    /**
+     * Invoked when an action occurs.
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Temis pTemis = Temis.getInstance();

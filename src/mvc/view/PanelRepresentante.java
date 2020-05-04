@@ -11,6 +11,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que define el Panel que muestra los colectivos para elegir a cual representar
+ *
+ * @author Daniel Prieto Fernández
+ *         Silvia Tomey Prieto
+ *         Patricia Matos Meza
+ * @version 20/04/2020
+ */
 public class PanelRepresentante extends JPanel implements ActionListener {
 
     private MiGUI gui;
@@ -38,7 +46,10 @@ public class PanelRepresentante extends JPanel implements ActionListener {
     //private JButton crearColectivo = new JButton("Crear un nuevo colectivo");
     //private JButton colectivos = new JButton("Ver colectivos");
 
-
+    /**
+     * Constructor de la clase
+     * @param gui de la aplicacion
+     */
     public PanelRepresentante(MiGUI gui) {
         this.gui = gui;
         this.setLayout(new BorderLayout());
@@ -128,6 +139,9 @@ public class PanelRepresentante extends JPanel implements ActionListener {
         this.add(colectivos);*/
     }
 
+    /**
+     * Funcion que actualiza el panel con los colectivos que se deben mostrar y sus botones
+     */
     public void mostrarColectivos() {
 
         if((this.posicion + 3) <= this.todos.size()) {
@@ -173,6 +187,9 @@ public class PanelRepresentante extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Funcion que modifica los colectivos mostrados en el panel
+     */
     public void siguienteColectivos() {
         int numCol = this.todos.size();
         int contador;
@@ -195,6 +212,9 @@ public class PanelRepresentante extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Funcion que modifica los colectivos mostrados en el panel
+     */
     public void anteriorColectivos() {
         int contador;
 
@@ -210,6 +230,10 @@ public class PanelRepresentante extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Invoked when an action occurs.
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Temis pTemis = Temis.getInstance();
@@ -263,6 +287,9 @@ public class PanelRepresentante extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Funcion que puebla de datos el panel en cuestión
+     */
     public void asignarData() {
         if(gui.getController().getLoggedUser() != null){
             l3.setText(gui.getController().getLoggedUserName());

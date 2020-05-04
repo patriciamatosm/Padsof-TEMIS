@@ -9,6 +9,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+/**
+ * Clase que define el Panel que muestra el colectivo representado
+ *
+ * @author Daniel Prieto Fernández
+ *         Silvia Tomey Prieto
+ *         Patricia Matos Meza
+ * @version 20/04/2020
+ */
 public class PanelColectivoRep extends JPanel implements ActionListener {
 
     private MiGUI gui;
@@ -37,6 +45,10 @@ public class PanelColectivoRep extends JPanel implements ActionListener {
 
     private JButton padre = new JButton("");
 
+    /**
+     * Constructor de la clase
+     * @param gui de la aplicacion
+     */
     public PanelColectivoRep(MiGUI gui) {
         this.gui = gui;
         this.setLayout(new BorderLayout());
@@ -150,6 +162,9 @@ public class PanelColectivoRep extends JPanel implements ActionListener {
         this.add(colectivos);
     }
 
+    /**
+     * Funcion que puebla de datos el panel en cuestión
+     */
     public void asignarData() {
         if(gui.getController().getLoggedUser() != null) {
             l3.setText(gui.getController().getLoggedUserName());
@@ -176,11 +191,19 @@ public class PanelColectivoRep extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Funcion que pone el colectivo que se usara en el panel
+     * @param c colectivo que se quiere mostrar
+     */
     public void setColectivo(Colectivo c) {
         this.c = c;
         l1.setText(gui.getController().getNombreColectivo(c));
     }
 
+    /**
+     * Invoked when an action occurs.
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Temis pTemis = Temis.getInstance();

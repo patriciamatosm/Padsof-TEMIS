@@ -9,7 +9,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-
+/**
+ * Clase que define el Panel para crear nuevos colectivos
+ *
+ * @author Daniel Prieto Fernández
+ *         Silvia Tomey Prieto
+ *         Patricia Matos Meza
+ * @version 20/04/2020
+ */
 public class PanelCrearColectivo extends JPanel implements ActionListener {
 
     private MiGUI gui;
@@ -32,6 +39,10 @@ public class PanelCrearColectivo extends JPanel implements ActionListener {
     private JButton cierraSesion = new JButton("Salir");
     private JButton crear = new JButton("Crear colectivo");
 
+    /**
+     * Constructor de la clase
+     * @param gui de la aplicacion
+     */
     public PanelCrearColectivo(MiGUI gui) {
         this.gui = gui;
         this.setLayout(new BorderLayout());
@@ -124,6 +135,9 @@ public class PanelCrearColectivo extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * Funcion que puebla de datos el panel en cuestión
+     */
     public void asignarData() {
         if(gui.getController().getLoggedUser() != null) {
             nombre.setText("");
@@ -134,6 +148,10 @@ public class PanelCrearColectivo extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * Invoked when an action occurs.
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Temis pTemis = Temis.getInstance();

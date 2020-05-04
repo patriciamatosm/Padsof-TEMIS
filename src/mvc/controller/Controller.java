@@ -439,6 +439,10 @@ public class Controller {
         return usuarios;
     }
 
+    /**
+     * Funcion que devuelve una lista con los colectivos seguidos por el usuario que ha iniciado sesion
+     * @return ArrayList de colectivos seguidos por el usuario
+     */
     public ArrayList<Colectivo> listaColectivosSeguidos() {
         ArrayList<Colectivo> colectivos = new ArrayList<>();
 
@@ -452,6 +456,10 @@ public class Controller {
         return colectivos;
     }
 
+    /**
+     * Pone en temis el colectivo que se esta representando cuando entre el usuario en modo representante
+     * @param c Colectivo que representa
+     */
     public void setColRep(Colectivo c) { pTemis.setColRepresentado(c); }
 
     /**
@@ -460,10 +468,20 @@ public class Controller {
      */
     public Colectivo getColRep(){ return pTemis.getColRepresentado();}
 
+    /**
+     * Funcion que devuelve todos los colectivos
+     * @return ArrayList con los colectivos que hay en temis
+     */
     public ArrayList<Colectivo> listaColectivos() {
         return new ArrayList<>(pTemis.getColectivos().values());
     }
 
+    /**
+     * Funcion que crea un nuevo colectivo y lo guarda en temis
+     * @param descripcion Descripcion del colectivo
+     * @param nombre Nombre del colectivo
+     * @throws Exception Si crearCol o crearSubColectivo lanzan exception
+     */
     public void crearColectivo(String descripcion, String nombre) throws Exception {
         if(getRepresentante()) {
             pTemis.crearSubColectivo(descripcion, nombre);
@@ -474,28 +492,59 @@ public class Controller {
         }
     }
 
-
-
+    /**
+     * Funcion que devuelve el nombre de un colectivo
+     * @param c Colectivo del que se quiere el nombre
+     * @return nombre del colectivo
+     */
     public String getNombreColectivo(Colectivo c) { return c.getNombre(); }
 
+    /**
+     * Funcion que devuelve el nombre del representante de un colectivo
+     * @param c Colectivo del que se quiere el representante
+     * @return nombre del representante del colectivo
+     */
     public String getRepColectivo(Colectivo c) {
         return c.getRepresentante().getNombre();
     }
 
+    /**
+     * Funcion que comprueba si el usuario conectado es el representante del colectivo
+     * @param c colectivo del que se quiere comprobar
+     * @return true si lo es, false si no lo es
+     */
     public boolean isRepCol(Colectivo c) {
         return c.getRepresentante().getDni().equals(pTemis.getUsuarioConectado().getDni());
     }
 
+    /**
+     * Funcion que devuelve la descripcion de un colectivo
+     * @param c colectivo del que se quiere la descripcion
+     * @return Descripcion del colectivo
+     */
     public String getDescripcion(Colectivo c) { return c.getDescripcion(); }
 
+    /**
+     * Funcion que une al usuario conectado a un colectivo
+     * @param c colectivo al que unirse
+     */
     public void unirseCol(Colectivo c) {
         pTemis.unirse(c);
     }
 
+    /**
+     * Funcion que hace que el usuario conectado deje de seguir al un colectivo
+     * @param c colectivo que abandonara el usuario conectado
+     */
     public void abandonarCol(Colectivo c) {
         pTemis.abandonar(c);
     }
 
+    /**
+     * Funcion que mira si el usuario conectado esta en el colectivo
+     * @param c colectivo que se comprobara
+     * @return true si esta en el colectivo, false si no
+     */
     public boolean enColectivo(Colectivo c) {
         for(Usuario u : c.getListaUsuario()) {
             if(u.getDni().equals(pTemis.getUsuarioConectado().getDni())) {
@@ -505,6 +554,11 @@ public class Controller {
         return false;
     }
 
+    /**
+     * Actualiza un colectivo con el que hay en temis
+     * @param c coletivo que se actualizara
+     * @return Colectivo que hay en temis con el mismo nombre
+     */
     public Colectivo getColectivo(Colectivo c) {
         for(Colectivo col : pTemis.getColectivos().values()) {
             if(col.getNombre().equals(c.getNombre())) {
@@ -514,6 +568,11 @@ public class Controller {
         return null;
     }
 
+    /**
+     * Funcion que comprueba si un colectivo tiene padre
+     * @param c colectivo del que se quiere el padre
+     * @return Colectivo padre si existe, null si no
+     */
     public Colectivo getPadre(Colectivo c) {
         for(Colectivo col : pTemis.getColectivos().values()) {
             if(col.getNombre().equals(c.getNombre())) {

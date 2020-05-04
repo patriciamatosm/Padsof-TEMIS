@@ -443,6 +443,13 @@ public class Temis {
         this.colectivos.put(c.getNombre(), c);
     }
 
+    /**
+     * Funcion que crea un colectivo
+     * @param nombre del colectivo que se quiere crear
+     * @param desc del colectivo que se quiere crear
+     * @return el Colectivo nuevo que se crea
+     * @throws Exception si ya existe un colectivo con ese nombre o el constructor de colectivo manda una
+     */
     public Colectivo crearCol(String nombre, String desc) throws Exception {
         for(Colectivo c : this.colectivos.values()) {
             if(c.getNombre().equals(nombre)) {
@@ -458,7 +465,18 @@ public class Temis {
         return c;
     }
 
+    /**
+     * Funcion que crea un subcolectivo del colectivo que se esta representando
+     * @param descripcion del nuevo colectivo
+     * @param nombre del nuevo colectivo
+     * @throws Exception si ya existe un colectivo con ese nombre o el constructor de colectivo manda una
+     */
     public void crearSubColectivo(String descripcion, String nombre) throws Exception {
+        for(Colectivo c : this.colectivos.values()) {
+            if(c.getNombre().equals(nombre)) {
+                throw new Exception("Ya existe un colectivo con ese nombre");
+            }
+        }
         for(Colectivo c : this.colectivos.values()) {
             if(c.getNombre().equals(colRepresentado.getNombre())) {
                 c.crearSubcolectivo(nombre, descripcion);
@@ -466,6 +484,10 @@ public class Temis {
         }
     }
 
+    /**
+     * Funcion que une al usuario conectado al colectivo c
+     * @param c colectivo al que se quiere unir
+     */
     public void unirse(Colectivo c) {
         for(Colectivo col : this.colectivos.values()) {
             if(col.getNombre().equals(c.getNombre())) {
@@ -478,6 +500,10 @@ public class Temis {
         }
     }
 
+    /**
+     * Funcion que hace que el usuario conectado deje de seguir al colectivo
+     * @param c colectivo que abandonar
+     */
     public void abandonar(Colectivo c) {
         for(Colectivo col : this.colectivos.values()) {
             if(col.getNombre().equals(c.getNombre())) {
