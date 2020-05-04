@@ -263,6 +263,7 @@ public class Controller {
      * @return true/false
      */
     public boolean cumpleNumVotos(Proyecto p) {
+        System.out.println("espera F");
         return p.esperarFinanc();
     }
 
@@ -275,6 +276,19 @@ public class Controller {
         for (Proyecto a : pTemis.getProyectos().values()) {
             if (a.getProjectTitle().equals(p.getProjectTitle())) {
                 a.pedirFinanciacion();
+            }
+        }
+    }
+
+    /**
+     * Funcion para pedir financiacion al admin
+     *
+     * @param p proyecto
+     */
+    public void pedirFinanciacionAdmin(Proyecto p) {
+        for (Proyecto a : pTemis.getProyectos().values()) {
+            if (a.getProjectTitle().equals(p.getProjectTitle())) {
+                a.pedirAdminSolicitud();
             }
         }
     }
@@ -768,7 +782,7 @@ public class Controller {
      * @param p Proyecto a votar
      */
     public void votar(Proyecto p) {
-        pTemis.votar(p);
+        pTemis.votar(pTemis.getProyectos().get(p.getProjectTitle()));
     }
 
     /**
@@ -777,7 +791,7 @@ public class Controller {
      * @param p Proyecto a votar
      */
     public void votarUsuarios(Proyecto p, Colectivo c) {
-        pTemis.votarUsuarios(p, c);
+        pTemis.votarUsuarios(pTemis.getProyectos().get(p.getProjectTitle()), pTemis.getColectivos().get(c.getNombre()));
     }
 
     /**
@@ -787,7 +801,7 @@ public class Controller {
      * @return true si ya ha votado, false si aun no lo ha hecho
      */
     public boolean haVotado(Proyecto p) {
-        return pTemis.haVotado(p);
+        return pTemis.haVotado(pTemis.getProyectos().get(p.getProjectTitle()));
     }
 
     /**
@@ -808,7 +822,7 @@ public class Controller {
      * @param min numero de votos a establecer
      */
     public void setMinVotos(Proyecto p, int min) {
-        p.setMinVotos(min);
+        pTemis.getProyectos().get(p.getProjectTitle()).setMinVotos(min);
     }
 
     /**

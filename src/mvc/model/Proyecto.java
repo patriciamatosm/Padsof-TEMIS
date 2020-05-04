@@ -51,7 +51,7 @@ public abstract class Proyecto implements GrantRequest, Serializable {
         this.creador = creador;
         this.estado = Estado.EN_ESPERA;
         this.numVotos = 0;
-        this.minVotos = 2;
+        this.minVotos = 0;
     }
     /**
      * Enumeracion que indica el estado del proyecto
@@ -297,9 +297,11 @@ public abstract class Proyecto implements GrantRequest, Serializable {
      * @return true si el proyecto cumple con los requisitos, false en el caso contrario
      */
     public boolean esperarFinanc() {
-    	if(this.estado != Estado.ACTIVO) return false;
+    	//if(this.estado == Estado.CADUCADO || this.estado == Estado.RECHAZADO) return false;
 
+        System.out.println(this.getNumVotos() + " : " + this.getMinVotos());
     	if(this.getNumVotos() >= this.getMinVotos()) {
+    	    System.out.println(this.getNumVotos() + " : " + this.getMinVotos());
     		this.estado = Estado.ESPERA_FINANC;
             for (Colectivo c : Temis.getInstance().getColectivos().values()) {
                 for (Proyecto proy1 : c.getProyectosApoyados()) {

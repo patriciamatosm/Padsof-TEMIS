@@ -292,20 +292,7 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
                     numVotos.setText(gui.getController().calcularPopularidad(p));
                     votar.setEnabled(false);
                     l8.setVisible(true);
-                    if (gui.getController().cumpleNumVotos(p)) {
-                        gui.getController().pedirFinanciacion(p);
-                        for (Colectivo c : gui.getController().listaColectivos()) {
-                            for (Proyecto proy1 : gui.getController().getProyectosApoyados(c)) {
-                                if (proy1.getProjectTitle().equals(p.getProjectTitle())) {
-                                    Notificacion n = new Notificacion(p, c, "¡El proyecto " +
-                                            p.getProjectTitle() + " está en espera de financiacion!");
 
-                                    gui.getController().anadirNotif(c, n);
-                                }
-
-                            }
-                        }
-                    }
                 }
             } else {
                 if (JOptionPane.showConfirmDialog(null, "No podrás retirar tu voto",
@@ -314,23 +301,10 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
                     gui.getController().votarUsuarios(p, gui.getController().getColRep());
                     gui.getController().colectivoApoyaProyecto(p, gui.getController().getColRep());
 
-                    numVotos.setText(gui.getController().calcularPopularidad(p));
+                    numVotos.setText(gui.getController().getNumVotos(p));
                     votar.setEnabled(false);
                     l8.setVisible(true);
-                    if (gui.getController().cumpleNumVotos(p)) {
-                        gui.getController().pedirFinanciacion(p);
-                        for (Colectivo c : gui.getController().listaColectivos()) {
-                            for (Proyecto proy1 : gui.getController().getProyectosApoyados(c)) {
-                                if (proy1.getProjectTitle().equals(p.getProjectTitle())) {
-                                    Notificacion n = new Notificacion(p, c, "¡El proyecto " +
-                                            p.getProjectTitle() + " está en espera de financiacion!");
 
-                                    gui.getController().anadirNotif(c, n);
-                                }
-
-                            }
-                        }
-                    }
                 }
             }
         } else if (e.getSource() == cierraSesion) {
@@ -357,6 +331,22 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
                 numVotos.setText(gui.getController().calcularPopularidad(p));
                 caducado.setVisible(false);
                 votar.setEnabled(false);
+
+                if (gui.getController().cumpleNumVotos(p)) {
+                    gui.getController().pedirFinanciacionAdmin(p);
+                    System.out.println("votos: " + gui.getController().getNumVotos(p));
+                    for (Colectivo c : gui.getController().listaColectivos()) {
+                        for (Proyecto proy1 : gui.getController().getProyectosApoyados(c)) {
+                            if (proy1.getProjectTitle().equals(p.getProjectTitle())) {
+                                Notificacion n = new Notificacion(p, c, "¡El proyecto " +
+                                        p.getProjectTitle() + " está en espera de financiacion!");
+
+                                gui.getController().anadirNotif(c, n);
+                            }
+
+                        }
+                    }
+                }
                 if (gui.getController().haVotado(p) == true) {
                     votar.setEnabled(false);
                     l8.setVisible(true);
