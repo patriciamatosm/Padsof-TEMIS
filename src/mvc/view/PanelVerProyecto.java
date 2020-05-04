@@ -290,7 +290,6 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
                     l8.setVisible(true);
                     if (gui.getController().cumpleNumVotos(p) == true) {
                         gui.getController().pedirFinanciacion(p);
-System.out.println(p.getEstado().toString());
                         for(Colectivo c : gui.getController().listaColectivos()){
                             if(c.getRepresentante().equals(gui.getController().getLoggedUser())){
                                 if(gui.getController().getLoggedUser().getListaProyecto().contains(p)){
@@ -305,13 +304,12 @@ System.out.println(p.getEstado().toString());
             } else if(gui.getController().getRepresentante()){
                 if(JOptionPane.showConfirmDialog(null, "No podrás retirar tu voto",
                         "Estás seguro?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    gui.getController().votarUsuarios(p);
+                    gui.getController().votarUsuarios(p, gui.getController().getColRep());
                     numVotos.setText(gui.getController().calcularPopularidad(p));
                     votar.setEnabled(false);
                     l8.setVisible(true);
                     if (gui.getController().cumpleNumVotos(p) == true) {
                         gui.getController().pedirFinanciacion(p);
-System.out.println(p.getEstado().toString());
                         for(Colectivo c : gui.getController().listaColectivos()){
                             if(c.getRepresentante().equals(gui.getController().getLoggedUser())){
                                 if(gui.getController().getLoggedUser().getListaProyecto().contains(p)){

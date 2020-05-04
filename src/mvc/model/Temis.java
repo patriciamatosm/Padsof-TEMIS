@@ -366,13 +366,17 @@ public class Temis {
      * Funcion que llama a la funcion votarUsuarios
      * @param p Proyecto a votar
      */
-    public void votarUsuarios(List<Usuario> users, Proyecto p) {
+    public void votarUsuarios(Proyecto p, Colectivo c) {
         for(Proyecto proyecto : this.proyectos.values()) {
             if(proyecto.getProjectTitle().equals(p.getProjectTitle())) {
                 for(Usuario u : this.usuarios.values()){
                     if(u.getNombre().equals(this.getUsuarioConectado().getNombre())) {
-                        proyecto.votarUsuarios(users);
-                        this.votar(p);
+                        for(Colectivo col : this.colectivos.values()){
+                            if(col.getNombre().equals(c.getNombre())){
+                                proyecto.votarUsuarios(col.getListaUsuario());
+                                this.votar(p);
+                            }
+                        }
                     }
                 }
             }

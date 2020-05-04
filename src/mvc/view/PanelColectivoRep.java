@@ -15,7 +15,7 @@ public class PanelColectivoRep extends JPanel implements ActionListener {
 
     private Colectivo c;
 
-    private JLabel l1 = new JLabel("Colectivo");
+    private JTextArea l1 = new JTextArea("Colectivo", 1, 50);
     private JLabel l2 = new JLabel("Perfil de ");
     private JLabel l3 = new JLabel("No name");
 
@@ -23,9 +23,13 @@ public class PanelColectivoRep extends JPanel implements ActionListener {
     private JLabel rep = new JLabel("No name");
 
     private JLabel l5 = new JLabel("Descripcion: ");
-    private JLabel desc = new JLabel("No descripcion");
+    private JTextArea desc = new JTextArea("No desc", 40, 50);
+    private JScrollPane scrollDesc = new JScrollPane(desc,
+            JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-    private JButton back = new JButton("Volver");
+    private JButton back = new JButton("Página Principal");
+    private JButton proyectos = new JButton("Proyectos");
+    private JButton colectivosP = new JButton("Colectivos");
     private JButton cierraSesion = new JButton("Salir");
     private JButton colectivos = new JButton("Ver colectivos");
 
@@ -48,6 +52,12 @@ public class PanelColectivoRep extends JPanel implements ActionListener {
         l1.setBounds(400, 100, 250, 25);
         l1.setForeground(Color.black);
         l1.setSize(l1.getPreferredSize());
+        Font boldFont = new Font(l1.getFont().getName(), Font.BOLD, l1.getFont().getSize());
+        l1.setFont(boldFont);
+        l1.setOpaque(false);
+        l1.setEditable(false);
+        l1.setLineWrap(true);
+        l1.setWrapStyleWord(true);
         this.add(l1);
 
         l2.setFont(l2.getFont().deriveFont(16f));
@@ -90,11 +100,17 @@ public class PanelColectivoRep extends JPanel implements ActionListener {
         this.add(l5);
 
         desc.setFont(desc.getFont().deriveFont(13f));
-        desc.setBounds(400, 450, 10, 400);
-        desc.setBackground(Color.white);
+        desc.setBackground(new Color(124, 150, 197));
+        desc.setEditable(false);
         desc.setForeground(Color.black);
-        desc.setSize(desc.getPreferredSize());
-        this.add(desc);
+        desc.setLineWrap(true);
+        desc.setWrapStyleWord(true);
+
+        scrollDesc.setViewportView(desc);
+        scrollDesc.setBackground(new Color(124, 150, 197));
+        scrollDesc.setBounds(200, 350, 500, 100);
+        scrollDesc.setVisible(true);
+        this.add(scrollDesc, BorderLayout.EAST);
 
         padre.setBounds(200, 300, 400, 40);
         padre.addActionListener(this);
@@ -114,6 +130,16 @@ public class PanelColectivoRep extends JPanel implements ActionListener {
         back.setBounds(20, 160, 160, 25);
         back.addActionListener(this);
         this.add(back);
+
+        proyectos.addActionListener(this);
+        proyectos.setFont(proyectos.getFont().deriveFont(16f));
+        proyectos.setBounds(20, 186, 160, 25);
+        this.add(proyectos);
+
+        colectivosP.addActionListener(this);
+        colectivosP.setFont(colectivosP.getFont().deriveFont(16f));
+        colectivosP.setBounds(20, 212, 160, 25);
+        this.add(colectivosP);
 
         crear.addActionListener(this);
         crear.setBounds(450, 600, 300, 40);
@@ -170,6 +196,12 @@ public class PanelColectivoRep extends JPanel implements ActionListener {
         }
         else if(e.getSource() == back) {
             gui.irPaginaPrincipal(this);
+        }
+        else if (e.getSource() == colectivosP) {
+            gui.irColectivos(this);
+        }
+        else if (e.getSource() == proyectos) {
+            gui.irProyectos(this);
         }
         else if(e.getSource() == colectivos) {
             gui.irColectivos(this);

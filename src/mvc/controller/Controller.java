@@ -454,6 +454,12 @@ public class Controller {
 
     public void setColRep(Colectivo c) { pTemis.setColRepresentado(c); }
 
+    /**
+     * Funcion que devuelve el colectivo al que representa el usuario
+     * @return Colectivo representado
+     */
+    public Colectivo getColRep(){ return pTemis.getColRepresentado();}
+
     public ArrayList<Colectivo> listaColectivos() {
         return new ArrayList<>(pTemis.getColectivos().values());
     }
@@ -582,8 +588,8 @@ public class Controller {
      * Funcion que llama a la funcion votarUsuarios
      * @param p Proyecto a votar
      */
-    public void votarUsuarios(Proyecto p) {
-        pTemis.votarUsuarios(this.listaUsuariosRepresentados(), p);
+    public void votarUsuarios(Proyecto p, Colectivo c) {
+        pTemis.votarUsuarios(p, c);
     }
 
     /**
