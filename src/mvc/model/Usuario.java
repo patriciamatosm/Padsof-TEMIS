@@ -64,6 +64,23 @@ public class Usuario extends Actor implements Serializable {
             this.colectivosPropios.add(c);
         }
     }
+
+    /**
+     * Funcion que devuelve la lista de notificaciones del usuario
+     * @return Lista de tipo Notificacion
+     */
+    public List<Notificacion> getNotificaciones(){ return notificaciones;}
+
+    /**
+     * Funcion que añade una Notificacion a la lista del Usuario
+     * @param n Notificacion
+     */
+    public void addNotificacion(Notificacion n){
+        if(!this.notificaciones.contains(n)){
+            this.notificaciones.add(n);
+        }
+    }
+
     /**
      * Funcion que devuelve el estado de los usuarios
      * @return estado estado del usuario

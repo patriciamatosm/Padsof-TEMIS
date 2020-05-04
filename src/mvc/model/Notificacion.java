@@ -54,7 +54,7 @@ public class Notificacion {
      * Funcion que envia una notificiacion
      */
     public void enviarNotificacion() {
-        this.receptor.getNotificacionesRecibidas().add(this);
+        this.receptor.addNotificacion(this);
     }
 
     @Override

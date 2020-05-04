@@ -417,17 +417,14 @@ public class Temis {
                                     p.getProjectTitle()+" ha caducado!");
                             this.anadirNotificacion(n);
                             c.addNotificacion(n);
-                        }
-                        /*for (Usuario u : this.getUsuarios().values()) {
-                            if(c.getRepresentante().equals(u)) {
-                                if (u.getListaProyecto().contains(p)) {
-                                    Notificacion n = new Notificacion(p, c, "¡El proyecto "+
-                                            p.getProjectTitle()+" ha caducado!");
-                                    this.anadirNotificacion(n);
-                                    c.addNotificacion(n);
+                            for(Usuario u : c.getListaUsuario()){
+                                if(u.getSuscritoNoticias().contains(c)){
+                                    if(!u.getNotificaciones().contains(n)) {
+                                        u.addNotificacion(n);
+                                    }
                                 }
                             }
-                        }*/
+                        }
                     }
                 }
 
@@ -443,13 +440,6 @@ public class Temis {
         this.colectivos.put(c.getNombre(), c);
     }
 
-    /**
-     * Funcion que crea un colectivo
-     * @param nombre del colectivo que se quiere crear
-     * @param desc del colectivo que se quiere crear
-     * @return el Colectivo nuevo que se crea
-     * @throws Exception si ya existe un colectivo con ese nombre o el constructor de colectivo manda una
-     */
     public Colectivo crearCol(String nombre, String desc) throws Exception {
         for(Colectivo c : this.colectivos.values()) {
             if(c.getNombre().equals(nombre)) {
@@ -465,18 +455,7 @@ public class Temis {
         return c;
     }
 
-    /**
-     * Funcion que crea un subcolectivo del colectivo que se esta representando
-     * @param descripcion del nuevo colectivo
-     * @param nombre del nuevo colectivo
-     * @throws Exception si ya existe un colectivo con ese nombre o el constructor de colectivo manda una
-     */
     public void crearSubColectivo(String descripcion, String nombre) throws Exception {
-        for(Colectivo c : this.colectivos.values()) {
-            if(c.getNombre().equals(nombre)) {
-                throw new Exception("Ya existe un colectivo con ese nombre");
-            }
-        }
         for(Colectivo c : this.colectivos.values()) {
             if(c.getNombre().equals(colRepresentado.getNombre())) {
                 c.crearSubcolectivo(nombre, descripcion);
@@ -484,10 +463,6 @@ public class Temis {
         }
     }
 
-    /**
-     * Funcion que une al usuario conectado al colectivo c
-     * @param c colectivo al que se quiere unir
-     */
     public void unirse(Colectivo c) {
         for(Colectivo col : this.colectivos.values()) {
             if(col.getNombre().equals(c.getNombre())) {
@@ -500,10 +475,6 @@ public class Temis {
         }
     }
 
-    /**
-     * Funcion que hace que el usuario conectado deje de seguir al colectivo
-     * @param c colectivo que abandonar
-     */
     public void abandonar(Colectivo c) {
         for(Colectivo col : this.colectivos.values()) {
             if(col.getNombre().equals(c.getNombre())) {
@@ -527,6 +498,15 @@ public class Temis {
             }
         }
     }
+
+    /**
+     * Funcion que devuelve el array que contiene los colectivos a los que esta suscrito el usuario
+     * @return Array de colectivos a los que se está suscrito
+     */
+    public List<Colectivo> getSuscritoNoticias(Usuario user){
+        return user.getSuscritoNoticias();
+    }
+
 
     /**
      * Funcion que llama a la funcion que añade un proyecto a la lista de proyectos

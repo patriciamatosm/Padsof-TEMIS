@@ -291,11 +291,14 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
                     if (gui.getController().cumpleNumVotos(p) == true) {
                         gui.getController().pedirFinanciacion(p);
                         for(Colectivo c : gui.getController().listaColectivos()){
-                            if(c.getRepresentante().equals(gui.getController().getLoggedUser())){
-                                if(gui.getController().getLoggedUser().getListaProyecto().contains(p)){
-                                    c.addNotificacion(gui.getController().nuevaNotificacion(p, c, "El proyecto "+
-                                            p.getProjectTitle()+" ha conseguido votos suficientes" +
-                                            "para pedir financiacion."));
+                            if(c.getProyectosApoyados().contains(p)){
+                                for(Usuario u : c.getListaUsuario()){
+                                    if(u.getSuscritoNoticias().contains(c)){
+                                        gui.getController().nuevaNotificacion(p, c, "El proyecto "+
+                                                p.getProjectTitle()+" ha conseguido votos suficientes" +
+                                                "para pedir financiacion.");
+System.out.println(u.getNotificaciones().get(0).getMensaje());
+                                    }
                                 }
                             }
                         }
@@ -312,11 +315,14 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
                     if (gui.getController().cumpleNumVotos(p) == true) {
                         gui.getController().pedirFinanciacion(p);
                         for(Colectivo c : gui.getController().listaColectivos()){
-                            if(c.getRepresentante().equals(gui.getController().getLoggedUser())){
-                                if(gui.getController().getLoggedUser().getListaProyecto().contains(p)){
-                                    gui.getController().nuevaNotificacion(p, c, "El proyecto "+
-                                            p.getProjectTitle()+" ha conseguido votos suficientes" +
-                                            "para pedir financiacion.");
+                            if(c.getProyectosApoyados().contains(p)){
+                                for(Usuario u : c.getListaUsuario()){
+                                    if(u.getSuscritoNoticias().contains(c)){
+                                        gui.getController().nuevaNotificacion(p, c, "El proyecto "+
+                                                p.getProjectTitle()+" ha conseguido votos suficientes" +
+                                                "para pedir financiacion.");
+ System.out.println(u.getNotificaciones().get(0).getMensaje());
+                                    }
                                 }
                             }
                         }

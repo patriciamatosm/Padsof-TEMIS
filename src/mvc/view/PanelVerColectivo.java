@@ -233,6 +233,7 @@ public class PanelVerColectivo extends JPanel implements ActionListener {
         }
         else if(e.getSource() == noticias) {
             gui.getController().subscribirseNoticias(c);
+            noticias.setEnabled(false);
         }
         try {
             pTemis.escribirFichero();
