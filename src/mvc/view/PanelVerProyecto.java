@@ -292,18 +292,17 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
                     numVotos.setText(gui.getController().calcularPopularidad(p));
                     votar.setEnabled(false);
                     l8.setVisible(true);
-                    if (gui.getController().cumpleNumVotos(p) == true) {
+                    if (gui.getController().cumpleNumVotos(p)) {
                         gui.getController().pedirFinanciacion(p);
                         for (Colectivo c : gui.getController().listaColectivos()) {
-                            if (c.getProyectosApoyados().contains(p)) {
-                                for (Usuario u : c.getListaUsuario()) {
-                                    if (u.getSuscritoNoticias().contains(c)) {
-                                        gui.getController().nuevaNotificacion(p, c, "El proyecto " +
-                                                p.getProjectTitle() + " ha conseguido votos suficientes" +
-                                                "para pedir financiacion.");
-                                        //System.out.println(u.getNotificaciones().get(0).getMensaje());
-                                    }
+                            for (Proyecto proy1 : gui.getController().getProyectosApoyados(c)) {
+                                if (proy1.getProjectTitle().equals(p.getProjectTitle())) {
+                                    Notificacion n = new Notificacion(p, c, "¡El proyecto " +
+                                            p.getProjectTitle() + " está en espera de financiacion!");
+
+                                    gui.getController().anadirNotif(c, n);
                                 }
+
                             }
                         }
                     }

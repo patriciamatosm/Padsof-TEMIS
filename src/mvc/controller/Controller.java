@@ -861,4 +861,24 @@ public class Controller {
                 pTemis.getColectivos().get(c.getNombre()));
 
     }
+
+    /**
+     * Funcion que devuelve proyectos apoyados
+     * @param c colectivo
+     * @return lista de proyectos
+     */
+    public List<Proyecto> getProyectosApoyados(Colectivo c){
+        return c.getProyectosApoyados();
+    }
+
+    /**
+     * Funcion que añade notif
+     * @param c colectivo
+     * @param n notificiacion
+     */
+    public void anadirNotif(Colectivo c, Notificacion n){
+        pTemis.anadirNotificacion(n);
+        c.addNotificacion(n);
+    }
+
 }

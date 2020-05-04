@@ -165,26 +165,29 @@ public class PanelPrincipal extends JPanel implements ActionListener {
         bc3.setVisible(false);
 
         if(this.actuales.size() > 0){
-            this.bc1.setText(this.actuales.get(0).getEmisor().getProjectTitle());
+            this.bc1.setText(this.actuales.get(0).getEmisor().getProjectTitle() + ": " + this.actuales.get(0).getMensaje());
 
             bc1.setVisible(true);
             bc1.setBounds(200, 300, 400, 40);
+            bc1.setSize(bc1.getPreferredSize());
             bc1.addActionListener(this);
             this.add(bc1);
 
             if(this.actuales.size() > 1) {
-                this.bc2.setText(this.actuales.get(1).getEmisor().getProjectTitle());
+                this.bc2.setText(this.actuales.get(1).getEmisor().getProjectTitle() + ": " + this.actuales.get(1).getMensaje());
 
                 bc2.setVisible(true);
                 bc2.setBounds(200, 340, 400, 40);
+                bc2.setSize(bc2.getPreferredSize());
                 bc2.addActionListener(this);
                 this.add(bc2);
 
                 if (this.actuales.size() > 2) {
-                    this.bc3.setText(this.actuales.get(2).getEmisor().getProjectTitle());
+                    this.bc3.setText(this.actuales.get(2).getEmisor().getProjectTitle() + ": " + this.actuales.get(2).getMensaje());
 
                     bc3.setVisible(true);
                     bc3.setBounds(200, 380, 400, 40);
+                    bc3.setSize(bc3.getPreferredSize());
                     bc3.addActionListener(this);
                     this.add(bc3);
                 }
@@ -264,14 +267,22 @@ public class PanelPrincipal extends JPanel implements ActionListener {
                 this.mostrarNotificaciones();
             }
             else if(e.getSource() == bc1) {
+                System.out.println("hey bc1");
+
                 gui.asignarNotificacion(this.actuales.get(0));
                 gui.verNotificacion(this);
+
+
             }
             else if(e.getSource() == bc2) {
+                System.out.println("hey bc2");
+
                 gui.asignarNotificacion(this.actuales.get(1));
                 gui.verNotificacion(this);
             }
             else if(e.getSource() == bc3) {
+                System.out.println("hey bc3");
+
                 gui.asignarNotificacion(this.actuales.get(2));
                 gui.verNotificacion(this);
             }
@@ -294,16 +305,28 @@ public class PanelPrincipal extends JPanel implements ActionListener {
                 this.mostrarNotificaciones();
             }
             else if(e.getSource() == bc1) {
+                System.out.println("hey bc1");
+
                 gui.asignarNotificacion(this.actuales.get(0));
                 gui.verNotificacion(this);
+
+
             }
             else if(e.getSource() == bc2) {
+                System.out.println("hey bc2");
+
                 gui.asignarNotificacion(this.actuales.get(1));
                 gui.verNotificacion(this);
+
+
             }
             else if(e.getSource() == bc3) {
+                System.out.println("hey bc3");
+
                 gui.asignarNotificacion(this.actuales.get(2));
                 gui.verNotificacion(this);
+
+
             }
         } else if(e.getSource() == proyectos){
             if(representanteFlag){
