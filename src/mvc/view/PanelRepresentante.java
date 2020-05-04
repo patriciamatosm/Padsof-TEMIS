@@ -24,8 +24,8 @@ public class PanelRepresentante extends JPanel implements ActionListener {
     private JLabel l3 = new JLabel("No name");
 
     private JButton back = new JButton("Página Principal");
-    private JButton proyectos = new JButton("Proyectos");
-    private JButton colectivosP = new JButton("Colectivos");
+    //private JButton proyectos = new JButton("Proyectos");
+    //private JButton colectivosP = new JButton("Colectivos");
     private JButton cierraSesion = new JButton("Salir");
     private JButton siguientes = new JButton("Siguiente >");
     private JButton anteriores = new JButton("< Anterior");
@@ -35,8 +35,8 @@ public class PanelRepresentante extends JPanel implements ActionListener {
     private JButton bc2 = new JButton("");
     private JButton bc3 = new JButton("");
 
-    private JButton crearColectivo = new JButton("Crear un nuevo colectivo");
-    private JButton colectivos = new JButton("Ver colectivos");
+    //private JButton crearColectivo = new JButton("Crear un nuevo colectivo");
+    //private JButton colectivos = new JButton("Ver colectivos");
 
 
     public PanelRepresentante(MiGUI gui) {
@@ -92,7 +92,7 @@ public class PanelRepresentante extends JPanel implements ActionListener {
         back.addActionListener(this);
         this.add(back);
 
-        proyectos.addActionListener(this);
+        /*proyectos.addActionListener(this);
         proyectos.setFont(proyectos.getFont().deriveFont(16f));
         proyectos.setBounds(20, 186, 160, 25);
         this.add(proyectos);
@@ -100,16 +100,16 @@ public class PanelRepresentante extends JPanel implements ActionListener {
         colectivosP.addActionListener(this);
         colectivosP.setFont(colectivosP.getFont().deriveFont(16f));
         colectivosP.setBounds(20, 212, 160, 25);
-        this.add(colectivosP);
+        this.add(colectivosP);*/
 
         /* Colectivos */
-        crearColectivo.addActionListener(this);
+        /*crearColectivo.addActionListener(this);
         crearColectivo.setBounds(150, 600, 300, 40);
         this.add(crearColectivo);
 
         crearColectivo.addActionListener(this);
         crearColectivo.setBounds(450, 600, 300, 40);
-        this.add(crearColectivo);
+        this.add(crearColectivo);*/
 
         siguientes.setFont(siguientes.getFont().deriveFont(16f));
         siguientes.setBounds(400, 420, 200, 45);
@@ -123,9 +123,9 @@ public class PanelRepresentante extends JPanel implements ActionListener {
         anteriores.addActionListener(this);
         this.add(anteriores);
 
-        colectivos.addActionListener(this);
+        /*colectivos.addActionListener(this);
         colectivos.setBounds(150, 600, 300, 40);
-        this.add(colectivos);
+        this.add(colectivos);*/
     }
 
     public void mostrarColectivos() {
@@ -225,7 +225,7 @@ public class PanelRepresentante extends JPanel implements ActionListener {
         }
         else if(e.getSource() == back) {
             gui.irPaginaPrincipal(this);
-        }
+        }/*
         else if (e.getSource() == colectivosP) {
             gui.irColectivos(this);
         }
@@ -237,7 +237,7 @@ public class PanelRepresentante extends JPanel implements ActionListener {
         }
         else if(e.getSource() == crearColectivo) {
             gui.crearColectivos(this);
-        }
+        }*/
         else if(e.getSource() == siguientes) {
             this.siguienteColectivos();
             this.mostrarColectivos();
