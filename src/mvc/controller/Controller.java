@@ -651,7 +651,7 @@ public class Controller {
      */
     public List<String> getDistritos(){return Temis.getInstance().getDistritos();}
 
-    public void colectivoApoyaProyecto(Colectivo c, Proyecto p){
-        c.addProyectoApoyado(p);
+    public void colectivoApoyaProyecto(Proyecto p, Colectivo c){
+        pTemis.addProyectoApoyado(p, c);
     }
 }

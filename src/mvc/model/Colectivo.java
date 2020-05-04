@@ -58,7 +58,7 @@ public class Colectivo extends Actor implements Serializable {
      * Funcion que devuelve las notificaciones recibidas
      * @return notificaciones recibidas
      */
-    public List<Notificacion>  getNotificacionesRecibidas() {
+    public List<Notificacion> getNotificacionesRecibidas() {
         return notificacionesRecibidas;
     }
 
@@ -77,6 +77,12 @@ public class Colectivo extends Actor implements Serializable {
     public void addProyectoApoyado(Proyecto p){
         this.proyectosApoyados.add(p);
     }
+
+    /**
+     * Funcion que devuelve una lista con los proyectos apoyados por el colectivo
+     * @return Lista de proyectos
+     */
+    public List<Proyecto> getProyectosApoyados() {return this.proyectosApoyados;}
 
     /**
      * Función que devuelve la descripción de un colectivo

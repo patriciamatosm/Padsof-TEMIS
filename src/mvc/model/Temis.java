@@ -410,24 +410,24 @@ public class Temis {
     public void caducarProyectos(Collection<Proyecto> proyectos){
         for(Proyecto p : proyectos){
             if(p.getEstado() == Proyecto.Estado.ACTIVO) {
-
                 if(p.caducado()){
-
                     for(Colectivo c : this.getColectivos().values()) {
-
-                        for (Usuario u : this.getUsuarios().values()) {
-
+                        if(c.getProyectosApoyados().contains(p)){
+                            Notificacion n = new Notificacion(p, c, "¡El proyecto "+
+                                    p.getProjectTitle()+" ha caducado!");
+                            this.anadirNotificacion(n);
+                            c.addNotificacion(n);
+                        }
+                        /*for (Usuario u : this.getUsuarios().values()) {
                             if(c.getRepresentante().equals(u)) {
-
                                 if (u.getListaProyecto().contains(p)) {
-
                                     Notificacion n = new Notificacion(p, c, "¡El proyecto "+
                                             p.getProjectTitle()+" ha caducado!");
                                     this.anadirNotificacion(n);
                                     c.addNotificacion(n);
                                 }
                             }
-                        }
+                        }*/
                     }
                 }
 
@@ -501,4 +501,12 @@ public class Temis {
             }
         }
     }
+
+    /**
+     * Funcion que llama a la funcion que añade un proyecto a la lista de proyectos
+     * apoyados por el colectivo
+     * @param p Proyecto apoyado
+     * @param c Colectivo
+     */
+    public void addProyectoApoyado(Proyecto p, Colectivo c) { c.addProyectoApoyado(p);}
 }
