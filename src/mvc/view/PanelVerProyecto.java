@@ -284,7 +284,7 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
                 if (JOptionPane.showConfirmDialog(null, "No podrás retirar tu voto",
                         "Estás seguro?", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     gui.getController().votar(p);
-                    numVotos.setText(gui.getController().calcularPopularidad(p));
+                    numVotos.setText(gui.getController().getNumVotos(p));
                     votar.setEnabled(false);
                     l8.setVisible(true);
 
