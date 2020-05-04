@@ -11,11 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**************************************************
- * SCROLLBAR TAMAÑO TEXTAREA                      *
- * NOTIFICACIONES              <-------           *
- * COMPROBAR USUARIO LOGUEADO  <-------           *
- **************************************************/
 
 public class PanelVerProyecto extends JPanel implements ActionListener {
 
