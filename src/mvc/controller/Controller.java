@@ -419,10 +419,13 @@ public class Controller {
     public List<Notificacion> listaNotificacionesSubs(Usuario u) {
         ArrayList<Notificacion> notificaciones = new ArrayList<>();
         for (Colectivo c : pTemis.getColectivos().values()) {
-            if (u.getSuscritoNoticias().contains(c)) {
-                for (Notificacion n : c.getNotificacionesRecibidas()) {
-                    notificaciones.add(n);
-                    System.out.println("lista subs");
+            for(Colectivo col : u.getSuscritoNoticias()){
+                if(col.getNombre().equals(c.getNombre())){
+                    System.out.println("lista subs" + c.getNotificacionesRecibidas());
+                    for (Notificacion n : c.getNotificacionesRecibidas()) {
+                        notificaciones.add(n);
+
+                    }
                 }
             }
         }
@@ -857,6 +860,5 @@ public class Controller {
         pTemis.addProyectoApoyado(pTemis.getProyectos().get(p.getProjectTitle()),
                 pTemis.getColectivos().get(c.getNombre()));
 
-        System.out.println("apoyados " + c.getProyectosApoyados());
     }
 }

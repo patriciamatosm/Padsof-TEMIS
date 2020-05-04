@@ -49,7 +49,7 @@ public abstract class Proyecto implements GrantRequest, Serializable {
         this.fechaUltimoVoto = LocalDate.now();
         this.importe = importe;
         this.creador = creador;
-        this.estado = Estado.ACTIVO;
+        this.estado = Estado.EN_ESPERA;
         this.numVotos = 0;
         this.minVotos = 2;
     }
@@ -256,7 +256,7 @@ public abstract class Proyecto implements GrantRequest, Serializable {
                 return true;
             }
         }
-    	return true;
+    	return false;
     }
     
     /**
@@ -301,6 +301,17 @@ public abstract class Proyecto implements GrantRequest, Serializable {
 
     	if(this.getNumVotos() >= this.getMinVotos()) {
     		this.estado = Estado.ESPERA_FINANC;
+            for (Colectivo c : Temis.getInstance().getColectivos().values()) {
+                for (Proyecto proy1 : c.getProyectosApoyados()) {
+                    if (proy1.getProjectTitle().equals(this.getProjectTitle())) {
+                        Notificacion n = new Notificacion(this, c, "¡El proyecto " +
+                                this.getProjectTitle() + " está en espera de financiacion!");
+                        Temis.getInstance().anadirNotificacion(n);
+                        c.addNotificacion(n);
+                    }
+
+                }
+            }
     		return true;
     	}
     	return false;
@@ -366,6 +377,20 @@ public abstract class Proyecto implements GrantRequest, Serializable {
 		} catch (IOException | InvalidIDException e) {
 			e.printStackTrace();
 		}
+
+		if(this.estado == Estado.FINANCIADO){
+            for (Colectivo c : Temis.getInstance().getColectivos().values()) {
+                for (Proyecto proy1 : c.getProyectosApoyados()) {
+                    if (proy1.getProjectTitle().equals(this.getProjectTitle())) {
+                        Notificacion n = new Notificacion(this, c, "¡El proyecto " +
+                                this.getProjectTitle() + " ha sido financiado!");
+                        Temis.getInstance().anadirNotificacion(n);
+                        c.addNotificacion(n);
+                    }
+
+                }
+            }
+        }
 
     	return result; 
     }

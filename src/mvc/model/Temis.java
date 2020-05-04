@@ -412,10 +412,7 @@ public class Temis {
             if (p.getEstado() != Proyecto.Estado.CADUCADO || p.getEstado() != Proyecto.Estado.RECHAZADO) {
                 if (p.caducado()) {
                     for (Colectivo c : this.getColectivos().values()) {
-                        System.out.println("apoyados " + c.getProyectosApoyados());
                         for (Proyecto proy1 : c.getProyectosApoyados()) {
-                            System.out.println("proy1 " + proy1);
-                            System.out.println("p " + p);
                             if (proy1.getProjectTitle().equals(p.getProjectTitle())) {
                                 Notificacion n = new Notificacion(p, c, "¡El proyecto " +
                                         p.getProjectTitle() + " ha caducado!");

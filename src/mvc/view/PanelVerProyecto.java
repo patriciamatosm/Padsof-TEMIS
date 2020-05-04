@@ -314,13 +314,6 @@ public class PanelVerProyecto extends JPanel implements ActionListener {
 
                     gui.getController().votarUsuarios(p, gui.getController().getColRep());
                     gui.getController().colectivoApoyaProyecto(p, gui.getController().getColRep());
-                    //Provocatre notificacion
-                    List<Proyecto> ps = new ArrayList<>();
-                    ps.add(p);
-                    Temis.getInstance().caducarProyectos(ps);
-
-                    System.out.println("verProyecto" + gui.getController().getColRep().getNotificacionesRecibidas());
-
 
                     numVotos.setText(gui.getController().calcularPopularidad(p));
                     votar.setEnabled(false);
