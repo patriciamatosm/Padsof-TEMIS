@@ -301,7 +301,6 @@ public class Controller {
 
     /**
      * Funcion que llama al constructor de Proyecto Social
-     * @return Proyecto social
      */
     public void nuevoProyectoSocial(String titulo, String descripcion, Integer importe,
                                         Actor creador, String grupoEtnico, boolean nacional) {
@@ -312,7 +311,6 @@ public class Controller {
 
     /**
      * Funcion que llama al constructor de Proyecto de Infraestructura
-     * @return Proyecto Infraestructura
      */
     public void nuevoProyectoInfra(String titulo, String descripcion, Integer importe,
                                        Actor creador, String distrito, String urlCroquis,
@@ -424,6 +422,10 @@ public class Controller {
         return p.calcularPopularidad(this.listaUsuarios()).toString();
     }
 
+    /**
+     * Funcion que devuelve los colectivos que representas
+     * @return ArrayList de colectivos que representas
+     */
     public ArrayList<Colectivo> listaColectivosPropios() {
         ArrayList<Colectivo> colectivos = new ArrayList<>();
 
@@ -435,6 +437,10 @@ public class Controller {
         return colectivos;
     }
 
+    /**
+     * Funcion que devuelve una lista de usuarios con los usuarios que estan en algun colectivo del usuario
+     * @return Lista de usuarios
+     */
     public ArrayList<Usuario> listaUsuariosRepresentados(){
         ArrayList<Usuario> usuarios = new ArrayList<>();
 
